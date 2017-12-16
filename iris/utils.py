@@ -70,7 +70,7 @@ def parse_config(account=None):
 
 		return config
 	else:
-		raise exception.Missingaccount(account=account)
+		raise exception.MissingAccount(account=account)
 
 # Validators
 def validate_yaml(string):

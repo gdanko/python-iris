@@ -130,12 +130,19 @@ class Iris(object):
 		account.ListPlaces()
 		if account.success:
 			db.populate_places(places=account.response["payload"]["attributes"]["places"])
+		else:
+			print("places failure")
 
 		place = Place(iris=self)
 		place.ListDevices()
 		if place.success:
 			db.populate_devices(devices=place.response["payload"]["attributes"]["devices"])
+		else:
+			print("devices failure")
 
 		place.ListPersons()
+
 		if place.success:
 			db.populate_people(people=place.response["payload"]["attributes"]["persons"])
+		else:
+			print("people failure")

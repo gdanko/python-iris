@@ -10,5 +10,14 @@ class Switch(Device):
 		self.namespace = "swit"
 		self.device_type = "Switch"
 
-		devices = [item for item in self.iris.devices if item["dev:devtypehint"] == self.device_type]
-		#pprint(devices)
+		methods = utils.fetch_methods(self.namespace, self.iris.validator)
+
+		def generate_method_fn(method, enabled, required, oneof, valid):
+			if enabled == True:
+				fn_name = method
+				def fn(self, **kwargs):
+					request.device_method_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
+				setattr(self.__class__, fn_name, fn)
+
+		for method_name, obj in methods.items():
+			generate_method_fn(method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])

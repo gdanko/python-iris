@@ -37,23 +37,23 @@ class InvalidConfigFile(Exception):
 		self.error = "The specified config file \"{}\" is invalid: {}".format(self.path, self.message)
 		return self.error
 
-class InvalidProfile(Exception):
+class InvalidAccount(Exception):
 	def __init__(self, profile=None, message=None):
-		self.profile = profile
+		self.account = account
 		self.message = message
 		return
 
 	def __str__(self):
-		self.error = "The specified is profile \"{}\" is invalid: {}.".format(self.profile, self.message)
+		self.error = "The specified is account \"{}\" is invalid: {}.".format(self.account, self.message)
 		return self.error
 
-class MissingProfile(Exception):
-	def __init__(self, profile=None):
-		self.profile = profile
+class MissingAccount(Exception):
+	def __init__(self, account=None):
+		self.profile = account
 		return
 
 	def __str__(self):
-		self.error = "The specified profile \"{}\" does not exist.".format(self.profile)
+		self.error = "The specified account \"{}\" does not exist.".format(self.account)
 		return self.error
 
 class InvalidJsonError(Exception):

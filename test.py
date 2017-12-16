@@ -29,12 +29,6 @@ iris = Iris(
 	#debug=True
 )
 
-d = DoorLock(iris=iris)
-d.AuthorizePerson(device="Garage Door", personId="Joe User")
-pprint(d.response)
-#d = Dimmer(iris=iris)
-#s = Switch(iris=iris)
-
 #a = Account(iris=iris)
 #a.ListDevices()
 #a.ListHubs()
