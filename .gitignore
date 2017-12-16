@@ -1,0 +1,4 @@
+dist/*.tar.gz
+*.egg-info
+__pycache__
+*.swp
