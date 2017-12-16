@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<c:capability name="Population" namespace="population"
+   version="1.0" xmlns:c="http://www.iris.com/schema/capability/1.0.0">
+   
+   <c:description>
+   Model of a population
+   </c:description>
+   
+   <c:attributes>
+      <c:attribute name="name" readwrite="r" type="string"
+         optional="false" description="Population Name" />
+      <c:attribute name="description" readwrite="r" type="string"
+         optional="false" description="Population Description" />
+      <c:attribute name="isDefault" readwrite="r" type="boolean"
+         optional="false" description="Indicates that this population is the default population"/>
+   </c:attributes>
+   
+   <c:methods>
+      <c:method name="GetPopulations"
+         description="Returns information on all populations." >
+         <c:return name="populations" type="list&lt;Population&gt;" description="" />
+      </c:method>
+   </c:methods>
+</c:capability>

@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:capability
+   name="HubSercomm"
+   namespace="hubsercomm"
+   enhances="Hub"
+   version="1.0"
+   xmlns:c="http://www.iris.com/schema/capability/1.0.0">
+
+   <c:description>
+   </c:description>
+
+   <c:attributes>
+      <c:attribute
+         name="numAvailable"
+         readwrite="r"
+         type="int"
+         optional="false"
+         description="Number of cameras available for pairing"/>
+      <c:attribute
+         name="numPaired"
+         readwrite="r"
+         type="int"
+         optional="false"
+         description="Number of cameras paired to the hub"/>
+      <c:attribute
+         name="numNotOwned"
+         readwrite="r"
+         type="int"
+         optional="false"
+         description="Number of cameras paired to other hubs"/>
+      <c:attribute
+         name="numDisconnected"
+         readwrite="r"
+         type="int"
+         optional="false"
+         description="Number of cameras that are no longer connected"/>
+      <c:attribute
+         name="cameras"
+         readwrite="r"
+         type="map&lt;string&gt;"
+         optional="false"
+         description="List of cameras (by MAC address) with current mode"/>
+      <c:attribute
+         name="username"
+         readwrite="r"
+         type="string"
+         optional="false"
+         description="Per-hub camera username"/>
+      <c:attribute
+         name="certHash"
+         readwrite="r"
+         type="string"
+         optional="false"
+         description="Per-hub camera certificate hash value"/>
+   </c:attributes>
+
+   <c:methods>
+      <c:method
+         name="getCameraPassword"
+         description="Get camera password for hub">
+         <c:parameters>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="password"
+               type="string"
+               description="Current per-hub camera password"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="pair"
+         description="Pair a camera to the hub">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the pairing"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="reset"
+         description="Reset a camera back to factory defaults">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the reset"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="reboot"
+         description="Reboot a camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the reboot"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="config"
+         description="Configure a camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="params"
+               type="string"
+               description="Parameters to set on camera"
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the configuration"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="upgrade"
+         description="Upgrade firmware on camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="url"
+               type="string"
+               description="URL of firmware image to install"
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the upgrade"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getState"
+         description="Get current state of camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="state"
+               type="enum"
+	       values="UNINITIALIZED,INITIALIZED,PAIRED,NOT_OWNED,INSTALLING,INSTALLED,INSTALL_REBOOT,INSTALL_ERROR,DISCONNECTED,RETRY,RESET,PAIRING"
+               description="Current state of camera"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getVersion"
+         description="Get current firmware version on camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="version"
+               type="string"
+               description="Camera firmware version"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getDayNight"
+         description="Get current day/night setting of camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="dayNight"
+               type="enum"
+               values="DAY,NIGHT,UNKNOWN"
+               description="Camera day or night status"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getIPAddress"
+         description="Get IPv4 address of camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="ipAddress"
+               type="string"
+               description="The IPv4 address of the camera"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getModel"
+         description="Get model of camera">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="model"
+               type="string"
+               description="The model name of the camera"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getInfo"
+         description="Get camera information and configuration">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="group"
+               type="string"
+               description="The parameter group for camera configuration."
+               optional="true"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="info"
+               type="string"
+               description="The camera information or configuration"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getAttrs"
+         description="Get camera attributes">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="The camera attributes data"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="motionDetectStart"
+         description="Start motion detection on camera.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="url"
+               type="string"
+               description="The URL to post to when motion occurs."
+               optional="false"/>
+            <c:parameter
+               name="username"
+               type="string"
+               description="The HTTP username for the post URL."
+               optional="true"/>
+            <c:parameter
+               name="password"
+               type="string"
+               description="The HTTP password for the post URL."
+               optional="true"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="motionDetectStop"
+         description="Stop motion detection on a camera.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="videoStreamStart"
+         description="Start video streaming on camera.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="address"
+               type="string"
+               description="The address of the video server."
+               optional="false"/>
+            <c:parameter
+               name="username"
+               type="string"
+               description="The HTTP username for the post URL."
+               optional="false"/>
+            <c:parameter
+               name="password"
+               type="string"
+               description="The HTTP password for the post URL."
+               optional="false"/>
+            <c:parameter
+               name="duration"
+               type="int"
+               description="The duration of the video streaming."
+               optional="true"/>
+            <c:parameter
+               name="precapture"
+               type="int"
+               description="The pre-capture video setting."
+               optional="true"/>
+            <c:parameter
+               name="format"
+               type="int"
+               description="The video streaming format."
+               optional="true"/>
+            <c:parameter
+               name="resolution"
+               type="int"
+               description="The video resolution."
+               optional="true"/>
+            <c:parameter
+               name="quality_type"
+               type="int"
+               description="The video quality type."
+               optional="true"/>
+            <c:parameter
+               name="bitrate"
+               type="int"
+               description="The video bitrate."
+               optional="true"/>
+            <c:parameter
+               name="quality"
+               type="int"
+               description="The video quality."
+               optional="true"/>
+            <c:parameter
+               name="framerate"
+               type="int"
+               description="The video framerate."
+               optional="true"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="videoStreamStop"
+         description="Stop video streaming on a camera.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="wifiScanStart"
+         description="Start scan for wireless access points">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="wifiScanEnd"
+         description="End scan for wireless access points">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="wifiConnect"
+         description="Connect to a wireless network">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="ssid"
+               type="string"
+               description="The ssid of the wireless network."
+               optional="false"/>
+            <c:parameter
+               name="security"
+               type="string"
+               description="The security type of the wireless network."
+               optional="false"/>
+            <c:parameter
+               name="key"
+               type="string"
+               description="The authentication key of the wireless network."
+               optional="true"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="wifiDisconnect"
+         description="Disconnect from a wireless network.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the disconnect"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="wifiGetAttrs"
+         description="Get current wireless attributes">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="Wireless attributes data"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="getCustomAttrs"
+         description="Get camera custom attributes">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="The camera custom attributes data"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="setCustomAttrs"
+         description="Set camera custom attributes">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="irLedMode"
+               type="enum"
+               values="ON,OFF,AUTO"
+               description="The IR LED mode"
+               optional="false"/>
+            <c:parameter
+               name="irLedLuminance"
+               type="int"
+               min="1"
+               max="5"
+               optional="true"
+               description="The IR LED luminance, on a scale of 1 to 5."/>
+            <c:parameter
+               name="mdMode"
+               type="enum"
+               values="OFF,PIR,WINDOW,BOTH"
+               optional="true"
+               description="The motion detection mode of operation."/>
+            <c:parameter
+               name="mdThreshold"
+               type="int"
+               min="0"
+               max="255"
+               optional="true"
+               description="The motion detection threshold, on a scale of 0 to 255."/>
+            <c:parameter
+               name="mdSensitivity"
+               type="int"
+               min="0"
+               max="10"
+               optional="true"
+               description="The motion detection threshold, on a scale of 0 to 10."/>
+            <c:parameter
+               name="mdWindowCoordinates"
+               type="string"
+               optional="true"
+               description="The motion detection window in X1,Y1,X2,Y2 format."/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="purgeCamera"
+         description="Remove camera from database, remove if necessary">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="ptzGetAttrs"
+         description="Get camera Pan/Tilt/Zoom attributes">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="The camera PTZ attributes data"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="ptzGotoHome"
+         description="Move camera to home position">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="ptzGotoAbsolute"
+         description="Move camera to absolute position">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="pan"
+               type="int"
+               min="0"
+               max="359"
+               description="The pan position for the camera."
+               optional="false"/>
+            <c:parameter
+               name="tilt"
+               type="int"
+               min="0"
+               max="180"
+               description="The tilt position for the camera."
+               optional="false"/>
+            <c:parameter
+               name="zoom"
+               type="int"
+               min="0"
+               max="100"
+               description="The zoom position for the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+      <c:method
+         name="ptzGotoRelative"
+         description="Move camera to relative position">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="The MAC address of the camera."
+               optional="false"/>
+            <c:parameter
+               name="deltaPan"
+               type="int"
+               min="-32"
+               max="32"
+               description="The pan delta for the camera."
+               optional="false"/>
+            <c:parameter
+               name="deltaTilt"
+               type="int"
+               min="-32"
+               max="32"
+               description="The tilt delta for the camera."
+               optional="false"/>
+            <c:parameter
+               name="deltaZoom"
+               type="int"
+               min="-32"
+               max="32"
+               description="The zoom delta for the camera."
+               optional="false"/>
+            <c:return
+               name="status"
+               type="enum"
+               values="OK,REFUSED"
+               description="A status indicating status of the method"
+               optional="false"/>
+            <c:return
+               name="message"
+               type="string"
+               description="An informative message about the status"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+    </c:methods>
+
+   <c:events>
+      <c:event
+         name="CameraUpgradeStatus"
+         description="Sent when the status of a camera firmware upgrade changes.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="MAC address of the camera"
+               optional="false"/>
+            <c:parameter
+               name="status"
+               type="enum"
+	       values="STARTED,ERROR,REBOOTING,COMPLETE,DOWNLOADED"
+               description="Current camera firmware upgrade status"
+               optional="false"/>
+            <c:parameter
+               name="message"
+               type="string"
+               description="Optional error message"
+               optional="true"/>
+         </c:parameters>
+      </c:event>
+      <c:event
+         name="CameraPairingStatus"
+         description="Sent when the status of a camera pairing changes.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="MAC address of the camera"
+               optional="false"/>
+            <c:parameter
+               name="status"
+               type="enum"
+	       values="STARTED,ERROR,COMPLETE"
+               description="Current camera pairing status"
+               optional="false"/>
+            <c:parameter
+               name="message"
+               type="string"
+               description="Optional error message"
+               optional="true"/>
+         </c:parameters>
+      </c:event>
+      <c:event
+         name="WifiScanResults"
+         description="Results of wireless access point scan.">
+         <c:parameters>
+            <c:parameter
+               name="mac"
+               type="string"
+               description="MAC address of the camera"
+               optional="false"/>
+            <c:parameter
+               name="message"
+               type="string"
+               description="Scan results"
+               optional="false"/>
+         </c:parameters>
+      </c:event>
+   </c:events>
+
+</c:capability>

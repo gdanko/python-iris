@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:capability
+   name="HubSounds"
+   namespace="hubsounds"
+   enhances="Hub"
+   version="1.0"
+   xmlns:c="http://www.iris.com/schema/capability/1.0.0">
+   
+   <c:description>
+   </c:description>
+   
+   <c:attributes>
+   		<c:attribute 
+         name="playing"
+         readwrite="r"
+         type="boolean" 
+         optional="false" 
+         description="Is the hub playing a sounds?"/>
+   		<c:attribute 
+         name="source"
+         readwrite="r"
+         type="string" 
+         optional="false" 
+         description="Source of the sounds being played.  File from URL or pre-programmed tone name"/>
+   </c:attributes>
+   
+   <c:methods>   
+      <c:method
+         name="PlayURL"
+         description="Causes the hub to play the sound file at the given location for the given length of time." >
+         <c:parameters>
+            <c:parameter 
+               name="url"
+               type="string"
+               description="Location of the sound file to play."
+               optional="false"/>
+            <c:parameter 
+               name="repetition"
+               type="int"
+               description="Number of times to play the file."
+               optional="false"/>             
+         </c:parameters>
+	   </c:method>
+      <c:method
+         name="PlayTone"
+         description="Causes the hub to play the chime sound.">
+         <c:parameters>
+            <c:parameter 
+               name="tone"
+               type="enum"
+               values="ARMED,ARMING,INTRUDER,LOW_BATTERY,NO_SOUND,PAIRED,SAFETY,UNPAIRED"
+               description="Prebuilt in sound to play from the hub."
+               optional="false"/>
+            <c:parameter 
+               name="durationSec"
+               type="int"
+               description="How long to play the tone."
+               optional="false"/>
+         </c:parameters>
+	   </c:method>
+      <c:method
+         name="Quiet"
+         description="Stop playing any sound." />
+    </c:methods>  
+   
+   <c:events>
+   </c:events>
+   
+</c:capability>

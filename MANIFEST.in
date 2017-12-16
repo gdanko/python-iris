@@ -1,0 +1,10 @@
+exclude .gitignore
+include README.rst 
+include README.md
+include iris/data/method-validator.json
+prune .cache
+prune .git
+prune build
+prune dist
+recursive-exclude *.egg-info *
+recursive-include tests *

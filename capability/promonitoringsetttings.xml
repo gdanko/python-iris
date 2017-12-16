@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:capability
+   name="ProMonitoringSettings"
+   namespace="promon"
+   version="1.0"
+   xmlns:c="http://www.iris.com/schema/capability/1.0.0">
+
+   <c:description>
+      Configuration for professional monitoring at a given place.
+   </c:description>
+
+   <c:attributes>
+      <c:attribute
+         name="notifyWhenAvailable"
+         type="boolean"
+         readwrite="rw"
+         optional="false"
+         description="The user should be notified when the service becomes available in their area." />
+      <c:attribute
+         name="trial"
+         type="boolean"
+         readwrite="r"
+         optional="false"
+         description="Indicates whether this is a member of the trial population or not.  To enable trial access send the invitation code to JoinTrial." />
+      <c:attribute
+         name="activatedOn"
+         type="timestamp"
+         readwrite="r"
+         optional="true"
+         description="The date that professional monitoring was activated at this place, or not specified if it is not active." />
+      <c:attribute
+         name="supportedAlerts"
+         type="set&lt;enum&gt;"
+         readwrite="r"
+         optional="false"
+         values="SECURITY,PANIC,SMOKE,CO"
+         description="The set of alerts that have enough devices to be monitored at this place." />
+      <c:attribute
+         name="monitoredAlerts"
+         type="set&lt;string&gt;"
+         readwrite="r"
+         optional="false"
+         values="SECURITY,PANIC,SMOKE,CO"
+         description="The set of alerts which will be forwarded to the monitoring service." />
+      <c:attribute
+         name="addressVerification"
+         type="enum"
+         readwrite="r"
+         optional="false"
+         values="UNVERIFIED, RESIDENTIAL"
+         description="Will be UNVERIFIED until UpdateAddress is invoked, which upon success will be changed to RESIDENTIAL." />
+      <c:attribute
+         name="permitRequired"
+         type="boolean"
+         readwrite="r"
+         optional="false"
+         description="Whether or not a permit is required at this location.  This will be populate appropriately after address is updated." />
+      <c:attribute
+         name="permitNumber"
+         type="string"
+         readwrite="rw"
+         optional="false"
+         description="The permit number." />
+      <c:attribute
+         name="adults"
+         type="int"
+         readwrite="rw"
+         optional="false"
+         description="The number of adults that live in the residence." />
+      <c:attribute
+         name="children"
+         type="int"
+         readwrite="rw"
+         optional="false"
+         description="The number of children that live in the residence." />
+      <c:attribute
+         name="pets"
+         type="int"
+         readwrite="rw"
+         description="The number of pets that live in the residence." />
+      <c:attribute
+         name="directions"
+         type="string"
+         readwrite="rw"
+         optional="true"
+         description="Additional directions on how to get to the house." />
+      <c:attribute
+         name="gateCode"
+         type="string"
+         readwrite="rw"
+         optional="true"
+         description="The code to get onto the property, if applicable." />
+      <c:attribute
+         name="instructions"
+         type="string"
+         readwrite="rw"
+         optional="true"
+         description="Additional instructions for emergency dispatchers." />
+      <c:attribute
+         name="testCallStatus"
+         type="enum"
+         values="IDLE,WAITING,SUCCEEDED,FAILED"
+         readwrite="r"
+         optional="false"
+         description="The current state of a test call." />
+      <c:attribute
+         name="testCallTime"
+         type="timestamp"
+         readwrite="r"
+         optional="true"
+         description="The last time a test call was started, will not be set until a test call is invoked for the first time." />
+      <c:attribute
+         name="testCallMessage"
+         type="string"
+         readwrite="r"
+         optional="true"
+         description="Additional text describing the current test call state." />
+      <c:attribute
+         name="externalId"
+         type="string"
+         readwrite="r"
+         optional="true"
+         description="external id/stages id used to reference the site created in stages." />
+      <c:attribute
+         name="certUrl"
+         type="string"
+         readwrite="r"
+         optional="true"
+         description="The fully-qualified url for the certificate." />         
+   </c:attributes>
+
+   <c:methods>
+      <c:method name="CheckAvailability" description="Checks if the current place supports professional monitoring or not.">
+         <c:return name="available" type="enum" values="NONE,TRIAL,FULL" description="The type of availability in the active place's area" />
+         <c:errors>
+            <c:error code="address.invalid" description="The place has no address or is missing the zip code.  This should prompt the user to update their address." />
+         </c:errors>
+      </c:method>
+      
+      <c:method
+         name="JoinTrial"
+         description="Allows the user to join the trial group by submitting a trial code."
+         >
+         <c:parameters>
+            <c:parameter
+               name="code"
+               type="string"
+               optional="false"
+               descrpiton="The invitation code to join the trial."
+               />
+         </c:parameters>
+         <c:errors>
+            <c:error code="code.invalid" description="If an incorrect trial code is received." />
+         </c:errors>
+      </c:method>
+
+      <c:method
+         name="ValidateAddress"
+         description="Validates that the place's address is recognized by the professional monitoring system. Usually when the address is invalid a set of suggestions may be used to prompt the user with alternatives."
+         >
+         <c:parameters>
+            <c:parameter
+               name="streetAddress"
+               type="StreetAddress"
+               optional="true"
+               description="If specified this address will be validated instead of the default place address."
+               />
+         </c:parameters>
+        <c:return name="valid" type="boolean" description="True if the given address is recognized, false otherwise."/>
+        <c:return name="suggestions" type="list&lt;StreetAddress&gt;" description="A list of validated addresses that are similar to the place's address."/>
+        <c:errors>
+           <c:error code="address.invalid" description="The place has no address or has an address that is missing information.  This should prompt the user to edit their place address or call support." />
+        </c:errors>
+      </c:method>
+
+      <c:method
+         name="UpdateAddress"
+         description="Validate the address with UCC, and updates the  current place's address if it is changed.  The address is optional and if not specified will use the address of the current place."
+         >
+         <c:parameters>
+            <c:parameter
+               name="streetAddress"
+               type="StreetAddress"
+               optional="true"
+               description="If specified the place address will be updated to use this given address."
+               />
+            <c:parameter
+               name="residential"
+               type="boolean"
+               optional="false"
+               description="Whether or not this is a residential address.  Currently will always return an error if set to false."
+               />
+         </c:parameters>
+         <c:errors>
+            <c:error code="address.invalid" description="The address does not pass validation as one recognized by UCC." />
+            <c:error code="address.unavailable" description="The address is not in an area where professionally monitoring is currently available." />
+            <c:error code="address.unsupported" description="If residential is not set to true." />
+         </c:errors>
+      </c:method>
+
+      <c:method 
+         name="ListDepartments" 
+         description="Lists the departments which service a place, generally used to figure out where to get a permit from."
+         >
+        <c:return 
+           name="departments" 
+           type="list&lt;Department&gt;" 
+           description="The departments which service the current address."
+           />
+        <c:errors>
+           <c:error code="address.invalid" description="If the address hasn't been validated." />
+        </c:errors>
+      </c:method>
+      
+      <c:method 
+         name="CheckSensors" 
+         description="Gets the set of professionally monitored devices which are currently offline."
+         >
+        <c:return 
+           name="offline" 
+           type="set&lt;string&gt;" 
+           description="The addresses of the professionally monitored devices which are offline."
+           />
+      </c:method>
+      
+      <c:method
+         name="Activate"
+         description="
+         This enrolls and activates professional monitoring at the given place.  Billing will be updated and the place will be professionally monitored.
+         Note that if testCall is set to true this may return successfully, and then fail later if the test call fails.
+         "
+         >
+         <c:parameters>
+            <c:parameter
+               name="testCall"
+               type="boolean"
+               optional="true"
+               description="(Default: false) Set to true to invoke a test call and activate upon success.  Set to false / unspecified to activate without sending a test call."
+               />
+         </c:parameters>
+         <c:errors>
+            <c:error code="address.invalid" description="If the address hasn't been validated." />
+            <c:error code="promonitoring.active" description="If promonitoring has already been activated at this place. This is an error to inform the caller that a test call has not​ been initiated." />
+            <c:error code="billinginfo.missing" description="If the account level is basic and there is no billing information." />
+         </c:errors>
+      </c:method>
+      
+      <c:method
+         name="TestCall"
+         description="
+            This instructs the monitoring service to place a call to the number associated with the place.  This call will return immediately, but the lastCallStatus should be watched to determine when the test call is completed.
+            Note that if a test call is already in progress this will return the existing testCallTime, and as such may be retried safely.
+         "
+         >
+         <c:return
+            name="testCallTime" 
+            type="timestamp" 
+            description="This is the start time for testCallTime.  This may be used to ensure that the state on promonitoringconfig is valid before checking for completion (in case a previous test call has been executed.)"
+            />
+      </c:method>
+
+      <c:method
+         name="Reset"
+         description="Downgrades the account to premium, deactivates the place and clears all promonitoring settings"/>
+
+   </c:methods>
+   <c:events>
+      <!-- TODO determine what if any events should be broadcast from here -->
+   </c:events>
+
+</c:capability>

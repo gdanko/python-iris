@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:capability
+   name="SupportAgentLogEntry"
+   namespace="salogentry"
+   version="1.0"
+   xmlns:c="http://www.iris.com/schema/capability/1.0.0">
+   
+   <c:description>
+   Model of an agent audit log entry
+   </c:description>
+   
+   <c:attributes>
+      <c:attribute
+         name="created"
+         readwrite="r"
+         type="timestamp"
+         optional="true"
+         description="The date the entry was created"/>
+
+       <c:attribute
+          name="agentId"
+          readwrite="r"
+          type="uuid"
+          optional="false"
+          description="Id of the agent"/>
+
+      <c:attribute
+         name="accountId"
+         readwrite="r"
+         type="uuid"
+         optional="false"
+         description="Account id in the log entry"/>
+
+      <c:attribute
+         name="action"
+         readwrite="r"
+         type="string"
+         optional="false"
+         description="The action that happened"/>
+
+      <c:attribute
+         name="parameters"
+         readwrite="r"
+         type="set&lt;string&gt;"
+         optional="true"
+         description="The parameters used in the action"/>
+
+       <c:attribute
+          name="userId"
+          readwrite="r"
+          type="uuid"
+          optional="true"
+          description="Id of the user this log is associated with (if any)"/>
+
+      <c:attribute
+         name="placeId"
+         readwrite="r"
+         type="uuid"
+         optional="true"
+         description="The place id in the log entry, if any"/>
+
+      <c:attribute
+         name="deviceId"
+         readwrite="r"
+         type="uuid"
+         optional="true"
+         description="The device id in the log entry, if any"/>
+   </c:attributes>
+
+   <c:methods>
+      <c:method
+         name="CreateAgentLogEntry"
+         description="Log something an agent did">
+         <c:parameters>
+            <c:parameter
+               name="agentId"
+               type="uuid"
+               description="ID of agent"
+               optional="false"/>
+            <c:parameter
+               name="accountId"
+               type="uuid"
+               description="ID of account"
+               optional="false"/>
+            <c:parameter
+               name="action"
+               type="string"
+               description="what occurred"
+               optional="false"/>
+            <c:parameter
+               name="parameters"
+               type="set&lt;string&gt;"
+               description="set of parameters"
+               optional="true"/>
+            <c:parameter
+                name="userId"
+                type="uuid"
+                description="ID of customer"
+                optional="true"/>
+            <c:parameter
+               name="deviceId"
+               type="uuid"
+               description="ID of device"
+               optional="true"/>
+            <c:parameter
+               name="placeId"
+               type="uuid"
+               description="ID of place"
+               optional="true"/>
+         </c:parameters>
+      </c:method>
+
+      <c:method
+         name="ListAgentLogEntries"
+         description="Lists audit logs within a time range">
+         <c:return
+            name="auditLogs"
+            type="list&lt;AgentAuditLogEntry&gt;"
+            description="The list of audit logs"/>
+         <c:parameters>
+            <c:parameter
+               name="agentId"
+               type="uuid"
+               description="ID of agent"
+               optional="false"/>
+            <c:parameter
+               name="startDate"
+               type="string"
+               description="Earliest date for logs. Format is yyyy-MM-dd HH:mm:ss"
+               optional="false"/>
+            <c:parameter
+               name="endDate"
+               type="string"
+               description="Latest date for logs. Format is yyyy-MM-dd HH:mm:ss"
+               optional="false"/>
+         </c:parameters>
+      </c:method>
+   </c:methods>
+
+   <c:events>
+      <!-- TODO:  other events -->
+   </c:events>
+   
+</c:capability>
