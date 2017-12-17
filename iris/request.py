@@ -103,6 +103,17 @@ def place_request(client=None, **kwargs):
 	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
 
+def rule_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.rule(
+			method=content["method"],
+			namespace=content["namespace"]
+		)
+	payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+
 def hub_request(client=None, **kwargs):
 	method = kwargs["method"]
 	namespace = kwargs["namespace"]

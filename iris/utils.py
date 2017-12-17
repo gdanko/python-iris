@@ -270,10 +270,10 @@ def method_validator(client=None, **kwargs):
 		device_address = None
 		if is_uuid(content["attributes"]["device"]):
 			identifier_type = "uuid"
-			device_address = db.find_device_address(id=content["attributes"]["device"])
+			device_address = db.find_address(table="devices", id=content["attributes"]["device"])
 		else:
 			identifier_type = "name"
-			device_address = db.find_device_address(name=content["attributes"]["device"])
+			device_address = db.find_address(table="devices", name=content["attributes"]["device"])
 
 		if device_address:
 			content["destination"] = device_address
@@ -285,10 +285,10 @@ def method_validator(client=None, **kwargs):
 		person_address = None
 		if is_uuid(content["attributes"]["person"]):
 			identifier_type = "uuid"
-			person_address = db.find_person_address(id=content["attributes"]["person"])
+			person_address = db.find_address(table="people", id=content["attributes"]["person"])
 		else:
 			identifier_type = "name"
-			person_address = db.find_person_address(name=content["attributes"]["person"])
+			person_address = db.find_address(table="people", name=content["attributes"]["person"])
 
 		if person_address:
 			content["destination"] = person_address
@@ -300,10 +300,10 @@ def method_validator(client=None, **kwargs):
 		place_address = None
 		if is_uuid(content["attributes"]["place"]):
 			identifier_type = "uuid"
-			place_address = db.find_place_address(id=content["attributes"]["place"])
+			place_address = db.find_address(table="places", id=content["attributes"]["place"])
 		else:
 			identifier_type = "name"
-			place_address = db.find_place_address(name=content["attributes"]["place"])
+			place_address = db.find_address(table="places", name=content["attributes"]["place"])
 
 		if place_address:
 			content["destination"] = place_address
@@ -314,7 +314,7 @@ def method_validator(client=None, **kwargs):
 	# For functions that require a personId in the attributes
 	if "personId" in content["attributes"]:
 		if not is_uuid(content["attributes"]["personId"]):
-			personId = db.find_person_id(name=content["attributes"]["personId"])
+			personId = db.find_id(table="people", name=content["attributes"]["personId"])
 
 			if personId:
 				content["attributes"]["personId"] = personId
@@ -324,7 +324,7 @@ def method_validator(client=None, **kwargs):
 	# For functions that require a placeId in the attributes
 	if "placeId" in content["attributes"]:
 		if not is_uuid(content["attributes"]["placeId"]):
-			placeId = db.find_place_id(name=content["attributes"]["placeId"])
+			placeId = db.find_place_id(table="places", name=content["attributes"]["placeId"])
 
 			if placeId:
 				content["attributes"]["placeId"] = placeId

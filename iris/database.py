@@ -1,5 +1,5 @@
 import os
-from tinydb import TinyDB, Query
+import sqlite3
 import re
 import sys
 from pprint import pprint
@@ -7,87 +7,105 @@ from pprint import pprint
 # Create exceptions
 
 def configure_database():
-	try:
-		os.remove(dbfile)
-	except:
-		print("db file not found")
+	columns = {
+		"devices": {
+			"id": "TEXT UNIQUE NOT NULL",
+			"name": "TEXT NOT NULL",
+			"address": "TEXT NOT NULL"
+		},
+		"places": {
+			"id": "TEXT UNIQUE NOT NULL",
+			"name": "TEXT NOT NULL",
+			"address": "TEXT NOT NULL"
+		},
+		"people": {
+			"id": "TEXT UNIQUE NOT NULL",
+			"name": "TEXT NOT NULL",
+			"address": "TEXT NOT NULL"
+		},
+		"rules": {
+			"id": "TEXT UNIQUE NOT NULL",
+			"name": "TEXT NOT NULL",
+			"address": "TEXT NOT NULL"
+		},
+	}
+	for table_name, table_cols in columns.items():
+		drop = "DROP TABLE IF EXISTS {}".format(table_name)
+		res = cursor.execute(drop)
+		conn.commit()
+
+		create = "CREATE TABLE {} ({})".format(table_name, ", ".join( [(k + " " + v) for k,v in table_cols.items()] ))
+		res = cursor.execute(create)
+		conn.commit()
 
 def populate_devices(devices=None):
-	db = TinyDB(dbfile)
-	table = db.table("devices")
 	for device in devices:
-		row = {}
-		for key, value in device.items():
-			key = key.replace(":", "_")
-			row[key] = value
-		table.insert(row)
+		insert = "INSERT OR REPLACE INTO devices (id,name,address) VALUES (?,?,?)"
+		cursor.execute(insert, (
+			device["base:id"],
+			device["dev:name"],
+			device["base:address"],
+		))
+		conn.commit()
 
 def populate_people(people=None):
-	db = TinyDB(dbfile)
-	table = db.table("people")
 	for person in people:
-		person["person_name"] = "{} {}".format(person["person:firstName"], person["person:lastName"])
-		row = {}
-		for key, value in person.items():
-			key = key.replace(":", "_")
-			row[key] = value
-		table.insert(row)
+		name = "{} {}".format(person["person:firstName"], person["person:lastName"])
+		insert = "INSERT OR REPLACE INTO people (id,name,address) VALUES (?,?,?)"
+		cursor.execute(insert, (
+			person["base:id"],
+			name,
+			person["base:address"],
+		))
+		conn.commit()
 
 def populate_places(places=None):
-	db = TinyDB(dbfile)
-	table = db.table("places")
 	for place in places:
-		place["address"] = "SERV:place:{}".format(place["base:id"])
-		row = {}
-		for key, value in place.items():
-			key = key.replace(":", "_")
-			row[key] = value
-		table.insert(row)
+		insert = "INSERT OR REPLACE INTO places (id,name,address) VALUES (?,?,?)"
+		cursor.execute(insert, (
+			place["base:id"],
+			place["place:name"],
+			place["base:address"]
+		))
+		conn.commit()
 
-def find_device_address(name=None, id=None):
-	table = db.table("devices")
-	query = Query()
-	res = None
+def populate_rules(rules=None):
+	for rule in rules:
+		insert = "INSERT OR REPLACE INTO rules (id,name,address) VALUES (?,?,?)"
+		cursor.execute(insert, (
+			rule["base:id"],
+			rule["rule:name"],
+			rule["base:address"]
+		))
+		conn.commit()
+
+def find_address(table=None, name=None, id=None):
+	selector = None
+	selected = None
 	if name:
-		res = table.search(query.dev_name == name)
+		selector = "name"
+		selected = name
 	elif id:
-		res = table.search(query.base_id == id)
-	return res[0]["base_address"] if len(res) > 0 else None
+		selector = "id"
+		selected = id
+	select = "SELECT address FROM {} WHERE {}='{}'".format(table, selector, selected)
+	cursor.execute(select)
+	result = cursor.fetchone()
+	return result["address"] if ((result) and ("address" in result)) else None
 
-def find_person_address(name=None, id=None):
-	table = db.table("people")
-	query = Query()
-	res = None
-	if name:
-		res = table.search(query.person_name == name)
-	elif id:
-		res = table.search(query.base_id == id)
-	return res[0]["base_address"] if len(res) > 0 else None
+def find_id(table=None, name=None):
+	select = "SELECT id FROM {} WHERE name='{}'".format(table, name)
+	cursor.execute(select)
+	result = cursor.fetchone()
+	return result["id"] if ((result) and ("id" in result)) else None	
 
-def find_place_address(name=None, id=None):
-	table = db.table("places")
-	query = Query()
-	res = None
-	if name:
-		res = table.search(query.placeName == name)
-	elif id:
-		res = table.search(query.placeId == id)
-	return res[0]["address"] if len(res) > 0 else None
+def _dict_factory(cursor, row):
+	d = {}
+	for idx,col in enumerate(cursor.description):
+		d[col[0]] = row[idx]
+	return d
 
-def find_person_id(name=None):
-	table = db.table("people")
-	query = Query()
-	res = None
-	res = table.search(query.person_name == name)
-	return res[0]["base_id"] if len(res) > 0 else None
-
-def find_place_id(name=None):
-	table = db.table("places")
-	pprint(table.all());sys.exit()
-	query = Query()
-	res = None
-	res = table.search(query.placeName == name)
-	return res[0]["base_id"] if len(res) > 0 else None
-
-dbfile = "{}/{}".format(os.path.expanduser("~"), ".iris.json")
-db = TinyDB(dbfile)
+dbfile = "{}/{}".format(os.path.expanduser("~"), ".iris.db")
+conn = sqlite3.connect(dbfile, check_same_thread=False)
+conn.row_factory = _dict_factory
+cursor = conn.cursor()

@@ -56,6 +56,7 @@ class Authenticator(object):
 					handle.write(yaml.dump(config, default_flow_style=False, explicit_start=True))
 
 	def get_credentials(self, config=None):
+		print("fetching a token")
 		account = config["accounts"][self.account]
 		login_uri = "https://bc.irisbylowes.com/login"
 		payload = {"user": account["username"], "password": account["password"], "public": "false"}

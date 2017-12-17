@@ -14,6 +14,7 @@ import iris.request as request
 import iris.utils as utils
 from iris.capabilities.account import Account
 from iris.capabilities.place import Place
+from iris.capabilities.rule import Rule
 
 import sys
 from pprint import pprint
@@ -126,13 +127,16 @@ class Iris(object):
 
 	def configure_database(self, **kwargs):
 		db.configure_database()
+		# Places
 		account = Account(iris=self)
 		account.ListPlaces()
 		if account.success:
 			db.populate_places(places=account.response["payload"]["attributes"]["places"])
 		else:
 			print("places failure")
+			sys.exit(1)
 
+		# Devices
 		place = Place(iris=self)
 		place.ListDevices()
 		if place.success:
@@ -140,11 +144,23 @@ class Iris(object):
 			db.populate_devices(devices=self.devices)
 		else:
 			print("devices failure")
+			sys.exit(1)
 
+		# People
 		place.ListPersons()
-
 		if place.success:
 			self.people = place.response["payload"]["attributes"]["persons"]
 			db.populate_people(people=self.people)
 		else:
 			print("people failure")
+			sys.exit(1)
+
+		# Rules
+		rule = Rule(iris=self)
+		rule.ListRules()
+		if rule.success:
+			self.rules = rule.response["payload"]["attributes"]["rules"]
+			db.populate_rules(rules=self.rules)
+		else:
+			print("rule failure")
+			sys.exit(1)
