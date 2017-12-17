@@ -2,3 +2,4 @@ dist/*.tar.gz
 *.egg-info
 __pycache__
 *.swp
+iris/devices/__pycache__
