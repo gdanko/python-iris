@@ -143,6 +143,7 @@ class Iris(object):
 		place.ListPersons()
 
 		if place.success:
+			#pprint(place.response);sys.exit()
 			db.populate_people(people=place.response["payload"]["attributes"]["persons"])
 		else:
 			print("people failure")

@@ -14,34 +14,32 @@ def set_active_place(place_id=None):
 		}
 	}
 
-def get_attributes(destination_address=None, namespace=None, key=None):
+def get_attributes(destination=None, namespace=None, key=None):
 	return {
 		"type": "base:GetAttributes",
 		"headers": {
-			"destination": destination_address,
+			"destination": destination,
 			"correlationId": "74cb2fe5-3c80-4294-bf36-e6a6a5faf08a",
 			"isRequest": True
 		},
 		"payload":{
 			"messageType": "base:GetAttributes",
-			"attributes": {
-				namespace: key,
-			}
+			"attributes": {}
 		}
 	}
 
-def set_attributes(place_id: None, destination_address: None, namespace: None, key: None, value: None):
+def set_attributes(destination: None, namespace: None, attribute: None, value: None):
 	return {
 		"type": "base:SetAttributes",
 		"headers": {
-			"destination": destination_address,
+			"destination": destination,
 			"correlationId": "790525f5-171f-4533-a952-0dcafb9b5310",
 			"isRequest": True
 		},
 		"payload": {
 			"messageType": "base:SetAttributes",
 			"attributes": {
-				"{}:{}".format(namespace, key): value
+				"{}:{}".format(namespace, attribute): value
 			}
 		}
 	}

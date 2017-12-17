@@ -1,6 +1,6 @@
 {
     "account": {
-        "correlation_id": "5e795182-76fe-4815-a5cf-b99d37c8b3e3",
+        "correlation_id": "6f1712dd-bf45-4465-b3e6-3c3f1c4ef9f4",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -81,6 +81,7 @@
                 "description": "The person ID of the account owner"
             }
         },
+        "is_device": false,
         "methods": {
             "ListDevices": {
                 "enabled": true,
@@ -328,8 +329,9 @@
         "events": {}
     },
     "accountmig": {
-        "correlation_id": "76347d3d-e59e-477a-af99-c4ed571ffd6f",
+        "correlation_id": "91960cb3-af28-45f4-ac24-c1fbb3973000",
         "attributes": {},
+        "is_device": false,
         "methods": {
             "MigrateBillingAccount": {
                 "enabled": true,
@@ -367,7 +369,7 @@
         "events": {}
     },
     "alarm": {
-        "correlation_id": "02ea7162-3594-447f-a708-75b92feb32d8",
+        "correlation_id": "d26420b9-9cce-40b9-bf55-081e99f30d70",
         "attributes": {
             "alertState": {
                 "readonly": true,
@@ -433,11 +435,12 @@
                 "description": "When true only notifications will be sent, alert devices / keypads will not sound."
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "incident": {
-        "correlation_id": "8a278c47-89de-4240-8eec-b104ba3fb264",
+        "correlation_id": "b2532c52-67fd-4d56-af4c-b0a4cf41f6cf",
         "attributes": {
             "placeId": {
                 "readonly": true,
@@ -566,6 +569,7 @@
                 "description": "The monitored flag that should be true if any of the active alarms are monitored or false if none are monitored"
             }
         },
+        "is_device": false,
         "methods": {
             "Verify": {
                 "enabled": true,
@@ -656,7 +660,7 @@
         }
     },
     "subalarm": {
-        "correlation_id": "d0c10ea9-1701-4de8-bc55-5e9a1a6ab009",
+        "correlation_id": "88d69521-92fe-435f-848c-06165884a923",
         "attributes": {
             "alarmState": {
                 "readonly": true,
@@ -837,6 +841,7 @@
                 ]
             }
         },
+        "is_device": false,
         "methods": {
             "ListIncidents": {
                 "enabled": true,
@@ -915,7 +920,7 @@
         "events": {}
     },
     "alert": {
-        "correlation_id": "9b3ed3e3-164b-4a07-a87e-7eac64d259cc",
+        "correlation_id": "21709674-28a4-47f7-8cca-e9e243cad3f6",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -946,11 +951,12 @@
                 "description": "The last time this device went to alert state."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "aosmithwaterheatercontroller": {
-        "correlation_id": "43290568-622f-4a7f-8a5a-0881a38b9128",
+        "correlation_id": "d5a5191b-0115-4389-9f5b-7273985b472e",
         "attributes": {
             "updaterate": {
                 "readonly": false,
@@ -1072,11 +1078,12 @@
                 "description": "Serial number as recorded on the heater's label "
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "atmos": {
-        "correlation_id": "61f933c8-cc32-46da-be68-be50fa2d7952",
+        "correlation_id": "c762dea9-cba1-41ba-a29d-e6078931b6a0",
         "attributes": {
             "pressure": {
                 "readonly": true,
@@ -1085,11 +1092,12 @@
                 "description": "Atmospheric air pressure."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "bridge": {
-        "correlation_id": "83acecd9-07ca-4c5e-beca-a14f3a1c0b06",
+        "correlation_id": "a629378b-41cf-4952-b9a5-5336a179ed08",
         "attributes": {
             "pairedDevices": {
                 "readonly": true,
@@ -1121,6 +1129,7 @@
                 "description": "Total number of devices this bridge can support."
             }
         },
+        "is_device": true,
         "methods": {
             "StartPairing": {
                 "enabled": true,
@@ -1162,7 +1171,7 @@
         "events": {}
     },
     "bridgechild": {
-        "correlation_id": "00355108-53eb-42a6-820b-1dc74779cc4d",
+        "correlation_id": "16f273b4-3299-4e0d-b252-0d094c850dc8",
         "attributes": {
             "parentAddress": {
                 "readonly": true,
@@ -1177,11 +1186,12 @@
                 "description": "The id assigned to this child device by its parent bridge device."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "but": {
-        "correlation_id": "e96d43d9-4c5b-4c1b-b8a3-99f450b03401",
+        "correlation_id": "ec2989a0-154b-4d31-bcce-b287bca91cb4",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -1200,11 +1210,12 @@
                 "description": "UTC date time of last state change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "camera": {
-        "correlation_id": "12267aa1-ab8a-4756-9484-e5981e1d28e9",
+        "correlation_id": "d515f80b-85d3-4185-81ee-1f145f70d0e5",
         "attributes": {
             "privacy": {
                 "readonly": true,
@@ -1314,6 +1325,7 @@
                 "max": "5"
             }
         },
+        "is_device": true,
         "methods": {
             "StartStreaming": {
                 "enabled": true,
@@ -1358,7 +1370,7 @@
         "events": {}
     },
     "cameraptz": {
-        "correlation_id": "a1f6bae0-d3fe-48f5-9f6d-cf879e69b916",
+        "correlation_id": "d16f8e37-a028-44f2-b7d3-e10bb56174e3",
         "attributes": {
             "currentPan": {
                 "readonly": true,
@@ -1433,6 +1445,7 @@
                 "max": "100"
             }
         },
+        "is_device": true,
         "methods": {
             "GotoHome": {
                 "enabled": true,
@@ -1517,7 +1530,7 @@
         "events": {}
     },
     "subcameras": {
-        "correlation_id": "8e9ca2d1-bb17-4add-a65c-faa2081c5be1",
+        "correlation_id": "3d443521-f35b-4f3a-a594-78cd46b918b8",
         "attributes": {
             "cameras": {
                 "readonly": true,
@@ -1552,11 +1565,12 @@
                 "max": "6"
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "camerastatus": {
-        "correlation_id": "d819181f-ca2e-4e4d-9bfa-cc6feb4cc557",
+        "correlation_id": "8a75e203-e3db-4394-9d4a-85a6e333de18",
         "attributes": {
             "camera": {
                 "readonly": true,
@@ -1595,11 +1609,12 @@
                 "description": "The address of the video that the camera is currently streaming / recording."
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "co": {
-        "correlation_id": "c2eb888f-b684-4a23-918f-58aab4c9c85d",
+        "correlation_id": "41fcc7f6-de9d-43a3-b153-3b35c091e266",
         "attributes": {
             "co": {
                 "readonly": true,
@@ -1634,11 +1649,12 @@
                 "description": "Measured value of the Carbon Monoxide in the room in parts per million"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "subcare": {
-        "correlation_id": "a2a3bc76-5934-47c4-ba3c-17bb02087e2f",
+        "correlation_id": "b259f15a-8f8f-487b-ad94-8cec128bab5f",
         "attributes": {
             "triggeredDevices": {
                 "readonly": true,
@@ -1774,6 +1790,7 @@
                 "description": "Flag indicating that careDevices has been initialized from careCapableDevices.  This is to initialize the field a single time. Data FIX"
             }
         },
+        "is_device": false,
         "methods": {
             "Panic": {
                 "enabled": true,
@@ -1993,7 +2010,7 @@
         }
     },
     "cellbackup": {
-        "correlation_id": "a1779ba0-6482-470b-81a6-bec000a71be9",
+        "correlation_id": "c5d6ff8c-68ee-482e-9061-f5b7c359eb22",
         "attributes": {
             "status": {
                 "readonly": true,
@@ -2033,6 +2050,7 @@
                 ]
             }
         },
+        "is_device": false,
         "methods": {
             "Ban": {
                 "enabled": true,
@@ -2069,7 +2087,7 @@
         }
     },
     "centralitesmartplug": {
-        "correlation_id": "7dfddd6c-3dc0-4539-a877-fec294cdf77b",
+        "correlation_id": "ad44eff0-bdd5-42e5-85bb-bce37c29ba73",
         "attributes": {
             "homeid": {
                 "readonly": true,
@@ -2084,6 +2102,7 @@
                 "description": ""
             }
         },
+        "is_device": true,
         "methods": {
             "SetLearnMode": {
                 "enabled": true,
@@ -2164,7 +2183,7 @@
         "events": {}
     },
     "subclimate": {
-        "correlation_id": "db5d3254-b5e3-42b3-9e6c-fa7cbf567dce",
+        "correlation_id": "64a288fa-0aac-4f54-9bce-a8300256ca38",
         "attributes": {
             "controlDevices": {
                 "readonly": true,
@@ -2245,6 +2264,7 @@
                 "description": "The addresses of all devices that implement spaceheater and have heatstate value of ON"
             }
         },
+        "is_device": false,
         "methods": {
             "EnableScheduler": {
                 "enabled": true,
@@ -2276,7 +2296,7 @@
         "events": {}
     },
     "clock": {
-        "correlation_id": "96349f26-ec23-4288-b23d-dd532adee649",
+        "correlation_id": "4bf85616-f8d9-450c-b2ec-e39b14b4f74f",
         "attributes": {
             "year": {
                 "readonly": true,
@@ -2335,11 +2355,12 @@
                 "max": "7"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "color": {
-        "correlation_id": "4afead31-1eab-4857-9007-1586a4a6472c",
+        "correlation_id": "84aeb472-9404-4f85-bfec-1fff979d4a64",
         "attributes": {
             "hue": {
                 "readonly": false,
@@ -2358,11 +2379,12 @@
                 "max": "100"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "colortemp": {
-        "correlation_id": "bfe0a22f-ba07-4f44-be44-6e58d1a7875f",
+        "correlation_id": "6150ff5a-1803-4aae-85e8-2ac3b92fad63",
         "attributes": {
             "colortemp": {
                 "readonly": false,
@@ -2383,11 +2405,12 @@
                 "description": "Coolest color temperature supported."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "cont": {
-        "correlation_id": "11456a66-38d9-40a0-8ec6-a6f042122362",
+        "correlation_id": "fa862fb3-beb7-4f48-8cdb-f7760bfaf45d",
         "attributes": {
             "contact": {
                 "readonly": true,
@@ -2418,11 +2441,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "daynight": {
-        "correlation_id": "ef1bf64e-052e-4ee9-ad3a-ea52047fd555",
+        "correlation_id": "f395af45-b988-4c3a-8232-7b2ed31df64b",
         "attributes": {
             "mode": {
                 "readonly": true,
@@ -2441,11 +2465,12 @@
                 "description": "UTC date time of last mode change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "devadv": {
-        "correlation_id": "9738d400-6409-44a0-8722-865dc02b63d6",
+        "correlation_id": "eea02c49-6798-4dbc-974f-ab90261986e5",
         "attributes": {
             "drivername": {
                 "readonly": true,
@@ -2526,6 +2551,7 @@
                 "description": "The code string indicating the reason that a device is operating in a degraded manner."
             }
         },
+        "is_device": true,
         "methods": {
             "UpgradeDriver": {
                 "enabled": true,
@@ -2600,7 +2626,7 @@
         }
     },
     "dev": {
-        "correlation_id": "d666cc29-ee3d-4cf5-b3a1-365299692555",
+        "correlation_id": "21de90f1-88e7-4800-925c-6c850bf3641d",
         "attributes": {
             "account": {
                 "readonly": true,
@@ -2645,6 +2671,7 @@
                 "description": "ID of the product catalog that describes this device"
             }
         },
+        "is_device": false,
         "methods": {
             "ListHistoryEntries": {
                 "enabled": true,
@@ -2715,7 +2742,7 @@
         }
     },
     "devconn": {
-        "correlation_id": "bd805ca4-d941-4b75-be16-925e1b6d24af",
+        "correlation_id": "ed2233da-2ad8-459f-8d54-d973e623a55c",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -2753,6 +2780,7 @@
                 "max": "100"
             }
         },
+        "is_device": true,
         "methods": {
             "LostDevice": {
                 "enabled": true,
@@ -2773,7 +2801,7 @@
         "events": {}
     },
     "devota": {
-        "correlation_id": "28991b15-4842-41c4-b2c1-d41930f17d0d",
+        "correlation_id": "04f65d12-6a6b-4bc0-bc31-944ebfa0f26a",
         "attributes": {
             "currentVersion": {
                 "readonly": true,
@@ -2824,6 +2852,7 @@
                 "description": "Reason for failure of the OTA (offline, timeout, refused, etc.)."
             }
         },
+        "is_device": true,
         "methods": {
             "FirmwareUpdate": {
                 "enabled": true,
@@ -2911,7 +2940,7 @@
         }
     },
     "devpow": {
-        "correlation_id": "044a1977-35a4-4632-8154-4d9ea0ec035b",
+        "correlation_id": "44886faf-9f2e-4d7a-856f-502f6d8cbcf4",
         "attributes": {
             "source": {
                 "readonly": true,
@@ -2959,6 +2988,7 @@
                 "description": "UTC date time of last source change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {
             "BackupBattery": {
@@ -2985,8 +3015,9 @@
         }
     },
     "devmock": {
-        "correlation_id": "e3cc4f7c-8150-4510-a6cb-fc01e55d5ff1",
+        "correlation_id": "ad10e288-279a-4c5e-9378-d2e442365628",
         "attributes": {},
+        "is_device": true,
         "methods": {
             "SetAttributes": {
                 "enabled": true,
@@ -3041,7 +3072,7 @@
         "events": {}
     },
     "dim": {
-        "correlation_id": "c8529707-c1c7-4404-8025-8de6ac07995f",
+        "correlation_id": "0d069385-86c0-4c7c-8ec1-542836ac4121",
         "attributes": {
             "brightness": {
                 "readonly": false,
@@ -3066,6 +3097,7 @@
                 "description": "Number of seconds remaining at current ramping rate before brightness is equal to rampingtarget. When ramping is complete, this value should be set to 0. This parameter is read-only and should be controlled via the RampBrightness method if ramping is desired."
             }
         },
+        "is_device": true,
         "methods": {
             "RampBrightness": {
                 "enabled": true,
@@ -3140,7 +3172,7 @@
         "events": {}
     },
     "doorlock": {
-        "correlation_id": "0c97b366-a987-42f6-a1a5-9a6906f2a683",
+        "correlation_id": "ce69122e-d2ff-443e-a3fe-0003f42f9c59",
         "attributes": {
             "lockstate": {
                 "readonly": false,
@@ -3196,6 +3228,7 @@
                 "description": "UTC date time of last lockstate change"
             }
         },
+        "is_device": true,
         "methods": {
             "AuthorizePerson": {
                 "enabled": true,
@@ -3343,7 +3376,7 @@
         }
     },
     "subdoorsnlocks": {
-        "correlation_id": "d2b7974e-c8e1-4598-a636-59cc4288ea69",
+        "correlation_id": "ad289247-2923-427f-a57c-4aab84576ba5",
         "attributes": {
             "lockDevices": {
                 "readonly": true,
@@ -3460,6 +3493,7 @@
                 "description": "The set of all that could have a chiming enabled/disabled."
             }
         },
+        "is_device": false,
         "methods": {
             "AuthorizePeople": {
                 "enabled": true,
@@ -3538,7 +3572,7 @@
         }
     },
     "ecowater": {
-        "correlation_id": "eb0660b0-1358-4b3d-a2ea-3bf499af30f3",
+        "correlation_id": "1698ad48-f5f9-4529-878f-4e52ad3ab62f",
         "attributes": {
             "excessiveUse": {
                 "readonly": true,
@@ -3577,11 +3611,12 @@
                 "description": "Indicates whether the user wants to receive excessive use notifications"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "fan": {
-        "correlation_id": "daf2d95a-96cf-442d-9f3b-3f225da26642",
+        "correlation_id": "c1c8d3cf-37c4-4e97-bb46-a55852acf11f",
         "attributes": {
             "speed": {
                 "readonly": false,
@@ -3610,11 +3645,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "flow": {
-        "correlation_id": "0ec2ae63-3ec6-4463-8717-4dd7af027159",
+        "correlation_id": "a0a8e30b-4766-4cb6-b18d-2e247c20f2a2",
         "attributes": {
             "flow": {
                 "readonly": true,
@@ -3623,11 +3659,12 @@
                 "description": "The instantaneous flow measurement."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "glass": {
-        "correlation_id": "1a9d9f20-9522-4ce5-876a-0a7df589f898",
+        "correlation_id": "431d434b-0b27-4acd-9289-5ac04203fb51",
         "attributes": {
             "break": {
                 "readonly": true,
@@ -3646,11 +3683,12 @@
                 "description": "UTC date time of last break change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "halo": {
-        "correlation_id": "38951c83-76f1-465c-91f1-f7706a05dcbc",
+        "correlation_id": "866ebae2-6a3d-475b-9456-253aaa97152c",
         "attributes": {
             "devicestate": {
                 "readonly": true,
@@ -3745,6 +3783,7 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {
             "StartHush": {
                 "enabled": true,
@@ -3821,7 +3860,7 @@
         "events": {}
     },
     "honeywelltcc": {
-        "correlation_id": "11189362-9b20-402f-812c-e2025c16ac7e",
+        "correlation_id": "fc03589e-c780-40d9-86c7-28de29bb316d",
         "attributes": {
             "requiresLogin": {
                 "readonly": true,
@@ -3839,11 +3878,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "hub4g": {
-        "correlation_id": "d409af93-39af-4998-820f-c1d5cb6f7791",
+        "correlation_id": "3e0d1d89-a538-4f35-a691-fc86809a393e",
         "attributes": {
             "present": {
                 "readonly": true,
@@ -3948,6 +3988,7 @@
                 "description": "Vendor specific connection status code"
             }
         },
+        "is_device": false,
         "methods": {
             "GetInfo": {
                 "enabled": true,
@@ -3977,7 +4018,7 @@
         "events": {}
     },
     "hubadv": {
-        "correlation_id": "bab69e93-82a7-4da4-b6b1-00eb4a104b02",
+        "correlation_id": "f5ce971e-c5e8-4856-904e-ad58a590991d",
         "attributes": {
             "mac": {
                 "readonly": true,
@@ -4123,6 +4164,7 @@
                 "description": "Size of flash, in bytes"
             }
         },
+        "is_device": false,
         "methods": {
             "Restart": {
                 "enabled": true,
@@ -4302,7 +4344,7 @@
         }
     },
     "hubalarm": {
-        "correlation_id": "a0ac8b9f-781b-4cb5-ba2c-14c271efe3ee",
+        "correlation_id": "23fde9e9-8425-4aee-88dc-e79d2c1fe8ba",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -4690,6 +4732,7 @@
                 "description": "When true only notifications will be sent, alert devices / keypads will not sound."
             }
         },
+        "is_device": false,
         "methods": {
             "Activate": {
                 "enabled": true,
@@ -4839,7 +4882,7 @@
         }
     },
     "hubav": {
-        "correlation_id": "83544d88-7190-441a-a6bb-903b2c303e8d",
+        "correlation_id": "d3fe1c47-08a8-4da6-b4c3-185c1b036bb6",
         "attributes": {
             "numAvailable": {
                 "readonly": true,
@@ -4866,6 +4909,7 @@
                 "description": "List of AV devices (by UUID) with current mode"
             }
         },
+        "is_device": false,
         "methods": {
             "pair": {
                 "enabled": true,
@@ -5160,8 +5204,9 @@
         }
     },
     "hubbackup": {
-        "correlation_id": "a20f707f-fcb4-4b30-b6f3-39b00ccf3550",
+        "correlation_id": "671ea357-726e-4bea-95e9-c23908d5a9f2",
         "attributes": {},
+        "is_device": false,
         "methods": {
             "Backup": {
                 "enabled": true,
@@ -5243,7 +5288,7 @@
         }
     },
     "hub": {
-        "correlation_id": "484c20f6-d3e0-4524-844c-7c113fd880f7",
+        "correlation_id": "edf90875-ef07-46ed-a7a9-b9ff8c44ffb0",
         "attributes": {
             "id": {
                 "readonly": true,
@@ -5323,6 +5368,7 @@
                 "description": "The timezone for the hub."
             }
         },
+        "is_device": false,
         "methods": {
             "PairingRequest": {
                 "enabled": true,
@@ -5541,8 +5587,9 @@
         }
     },
     "hubchime": {
-        "correlation_id": "7ffe2a6f-7a05-4d9a-a581-9fcb4d184db2",
+        "correlation_id": "4dae059a-1547-4594-bb81-e69048d84cf8",
         "attributes": {},
+        "is_device": false,
         "methods": {
             "chime": {
                 "enabled": true,
@@ -5556,7 +5603,7 @@
         "events": {}
     },
     "hubconn": {
-        "correlation_id": "a65fd25e-6ed4-45fa-bfc0-fac3c6b0f05a",
+        "correlation_id": "ecbab26f-20d4-4300-9f8a-d46d4ccc1014",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -5600,12 +5647,14 @@
                 "max": "100"
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "hubdebug": {
-        "correlation_id": "917e3178-15d5-4fd6-927c-bdc811092df1",
+        "correlation_id": "1d6d0f7d-0a89-43a8-89a9-e65c80820119",
         "attributes": {},
+        "is_device": false,
         "methods": {
             "GetFiles": {
                 "enabled": true,
@@ -5698,7 +5747,7 @@
         "events": {}
     },
     "hubhue": {
-        "correlation_id": "e5a63118-4e8d-42e6-9d24-44f761fed604",
+        "correlation_id": "6292f58c-af83-412f-836e-8a9bc4810d35",
         "attributes": {
             "bridgesAvailable": {
                 "readonly": true,
@@ -5725,11 +5774,12 @@
                 "description": "The lights paired where the key is the light's identifier and the value is the bridge the uuid of the bridge the light is behind"
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "hubmetric": {
-        "correlation_id": "a733a0eb-5640-40e9-8a8e-a6c0ea8f7299",
+        "correlation_id": "82d3d151-e4dd-43e7-9740-761370bca5f5",
         "attributes": {
             "metricsjobs": {
                 "readonly": true,
@@ -5738,6 +5788,7 @@
                 "description": "List of the active metrics reporting jobs."
             }
         },
+        "is_device": false,
         "methods": {
             "StartMetricsJob": {
                 "enabled": true,
@@ -5833,7 +5884,7 @@
         "events": {}
     },
     "hubnet": {
-        "correlation_id": "b7782db5-aea9-49fb-9853-0825ba57c234",
+        "correlation_id": "4b20b441-d3d4-460b-bc95-1a3c2e7f6f94",
         "attributes": {
             "type": {
                 "readonly": true,
@@ -5889,6 +5940,7 @@
                 "description": "ip address of the active interface"
             }
         },
+        "is_device": false,
         "methods": {
             "GetRoutingTable": {
                 "enabled": true,
@@ -5902,7 +5954,7 @@
         "events": {}
     },
     "hubpow": {
-        "correlation_id": "aa5dde95-7b2d-4f33-a1c0-d55dca183785",
+        "correlation_id": "1af006ae-c80f-47ad-bac0-472523588ea3",
         "attributes": {
             "source": {
                 "readonly": true,
@@ -5927,6 +5979,7 @@
                 "description": "Current battery remaining, in percent"
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {
             "HubPowerSourceChanged": {
@@ -5946,7 +5999,7 @@
         }
     },
     "hubrflx": {
-        "correlation_id": "15dcd23b-fe4a-4ee0-96eb-bc06c0a90278",
+        "correlation_id": "0b6d325a-6520-4069-91bf-d829acac8dc9",
         "attributes": {
             "numDrivers": {
                 "readonly": true,
@@ -5979,6 +6032,7 @@
                 "description": "The version of hub local reflexes currently supported by the hub."
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {
             "SyncNeeded": {
@@ -5991,7 +6045,7 @@
         }
     },
     "hubsercomm": {
-        "correlation_id": "0f300a04-e471-4712-9335-617685d1d50b",
+        "correlation_id": "dcbe4903-56d4-41b2-a6e6-b6a50701dd17",
         "attributes": {
             "numAvailable": {
                 "readonly": true,
@@ -6036,6 +6090,7 @@
                 "description": "Per-hub camera certificate hash value"
             }
         },
+        "is_device": false,
         "methods": {
             "getCameraPassword": {
                 "enabled": true,
@@ -6777,7 +6832,7 @@
         }
     },
     "hubsounds": {
-        "correlation_id": "bb122a96-9324-4c07-b599-4e36e1ae322a",
+        "correlation_id": "041167e8-138a-40f6-b247-bc0a5b80681f",
         "attributes": {
             "playing": {
                 "readonly": true,
@@ -6792,6 +6847,7 @@
                 "description": "Source of the sounds being played.  File from URL or pre-programmed tone name"
             }
         },
+        "is_device": false,
         "methods": {
             "PlayURL": {
                 "enabled": true,
@@ -6859,7 +6915,7 @@
         "events": {}
     },
     "hubvol": {
-        "correlation_id": "ce5cef1b-6b23-4572-a855-48c99033677f",
+        "correlation_id": "8e9bd280-f0ff-4f2c-8041-b9be162069e5",
         "attributes": {
             "volume": {
                 "readonly": false,
@@ -6874,11 +6930,12 @@
                 ]
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "hubzigbee": {
-        "correlation_id": "c41a6eae-4372-42ef-a7df-de34f4b72c36",
+        "correlation_id": "835c26e7-f157-43c8-8e4b-5ac3eff72f06",
         "attributes": {
             "panid": {
                 "readonly": true,
@@ -6989,6 +7046,7 @@
                 ]
             }
         },
+        "is_device": false,
         "methods": {
             "Reset": {
                 "enabled": true,
@@ -7226,7 +7284,7 @@
         "events": {}
     },
     "hubzwave": {
-        "correlation_id": "278dbaa7-ea60-4930-862f-7cacf017fa87",
+        "correlation_id": "5a3bd1ad-75e2-4823-a4fe-dd887f099837",
         "attributes": {
             "hardware": {
                 "readonly": true,
@@ -7372,6 +7430,7 @@
                 "description": "True if a heal should be run on the network to restore proper operation."
             }
         },
+        "is_device": false,
         "methods": {
             "FactoryReset": {
                 "enabled": true,
@@ -7516,7 +7575,7 @@
         }
     },
     "huebridge": {
-        "correlation_id": "296a9ee0-b89b-42b3-ada8-90d752626765",
+        "correlation_id": "8a9a6298-6fce-4b3a-adad-5d394477b00e",
         "attributes": {
             "ipaddress": {
                 "readonly": true,
@@ -7561,12 +7620,14 @@
                 "description": "Id of the hue bridge"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "ident": {
-        "correlation_id": "e20c9b11-5b3c-40bd-9dd1-df461b322305",
+        "correlation_id": "54a0b132-1265-4a00-b13c-20f9b231b2f0",
         "attributes": {},
+        "is_device": true,
         "methods": {
             "Identify": {
                 "enabled": true,
@@ -7587,7 +7648,7 @@
         "events": {}
     },
     "ill": {
-        "correlation_id": "6dae6fa7-0b13-4c1d-bca9-74792454a4e2",
+        "correlation_id": "ed6ed3ee-eb43-4fd3-92ca-d3755ccbd979",
         "attributes": {
             "illuminance": {
                 "readonly": true,
@@ -7608,11 +7669,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "indicator": {
-        "correlation_id": "9982152b-4611-4ad8-8839-2f88220b95b6",
+        "correlation_id": "45c3a5dc-7476-433d-aca5-d45b3110b086",
         "attributes": {
             "indicator": {
                 "readonly": true,
@@ -7644,11 +7706,12 @@
                 "description": "Indicates whether operation of the indicator should be inverted, if supported by the device. For example, turn indicator OFF when switch is ON, etc."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "ipinfo": {
-        "correlation_id": "606281f8-6331-4f4e-8f2b-7262dab99dd0",
+        "correlation_id": "025cf3f9-3991-476b-86d5-bf3a191c36ed",
         "attributes": {
             "ip": {
                 "readonly": true,
@@ -7675,11 +7738,12 @@
                 "description": "Current gateway IP address"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "irrcont": {
-        "correlation_id": "f0120da4-1802-492c-85db-ccf5a1af2f84",
+        "correlation_id": "aa085756-0164-4055-b13b-ead7d9fbc853",
         "attributes": {
             "numZones": {
                 "readonly": true,
@@ -7759,6 +7823,7 @@
                 "description": "This attribute was deprecated in 1.8."
             }
         },
+        "is_device": true,
         "methods": {
             "WaterNowV2": {
                 "enabled": true,
@@ -7858,7 +7923,7 @@
         "events": {}
     },
     "irrsched": {
-        "correlation_id": "93ae1707-0946-4fd0-b86a-c959a420074b",
+        "correlation_id": "25f44a0b-c54e-4fac-8073-ddc211579a06",
         "attributes": {
             "refreshSchedule": {
                 "readonly": false,
@@ -7867,6 +7932,7 @@
                 "description": "If true then the device needs to schedule synchronized with the platform."
             }
         },
+        "is_device": true,
         "methods": {
             "EnableSchedule": {
                 "enabled": true,
@@ -8145,7 +8211,7 @@
         }
     },
     "irr": {
-        "correlation_id": "a806ea51-5bd2-4749-b7c9-4f062647afb3",
+        "correlation_id": "b83fb620-d45d-420f-aad5-6cca14cda667",
         "attributes": {
             "zoneState": {
                 "readonly": true,
@@ -8226,11 +8292,12 @@
                 "description": "This attribute was deprecated in the 1.8 release."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "keypad": {
-        "correlation_id": "9ab66d5a-ce85-4a66-a37c-60db6d6eba08",
+        "correlation_id": "8d3ae4f2-400e-4b1f-a832-581f45291d01",
         "attributes": {
             "alarmState": {
                 "readonly": false,
@@ -8281,6 +8348,7 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {
             "BeginArming": {
                 "enabled": true,
@@ -8486,7 +8554,7 @@
         }
     },
     "sublawnngarden": {
-        "correlation_id": "6870e31a-a62e-4327-8b5b-90bfc330444c",
+        "correlation_id": "a2627448-d145-40e5-a7d0-79700c7635ca",
         "attributes": {
             "controllers": {
                 "readonly": true,
@@ -8537,6 +8605,7 @@
                 "description": "Metadata about the current watering zone for each controller."
             }
         },
+        "is_device": false,
         "methods": {
             "StopWatering": {
                 "enabled": true,
@@ -9033,7 +9102,7 @@
         }
     },
     "gas": {
-        "correlation_id": "4a571d52-9c81-4427-9cd3-c8ac9e499e0b",
+        "correlation_id": "9a9463d2-b282-4ce8-b3cf-193366975064",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -9052,11 +9121,12 @@
                 "description": "UTC date time of last state change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "leakh2o": {
-        "correlation_id": "acc00b00-55ba-44e9-b391-5d31f43a2602",
+        "correlation_id": "224897e5-85e9-436b-8104-c716c15bba21",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -9075,6 +9145,7 @@
                 "description": "UTC date time of last state change"
             }
         },
+        "is_device": true,
         "methods": {
             "leakh2o": {
                 "enabled": true,
@@ -9098,7 +9169,7 @@
         "events": {}
     },
     "light": {
-        "correlation_id": "1a9023bb-4cd7-4154-b66b-4139f67151c2",
+        "correlation_id": "7435e629-5d92-4aa6-b82c-fa9d03fe0ec0",
         "attributes": {
             "colormode": {
                 "readonly": false,
@@ -9112,11 +9183,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "sublightsnswitches": {
-        "correlation_id": "8b1f6eee-7854-47ab-80cf-39cb1cc3f515",
+        "correlation_id": "c0d4c7b5-dcb2-4493-8e3f-62b3e1a5c0bf",
         "attributes": {
             "switchDevices": {
                 "readonly": true,
@@ -9137,11 +9209,12 @@
                 "description": "A map of deviceTypeHint to count of devices that are currently on."
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "lutronbridge": {
-        "correlation_id": "ea2bbabc-1876-49db-9a3d-4e6aa94d211d",
+        "correlation_id": "2b4aaf35-d5c0-4ca9-b9ac-26b53a948e86",
         "attributes": {
             "href": {
                 "readonly": true,
@@ -9168,11 +9241,12 @@
                 "description": "Serial number of the device."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "mobiledevice": {
-        "correlation_id": "7b457f6b-d435-4ff2-a902-f412950c86f8",
+        "correlation_id": "ddd6b05e-a6bb-4362-bd35-ef529f3783e9",
         "attributes": {
             "personId": {
                 "readonly": true,
@@ -9277,12 +9351,14 @@
                 "description": "The version of the Iris app installed on this device."
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "incidentmock": {
-        "correlation_id": "0bcc2f69-a7a2-46b4-aaf0-87180508e6d4",
+        "correlation_id": "37067a9d-4413-4839-8ec1-c7375ae24462",
         "attributes": {},
+        "is_device": false,
         "methods": {
             "Contacted": {
                 "enabled": true,
@@ -9348,7 +9424,7 @@
         "events": {}
     },
     "mot": {
-        "correlation_id": "de13812b-b48b-42aa-a36a-95d76ce644b6",
+        "correlation_id": "0ffbd764-678f-4ff5-b060-8f65d33e8eea",
         "attributes": {
             "motion": {
                 "readonly": true,
@@ -9367,11 +9443,12 @@
                 "description": "UTC date time of last motion change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "motdoor": {
-        "correlation_id": "8dfdf41e-2cda-442a-9367-57365d632da3",
+        "correlation_id": "768a6114-117c-4b14-a360-b1e001c19ee8",
         "attributes": {
             "doorstate": {
                 "readonly": false,
@@ -9401,11 +9478,12 @@
                 "description": "UTC date time of last doorstate change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "nesttherm": {
-        "correlation_id": "fc253c11-bd27-4ecf-85b6-3894fee43c98",
+        "correlation_id": "a1dbe7f0-203c-4190-92f9-b39a02309095",
         "attributes": {
             "hasleaf": {
                 "readonly": true,
@@ -9438,11 +9516,12 @@
                 "description": "The maximum temperature that the nest thermostat can be set to when locked is true."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "person": {
-        "correlation_id": "e4f30673-c92f-4523-a39b-a5a1a63dd02b",
+        "correlation_id": "f159eedb-1f65-4dbb-b515-a4ac47d5ab7b",
         "attributes": {
             "firstName": {
                 "readonly": false,
@@ -9535,6 +9614,7 @@
                 "description": "Returns true if the person has a login, false otherwise"
             }
         },
+        "is_device": false,
         "methods": {
             "SetSecurityAnswers": {
                 "enabled": true,
@@ -9947,7 +10027,7 @@
         }
     },
     "petdoor": {
-        "correlation_id": "47043dd2-ba30-4223-80d5-0d7dd4b7b52c",
+        "correlation_id": "b84a84b6-e249-416f-8850-3cf74dbe582d",
         "attributes": {
             "lockstate": {
                 "readonly": false,
@@ -9989,6 +10069,7 @@
                 "description": "The number (5) of RFID tags this device supports."
             }
         },
+        "is_device": true,
         "methods": {
             "RemoveToken": {
                 "enabled": true,
@@ -10072,7 +10153,7 @@
         }
     },
     "pettoken": {
-        "correlation_id": "13cdc9c2-c6a9-496c-9d6a-1fc3b71daf96",
+        "correlation_id": "b88a6dfe-fe88-4877-bddb-8d5f80676b04",
         "attributes": {
             "tokenNum": {
                 "readonly": true,
@@ -10115,11 +10196,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "place": {
-        "correlation_id": "81c05388-70ac-4931-b0cc-4b1446c9f08d",
+        "correlation_id": "0f8b161f-bb3e-4ae4-88e6-0c8b952ae59a",
         "attributes": {
             "account": {
                 "readonly": true,
@@ -10291,6 +10373,7 @@
                 "description": "Platform-owned set of service addons subscribed to at this place"
             }
         },
+        "is_device": false,
         "methods": {
             "ListDevices": {
                 "enabled": true,
@@ -10538,7 +10621,7 @@
         "events": {}
     },
     "subplacemonitor": {
-        "correlation_id": "fe5b9063-d47e-4581-aa30-33b552e16a5d",
+        "correlation_id": "8409e1ff-94cf-4137-8fdf-ad95d1dd6467",
         "attributes": {
             "updatedDevices": {
                 "readonly": true,
@@ -10577,6 +10660,7 @@
                 ]
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {
             "HubOffline": {
@@ -10656,7 +10740,7 @@
         }
     },
     "population": {
-        "correlation_id": "ff6b577d-3232-408f-86ba-91d78b2fc419",
+        "correlation_id": "4e5b59cb-b5e8-4602-8b75-22c91e5bba31",
         "attributes": {
             "name": {
                 "readonly": true,
@@ -10677,6 +10761,7 @@
                 "description": "Indicates that this population is the default population"
             }
         },
+        "is_device": false,
         "methods": {
             "GetPopulations": {
                 "enabled": true,
@@ -10690,7 +10775,7 @@
         "events": {}
     },
     "pow": {
-        "correlation_id": "43b3034e-bc81-414b-b5f7-13f090ba9fb5",
+        "correlation_id": "119eb49e-97e0-4d42-8a37-59ec6146fb65",
         "attributes": {
             "instantaneous": {
                 "readonly": true,
@@ -10711,11 +10796,12 @@
                 "description": "If true, this represents a whole-home meter."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "pres": {
-        "correlation_id": "35228d33-d0eb-4a76-8516-111cc487156b",
+        "correlation_id": "76ebcd4c-fa75-45ca-b585-7a8e03c763e9",
         "attributes": {
             "presence": {
                 "readonly": true,
@@ -10751,11 +10837,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "subspres": {
-        "correlation_id": "6cca0e35-7b5a-4952-8678-3476e5e5ec05",
+        "correlation_id": "5b3942f2-c595-4649-a695-60022cf725ff",
         "attributes": {
             "occupied": {
                 "readonly": true,
@@ -10800,6 +10887,7 @@
                 "description": "Set of addresses of all presence capable devices"
             }
         },
+        "is_device": false,
         "methods": {
             "GetPresenceAnalysis": {
                 "enabled": true,
@@ -10994,7 +11082,7 @@
         }
     },
     "product": {
-        "correlation_id": "a7e041c0-908a-473c-9894-286f3ee70d3d",
+        "correlation_id": "045f6c88-d3b3-4750-921e-2d6da418c36d",
         "attributes": {
             "id": {
                 "readonly": true,
@@ -11264,11 +11352,12 @@
                 "description": "If product can be discovered in non-Iris user experiences that are fed by the Iris API, such as Alexa or Google Home.  Default is true."
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "prodcat": {
-        "correlation_id": "4938b5b7-d70c-4f95-94bb-edeaa7dc338d",
+        "correlation_id": "aa16108b-be99-4053-a2dc-e730f34a3f5a",
         "attributes": {
             "publisher": {
                 "readonly": true,
@@ -11301,6 +11390,7 @@
                 "description": "Number of products in this catalog"
             }
         },
+        "is_device": false,
         "methods": {
             "GetProductCatalog": {
                 "enabled": true,
@@ -11411,7 +11501,7 @@
         }
     },
     "promon": {
-        "correlation_id": "047125e1-6249-4f84-9ea0-ff51129a329b",
+        "correlation_id": "cc082635-9e1f-4b47-a567-54030eaa7d67",
         "attributes": {
             "notifyWhenAvailable": {
                 "readonly": false,
@@ -11549,6 +11639,7 @@
                 "description": "The fully-qualified url for the certificate."
             }
         },
+        "is_device": false,
         "methods": {
             "CheckAvailability": {
                 "enabled": true,
@@ -11658,7 +11749,7 @@
         "events": {}
     },
     "video": {
-        "correlation_id": "ce92f537-756a-47a7-add5-32f5b2d59329",
+        "correlation_id": "031336ab-bbbf-4025-9ba3-779b9f319c97",
         "attributes": {
             "name": {
                 "readonly": false,
@@ -11767,6 +11858,7 @@
                 "description": "If the recording has been completed."
             }
         },
+        "is_device": false,
         "methods": {
             "View": {
                 "enabled": true,
@@ -11804,7 +11896,7 @@
         "events": {}
     },
     "humid": {
-        "correlation_id": "b0d05513-7adb-477f-9526-b3c3a91269cb",
+        "correlation_id": "9b23c0ad-0faa-4d4c-ad73-a75c820c488e",
         "attributes": {
             "humidity": {
                 "readonly": true,
@@ -11815,11 +11907,12 @@
                 "max": "100"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "rule": {
-        "correlation_id": "ce1c066d-d9df-442a-ac47-caf19f035223",
+        "correlation_id": "32c665ed-7d11-4383-9426-a57590a7cb3e",
         "attributes": {
             "name": {
                 "readonly": false,
@@ -11868,6 +11961,7 @@
                 "description": "The context for rule evaluation, if no user defined context is required this is may be null or empty"
             }
         },
+        "is_device": false,
         "methods": {
             "Enable": {
                 "enabled": true,
@@ -11930,7 +12024,7 @@
         "events": {}
     },
     "ruletmpl": {
-        "correlation_id": "f0e5a75c-90cc-494c-8bec-7e743eb58cfb",
+        "correlation_id": "642be404-c2eb-44f8-99d0-876f434a24c4",
         "attributes": {
             "keywords": {
                 "readonly": true,
@@ -11993,6 +12087,7 @@
                 "description": "Extra text associated with the rule."
             }
         },
+        "is_device": false,
         "methods": {
             "CreateRule": {
                 "enabled": true,
@@ -12045,7 +12140,7 @@
         "events": {}
     },
     "subsafety": {
-        "correlation_id": "e8724ea7-13df-4695-b5e3-8368e0c56860",
+        "correlation_id": "433c5d87-3e52-4161-8052-5d05cb64ff86",
         "attributes": {
             "totalDevices": {
                 "readonly": true,
@@ -12197,6 +12292,7 @@
                 "description": "The last time the alarm was fired."
             }
         },
+        "is_device": false,
         "methods": {
             "Trigger": {
                 "enabled": true,
@@ -12225,7 +12321,7 @@
         "events": {}
     },
     "scene": {
-        "correlation_id": "ba97fa10-89c7-49c8-a10f-1068d182710b",
+        "correlation_id": "c8f4c6c9-fa0a-4ba9-9d60-db53aff88390",
         "attributes": {
             "name": {
                 "readonly": false,
@@ -12300,6 +12396,7 @@
                 ]
             }
         },
+        "is_device": false,
         "methods": {
             "Fire": {
                 "enabled": true,
@@ -12321,7 +12418,7 @@
         "events": {}
     },
     "scenetmpl": {
-        "correlation_id": "1fa7a3ed-a7e0-4fec-a4b2-8c6f682b1936",
+        "correlation_id": "d113eac8-1624-4e3b-adaa-319d20e49462",
         "attributes": {
             "added": {
                 "readonly": true,
@@ -12360,6 +12457,7 @@
                 "description": "Indicates if the scene template is in use or not."
             }
         },
+        "is_device": false,
         "methods": {
             "Create": {
                 "enabled": true,
@@ -12407,7 +12505,7 @@
         "events": {}
     },
     "schedulable": {
-        "correlation_id": "a77f8af5-fa17-4323-a9fc-497bc5876490",
+        "correlation_id": "8d3456e3-2bc8-46c2-a181-cebfc25eba64",
         "attributes": {
             "type": {
                 "readonly": true,
@@ -12429,6 +12527,7 @@
                 "description": "Whether or not a schedule is currently enabled for this device"
             }
         },
+        "is_device": true,
         "methods": {
             "EnableSchedule": {
                 "enabled": true,
@@ -12464,7 +12563,7 @@
         "events": {}
     },
     "sched": {
-        "correlation_id": "78539dbf-98be-4259-ad77-2f3b397500b8",
+        "correlation_id": "6f8aac32-ded5-4e5b-b9cf-5f87b5db937b",
         "attributes": {
             "group": {
                 "readonly": true,
@@ -12515,6 +12614,7 @@
                 "description": "The attributes that were sent on last execution."
             }
         },
+        "is_device": false,
         "methods": {
             "Delete": {
                 "enabled": true,
@@ -12544,7 +12644,7 @@
         "events": {}
     },
     "scheduler": {
-        "correlation_id": "8fea3c9c-73fb-4c38-a859-684ab5c71262",
+        "correlation_id": "2fa60e15-0a55-42bd-b1ea-86c10fcfcb42",
         "attributes": {
             "placeId": {
                 "readonly": true,
@@ -12589,6 +12689,7 @@
                 "description": " The commands that this schedule may send.  This is a derived, read-only view.  The specific format of the ScheduledCommand depends on the type of schedule this is.  Currently only WeeklySchedule and TimeOfDayCommand are supported.          "
             }
         },
+        "is_device": false,
         "methods": {
             "FireCommand": {
                 "enabled": true,
@@ -12639,7 +12740,7 @@
         "events": {}
     },
     "subsecuritymode": {
-        "correlation_id": "676b4b87-a65b-464c-8df9-01a13c82bcd7",
+        "correlation_id": "3a2a4303-ec1c-4e64-8d6d-19a71201cb2e",
         "attributes": {
             "devices": {
                 "readonly": false,
@@ -12684,11 +12785,12 @@
                 "description": "The number of the number of motion sensors associated with this mode"
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {}
     },
     "subsecurity": {
-        "correlation_id": "ccf5b9b3-3872-4a2b-b185-e5442b40a608",
+        "correlation_id": "1aa2f6f5-fa82-495e-809a-312d775c07e7",
         "attributes": {
             "securityDevices": {
                 "readonly": true,
@@ -12865,6 +12967,7 @@
                 "description": "The addresses of all the devices that are blacklisted, and therefore not considered as security devices."
             }
         },
+        "is_device": false,
         "methods": {
             "Panic": {
                 "enabled": true,
@@ -13023,7 +13126,7 @@
         }
     },
     "shade": {
-        "correlation_id": "3ce57118-5dd2-49fe-8d6d-2c01ce474c0b",
+        "correlation_id": "ea48ab17-f6cb-46dc-960f-9d2a4e83a364",
         "attributes": {
             "level": {
                 "readonly": false,
@@ -13050,6 +13153,7 @@
                 "description": "UTC time of last level change."
             }
         },
+        "is_device": true,
         "methods": {
             "GoToOpen": {
                 "enabled": true,
@@ -13100,7 +13204,7 @@
         "events": {}
     },
     "smoke": {
-        "correlation_id": "4efe0e9d-d5d6-4f05-bdab-d93811415a9e",
+        "correlation_id": "5ae85290-4da3-4289-a4cb-24824224f7a1",
         "attributes": {
             "smoke": {
                 "readonly": true,
@@ -13119,11 +13223,12 @@
                 "description": "UTC date time of last smoke change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "soilmoisture": {
-        "correlation_id": "03404cf9-8c53-44c2-989c-ad611e5a0bb9",
+        "correlation_id": "3935ad3e-a7a7-445e-99e3-9ac7d3507999",
         "attributes": {
             "watercontent": {
                 "readonly": true,
@@ -13151,11 +13256,12 @@
                 "description": "UTC date time of when Water Content value was reported by sensor."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "somfy1": {
-        "correlation_id": "534dcbe6-8d84-4133-898c-6cde4e01dc63",
+        "correlation_id": "1bda8a21-ebb6-4799-8254-5afa4f78c610",
         "attributes": {
             "mode": {
                 "readonly": false,
@@ -13178,11 +13284,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "somfyv1": {
-        "correlation_id": "dd0f03f0-b109-4391-836d-5618a896a52f",
+        "correlation_id": "0f6caf45-a543-4824-9212-d358d641ee58",
         "attributes": {
             "type": {
                 "readonly": false,
@@ -13229,6 +13336,7 @@
                 "description": "UTC time of last state (OPEN/CLOSED/FAVORITE) change."
             }
         },
+        "is_device": true,
         "methods": {
             "GoToOpen": {
                 "enabled": true,
@@ -13279,7 +13387,7 @@
         "events": {}
     },
     "spaceheater": {
-        "correlation_id": "030fc048-eda6-4628-be91-cb4661137ee9",
+        "correlation_id": "1852fe85-50a3-4f78-9755-76aa667c33f8",
         "attributes": {
             "setpoint": {
                 "readonly": false,
@@ -13310,11 +13418,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "subs": {
-        "correlation_id": "5695d250-f843-4ccc-a01b-fc0fbd3788bd",
+        "correlation_id": "fa2c811b-e956-4470-b057-73e1d4fe6470",
         "attributes": {
             "name": {
                 "readonly": true,
@@ -13363,6 +13472,7 @@
                 ]
             }
         },
+        "is_device": false,
         "methods": {
             "Activate": {
                 "enabled": true,
@@ -13416,7 +13526,7 @@
         "events": {}
     },
     "supportagent": {
-        "correlation_id": "820b024f-8a84-475e-8af9-47c933557828",
+        "correlation_id": "df0bb4c7-160a-4218-89ce-ef3da54e9d13",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -13503,6 +13613,7 @@
                 "description": "maps preferences by name to value "
             }
         },
+        "is_device": false,
         "methods": {
             "ListAgents": {
                 "enabled": true,
@@ -13646,7 +13757,7 @@
         "events": {}
     },
     "salogentry": {
-        "correlation_id": "b79adfb3-d2a7-4b01-ad7f-29e336f1a925",
+        "correlation_id": "4e89ec82-73e7-4347-8dff-f62eb94eadaa",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -13697,6 +13808,7 @@
                 "description": "The device id in the log entry, if any"
             }
         },
+        "is_device": false,
         "methods": {
             "CreateAgentLogEntry": {
                 "enabled": true,
@@ -13778,7 +13890,7 @@
         "events": {}
     },
     "suppcustinteraction": {
-        "correlation_id": "2c5b934a-f069-4425-b835-9f4ab8a24c2c",
+        "correlation_id": "ca406459-f839-42f1-b4a2-c0b55726cf4e",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -13847,6 +13959,7 @@
                 "description": "The last date the interaction was modified"
             }
         },
+        "is_device": false,
         "methods": {
             "CreateInteraction": {
                 "enabled": true,
@@ -14047,7 +14160,7 @@
         "events": {}
     },
     "suppcustsession": {
-        "correlation_id": "8f46f58b-ef18-4426-93ae-d93f5d40c302",
+        "correlation_id": "9ffcc680-6dc5-4dab-92fe-3c906fab3c6f",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -14110,6 +14223,7 @@
                 "description": "Notes taken by the agent during the session"
             }
         },
+        "is_device": false,
         "methods": {
             "StartSession": {
                 "enabled": true,
@@ -14195,7 +14309,7 @@
         "events": {}
     },
     "swit": {
-        "correlation_id": "f35a309c-fdab-4465-a8ac-568fc15bc60b",
+        "correlation_id": "05123190-d5ac-40bc-9b14-3370f8b16466",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -14220,11 +14334,12 @@
                 "description": "UTC date time of last state change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "temp": {
-        "correlation_id": "4920f8ee-be16-4ed7-9ceb-5be279736b16",
+        "correlation_id": "9e09faf8-f328-4ded-b104-70ee4ba03317",
         "attributes": {
             "temperature": {
                 "readonly": true,
@@ -14233,11 +14348,12 @@
                 "description": "Reflects a temperature measurement taken from a thermistor."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "test": {
-        "correlation_id": "6f90af10-7263-403e-b81e-5f82fc94f684",
+        "correlation_id": "8e8c9a91-12c1-437e-a5f3-f8315096d332",
         "attributes": {
             "lastTestTime": {
                 "readonly": true,
@@ -14246,6 +14362,7 @@
                 "description": "The last time the device was tested (a test:Test event was emitted)."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {
             "Test": {
@@ -14258,7 +14375,7 @@
         }
     },
     "therm": {
-        "correlation_id": "4b85cc2e-06b4-40ac-8ef7-f711a2faf11f",
+        "correlation_id": "32bc961e-f425-497d-9b1b-0e5517b7a9c8",
         "attributes": {
             "coolsetpoint": {
                 "readonly": false,
@@ -14409,6 +14526,7 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {
             "changeFilter": {
                 "enabled": true,
@@ -14519,7 +14637,7 @@
         }
     },
     "tilt": {
-        "correlation_id": "8521fa1c-b33c-4f64-9954-cf63d922ded5",
+        "correlation_id": "44cff2e7-8e22-4ba2-92d0-52840785582d",
         "attributes": {
             "tiltstate": {
                 "readonly": false,
@@ -14538,11 +14656,12 @@
                 "description": "UTC date time of last tilt state change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "twinstar": {
-        "correlation_id": "ab06a01d-7b8d-4d44-bce7-efde9879f162",
+        "correlation_id": "ef4c2208-d196-4a09-8d96-cfb0e2cc5137",
         "attributes": {
             "ecomode": {
                 "readonly": false,
@@ -14555,11 +14674,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "valv": {
-        "correlation_id": "735d8316-70fc-4b96-85fa-41f4d9b5c70c",
+        "correlation_id": "3a2fbc49-47c1-4c3a-8e82-e6ae94d3f0f2",
         "attributes": {
             "valvestate": {
                 "readonly": false,
@@ -14581,11 +14701,12 @@
                 "description": "UTC date time of last valve state change"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "vent": {
-        "correlation_id": "46dbab15-9823-479f-9f92-c8d04111f4d7",
+        "correlation_id": "2295c2f3-8d4b-4cdf-9344-e07c80c9366e",
         "attributes": {
             "ventstate": {
                 "readonly": true,
@@ -14612,11 +14733,12 @@
                 "description": "Air pressure in duct."
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "waterhardness": {
-        "correlation_id": "64316732-fd2b-4342-a030-f14186779355",
+        "correlation_id": "294e07f3-d1de-42af-9aba-323e61e6f7cf",
         "attributes": {
             "hardness": {
                 "readonly": true,
@@ -14625,11 +14747,12 @@
                 "description": "Hardness of water in grains per gallon"
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "waterheater": {
-        "correlation_id": "90a47407-72ad-4609-98b8-496271e5c92c",
+        "correlation_id": "282cecfd-22f1-4f4e-bab9-ee1ba29d3307",
         "attributes": {
             "heatingstate": {
                 "readonly": true,
@@ -14661,11 +14784,12 @@
                 ]
             }
         },
+        "is_device": true,
         "methods": {},
         "events": {}
     },
     "watersoftener": {
-        "correlation_id": "956fa40c-c579-473d-96fd-71bfd24afb29",
+        "correlation_id": "f7efe851-9019-4e75-bd2d-f3b67a9867e0",
         "attributes": {
             "rechargeStatus": {
                 "readonly": true,
@@ -14724,6 +14848,7 @@
                 "description": "The total number of recharge cycles the softener has performed since being added to the network"
             }
         },
+        "is_device": true,
         "methods": {
             "rechargeNow": {
                 "enabled": true,
@@ -14744,7 +14869,7 @@
         "events": {}
     },
     "subwater": {
-        "correlation_id": "a09f3c30-1d2f-493f-97a2-d0ba14a12dec",
+        "correlation_id": "8382b9bf-2186-4253-b6aa-dbc9ddf6c9b5",
         "attributes": {
             "primaryWaterHeater": {
                 "readonly": false,
@@ -14789,6 +14914,7 @@
                 "description": "The set of water softeners that have a low salt level."
             }
         },
+        "is_device": false,
         "methods": {},
         "events": {
             "ContinuousWaterUse": {
@@ -14851,7 +14977,7 @@
         }
     },
     "noaa": {
-        "correlation_id": "2dd2a18f-9eb7-4b18-b3b5-35d09652e01d",
+        "correlation_id": "1248b590-a6c1-465a-b1b9-0ba8cffb92f7",
         "attributes": {
             "alertstate": {
                 "readonly": true,
@@ -14911,6 +15037,7 @@
                 "description": "Broadcast frequency of selected station."
             }
         },
+        "is_device": true,
         "methods": {
             "ScanStations": {
                 "enabled": true,
@@ -14994,7 +15121,7 @@
         "events": {}
     },
     "subweather": {
-        "correlation_id": "2e749add-41e6-482d-a018-49bea6da675d",
+        "correlation_id": "b9a5d62f-e37d-4baa-acea-cd7b00b45adb",
         "attributes": {
             "weatherRadios": {
                 "readonly": true,
@@ -15025,6 +15152,7 @@
                 "description": "The last time a weather alert was raised"
             }
         },
+        "is_device": false,
         "methods": {
             "SnoozeAllAlerts": {
                 "enabled": true,
@@ -15038,7 +15166,7 @@
         "events": {}
     },
     "schedweek": {
-        "correlation_id": "17345981-3d66-48bd-87b6-c9c9aac08c3d",
+        "correlation_id": "cbbf4268-3abf-403f-8b70-89b4a9d9d236",
         "attributes": {
             "mon": {
                 "readonly": true,
@@ -15083,6 +15211,7 @@
                 "description": "The commands that are scheduled to run on Sundays"
             }
         },
+        "is_device": false,
         "methods": {
             "ScheduleWeeklyCommand": {
                 "enabled": true,
@@ -15204,7 +15333,7 @@
         "events": {}
     },
     "wifi": {
-        "correlation_id": "326002a7-730f-4b21-8e17-6a38c2b00981",
+        "correlation_id": "7b435179-2029-40e6-ab39-1d08699fb37e",
         "attributes": {
             "enabled": {
                 "readonly": false,
@@ -15267,6 +15396,7 @@
                 "description": "Received signal stength indicator in dB."
             }
         },
+        "is_device": true,
         "methods": {
             "Connect": {
                 "enabled": true,
@@ -15324,8 +15454,9 @@
         "events": {}
     },
     "wifiscan": {
-        "correlation_id": "5e9b0227-de67-4f8e-8f72-7dbc5825d26c",
+        "correlation_id": "3fe9ed59-dffd-415e-af21-36f4a5e1c966",
         "attributes": {},
+        "is_device": true,
         "methods": {
             "StartWifiScan": {
                 "enabled": true,

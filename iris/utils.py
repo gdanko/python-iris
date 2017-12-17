@@ -193,7 +193,8 @@ def make_response(client=None, success=None, content_key=None, content=None):
 			response = {"status": status, "message": "Unknown"}
 		client.response = response
 
-# Attribute validation
+# Method and set/get attribute validation
+# These will eventually be combined
 def __missing_attributes_error(method, missing):
 	return "the following required {0} parameters are missing: {1}".format(method, ", ".join(missing))
 
@@ -203,23 +204,26 @@ def __missing_optional_error(method, oneof):
 def __too_many_optional_error(method, oneof):
 	return "the {0} method will accept only one of the following parameters: {1}".format(method, ", ".join(oneof))
 
-def process_attributes(client=None, **kwargs):
-	required, oneof, valid = fetch_parameters(
-		kwargs["namespace"],
-		kwargs["method"],
-		client.iris.validator
-	)
-
-	if "params" not in valid: return content
+def method_validator(client=None, **kwargs):
+	if ("required" in kwargs) and ("oneof" in kwargs) and ("valid" in kwargs):
+		required = kwargs["required"]
+		oneof = kwargs["oneof"]
+		valid = kwargs["valid"]
+	else: 
+		required, oneof, valid = fetch_parameters(kwargs["namespace"], kwargs["method"], client.iris.validator)
 
 	content = {
 		"attributes": {},
 		"destination": None,
 		"method": kwargs["method"],
 		"namespace": kwargs["namespace"],
+		"attribute": kwargs["attribute"] if "attribute" in kwargs else None,
 	}
+
+	if "params" not in valid: return content
+
 	errors = []
-	method = kwargs["method"] if "method" in kwargs else __get_method(inspect.stack())
+	method = kwargs["method"] if "method" in kwargs else "unknown method"
 	type_map = {"boolean": bool, "enum": str, "int": int, "string": str, "uuid": str, "double": float}
 
 	filtered = {k: v for k, v in kwargs.items() if v is not None}
@@ -248,9 +252,9 @@ def process_attributes(client=None, **kwargs):
 			else:
 				required_type = str
 
-			if not isinstance(kwargs[param], required_type):
-				message = "The parameter {} is supposed to be of type {} but is actually of type {}".format(param, required_type, type(kwargs[param]))
-				errors.append(message)
+			#if not isinstance(kwargs[param], required_type):
+			#	message = "The parameter {} is supposed to be of type {} but is actually of type {}".format(param, required_type, type(kwargs[param]))
+			#	errors.append(message)
 
 			if param in valid:
 				lower = [e.lower() for e in valid[param]]
@@ -326,6 +330,23 @@ def process_attributes(client=None, **kwargs):
 				content["attributes"]["placeId"] = placeId
 			else:
 				errors.append("The place with the name of {} was not found.".format(content["attributes"]["placeId"]))
+
+	# I'm not happy with this but for now it works.
+	# It is only used for set attribute functions.
+	if "settings" in kwargs:
+		settings = kwargs["settings"]
+		if "min" in settings and "max" in settings:
+			if int(content["attributes"]["value"]) < int(settings["min"]):
+				errors.append("The value \"{}\" specified for the \"{}\" attribute is lower than the minimum allowed value of {}.".format(content["attributes"]["value"], kwargs["attribute"], settings["min"]))
+			if int(content["attributes"]["value"]) > int(settings["max"]):
+				errors.append("The value \"{}\" specified for the \"{}\" attribute is higher than the maximum allowed value of {}.".format(content["attributes"]["value"], kwargs["attribute"], settings["max"]))
+
+		elif "valid" in settings:
+			lower = [e.lower() for e in settings["valid"]]
+			if not str(content["attributes"]["value"]).lower() in lower:
+				errors.append("\"{}\" is an invalid valid for the \"{}\" attribute. Valid values are: {}.".format(content["attributes"]["value"], kwargs["attribute"], ", ".join(settings["valid"])))
+			else:
+				content["value"] = block["value"]
 
 	if len(errors) > 0:
 		make_response(client=client, success=False, content="; ".join(errors))

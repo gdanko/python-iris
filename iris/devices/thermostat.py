@@ -4,14 +4,14 @@ import iris.utils as utils
 from iris.capabilities.device import Device
 from pprint import pprint
 
-class Switch(Device):
+class Dimmer(Device):
 	def __init__(self, **kwargs):
 		Device.__init__(self, **kwargs)
-		self.namespace = "swit"
-		self.device_type = "Switch"
+		self.namespace = "therm"
+		self.device_type = "Thermostat"
 
-		module_capabilities = ["indicator", "swit"]
-		capabilities = sorted(module_capabilities)
+		module_capabilities = ["clock", "humid", "indicator", "temp", "therm"]
+		capabilities = sorted(self.common_capabilities + module_capabilities)
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)
 		methods = utils.fetch_methods(self.namespace, self.iris.validator)

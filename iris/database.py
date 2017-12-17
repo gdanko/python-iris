@@ -83,10 +83,11 @@ def find_person_id(name=None):
 
 def find_place_id(name=None):
 	table = db.table("places")
+	pprint(table.all());sys.exit()
 	query = Query()
 	res = None
 	res = table.search(query.placeName == name)
-	return res[0]["placeId"] if len(res) > 0 else None
+	return res[0]["base_id"] if len(res) > 0 else None
 
 dbfile = "{}/{}".format(os.path.expanduser("~"), ".iris.json")
 db = TinyDB(dbfile)

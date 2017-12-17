@@ -10,6 +10,10 @@ class DoorLock(Device):
 		self.namespace = "doorlock"
 		self.device_type = "Lock"
 
+		module_capabilities = ["doorlock"]
+		capabilities = sorted(self.common_capabilities + module_capabilities)
+		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
+		writable = utils.fetch_writable_attributes(readable)
 		methods = utils.fetch_methods(self.namespace, self.iris.validator)
 
 		def generate_method_fn(method, enabled, required, oneof, valid):

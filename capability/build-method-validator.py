@@ -47,6 +47,7 @@ for filename in files:
 				parameters[namespace] = {
 					"correlation_id": str(uuid.uuid4()),
 					"attributes": {},
+					"is_device": is_device,
 					"methods": {},
 					"events": {}
 				}
