@@ -4,13 +4,13 @@ import iris.utils as utils
 from iris.capabilities.device import Device
 from pprint import pprint
 
-class DoorLock(Device):
+class SmokeCoDetector(Device):
 	def __init__(self, **kwargs):
 		Device.__init__(self, **kwargs)
-		self.namespace = "doorlock"
-		self.device_type = "Lock"
+		self.namespace = "smoke"
+		self.device_type = "Smoke"
 
-		module_capabilities = ["doorlock"]
+		module_capabilities = ["co", "smoke", "test"]
 		capabilities = sorted(self.common_capabilities + module_capabilities)
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)
@@ -46,4 +46,3 @@ class DoorLock(Device):
 
 			for method_name, obj in methods.items():
 				generate_method_fn(method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
-		

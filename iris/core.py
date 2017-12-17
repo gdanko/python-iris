@@ -136,14 +136,15 @@ class Iris(object):
 		place = Place(iris=self)
 		place.ListDevices()
 		if place.success:
-			db.populate_devices(devices=place.response["payload"]["attributes"]["devices"])
+			self.devices = place.response["payload"]["attributes"]["devices"]
+			db.populate_devices(devices=self.devices)
 		else:
 			print("devices failure")
 
 		place.ListPersons()
 
 		if place.success:
-			#pprint(place.response);sys.exit()
-			db.populate_people(people=place.response["payload"]["attributes"]["persons"])
+			self.people = place.response["payload"]["attributes"]["persons"]
+			db.populate_people(people=self.people)
 		else:
 			print("people failure")
