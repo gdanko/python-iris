@@ -92,6 +92,21 @@ def account_request(client=None, **kwargs):
 	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
 
+def hub_request(client=None, **kwargs):
+	method = kwargs["method"]
+	namespace = kwargs["namespace"]
+	client.response = {}
+	required, oneof, valid = utils.fetch_parameters(namespace, method, client.iris.validator)
+	content = utils.method_validator(client=client, opts=kwargs, required=required, oneof=oneof, valid=valid)
+	if isinstance(content, dict):
+		payload = payloads.method(
+			namespace=namespace,
+			destination=client.iris.hub_address,
+			method=method,
+		)
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, payload=payload, debug=client.iris.debug)
+
 def place_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
 	if client.success:
@@ -114,20 +129,16 @@ def rule_request(client=None, **kwargs):
 	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
 
-def hub_request(client=None, **kwargs):
-	method = kwargs["method"]
-	namespace = kwargs["namespace"]
-	client.response = {}
-	required, oneof, valid = utils.fetch_parameters(namespace, method, client.iris.validator)
-	content = utils.method_validator(client=client, opts=kwargs, required=required, oneof=oneof, valid=valid)
-	if isinstance(content, dict):
-		payload = payloads.method(
-			namespace=namespace,
-			destination=client.iris.hub_address,
-			method=method,
+def scene_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.scene(
+			method=content["method"],
+			namespace=content["namespace"]
 		)
-		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, payload=payload, debug=client.iris.debug)
+	payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
 
 def send(client=None, method=None, payload=None, debug=False):
 	payload = json.dumps(payload)

@@ -10,7 +10,7 @@ class HubZigbee(Capability):
 
 		capabilities = [self.namespace]
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
-		writable = utils.fetch_writable_attributes(self.namespace, readable)
+		writable = utils.fetch_writable_attributes(readable)
 		methods = utils.fetch_methods(self.namespace, self.iris.validator)
 
 		def generate_method_fn(method, required, oneof, valid):

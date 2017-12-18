@@ -58,6 +58,20 @@ def method(destination=None, namespace=None, method=None):
 		}
 	}
 
+def place(place_id=None, method=None):
+	return {
+		"type": "place:{}".format(method),
+		"headers": {
+			"destination": "SERV:place:{}".format(place_id),
+			"correlationId": "79cd5c7c-f5f7-4dba-9032-99ad183e64be",
+			"isRequest": True
+		},
+		"payload": {
+			"messageType": "place:{}".format(method),
+			"attributes": {}
+		}
+	}
+
 def rule(namespace=None, method=None, place_id=None):
 	return {
 		"type": "{}:{}".format(namespace, method),
@@ -74,16 +88,18 @@ def rule(namespace=None, method=None, place_id=None):
 		}
 	}
 
-def place(place_id=None, method=None):
+def scene(namespace=None, method=None, place_id=None):
 	return {
-		"type": "place:{}".format(method),
-		"headers": {
-			"destination": "SERV:place:{}".format(place_id),
-			"correlationId": "79cd5c7c-f5f7-4dba-9032-99ad183e64be",
-			"isRequest": True
+		"type": "{}:{}".format(namespace, method),
+		"headers":{
+			"destination": "SERV:scene:",
+			"isRequest": True,
+			"correlationId": "78cd5c7c-f5f7-4dba-9032-99ad183e64be",
 		},
 		"payload": {
-			"messageType": "place:{}".format(method),
-			"attributes": {}
+			"messageType": "{}:{}".format(namespace, method),
+			"attributes": {
+				"placeId": place_id
+			}
 		}
 	}

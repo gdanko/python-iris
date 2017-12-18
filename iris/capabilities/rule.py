@@ -23,11 +23,3 @@ class Rule(Capability):
 
 		for method_name, obj in methods.items():
 			generate_method_fn(method_name, obj["required"], obj["oneof"], obj["valid"])
-
-	# Not in the XML for some reason
-	#def ListRules(self, **kwargs):
-	#	required = []
-	#	oneof = []
-	#	valid = {"params": {}}
-	#	method = "ListRules"
-	#	request.rule_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
