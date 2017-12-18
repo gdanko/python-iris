@@ -3,3 +3,7 @@ dist/*.tar.gz
 __pycache__
 *.swp
 iris/devices/__pycache__
+*__pycache__*
+capability
+test.py
+payloads.txt
