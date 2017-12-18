@@ -10,7 +10,7 @@ class Camera(Device):
 		self.namespace = "camera"
 		self.device_type = "Camera"
 
-		module_capabilities = ["ccamera"]
+		module_capabilities = ["camera"]
 		capabilities = sorted(module_capabilities)
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)

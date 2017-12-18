@@ -10,7 +10,7 @@ class CameraPTZ(Device):
 		self.namespace = "cameraptz"
 		self.device_type = "CameraPTZ"
 
-		module_capabilities = ["ccameraptz"]
+		module_capabilities = ["cameraptz"]
 		capabilities = sorted(module_capabilities)
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)
