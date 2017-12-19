@@ -9,8 +9,10 @@ class Camera(Device):
 		Device.__init__(self, **kwargs)
 		self.namespace = "camera"
 		self.device_type = "Camera"
+		self.readable = []
+		self.writable = []
 
-		module_capabilities = ["camera"]
+		module_capabilities = ["camera", "camerastatus"]
 		capabilities = sorted(module_capabilities)
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)
@@ -38,11 +40,16 @@ class Camera(Device):
 		if self.iris.validator[self.namespace]["is_device"] == True:
 			for namespace in readable.keys():
 				for attribute, obj in readable[namespace].items():
+					self.readable.append("{}_{}".format(namespace, attribute))
 					generate_get_fn(namespace, attribute, obj)
 
 			for namespace in writable.keys():
 				for attribute, obj in writable[namespace].items():
+					self.writable.append("{}_{}".format(namespace, attribute))
 					generate_set_fn(namespace, attribute, obj)
 
 			for method_name, obj in methods.items():
 				generate_method_fn(method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+
+		self.readable = sorted(self.readable)
+		self.writable = sorted(self.writable)
