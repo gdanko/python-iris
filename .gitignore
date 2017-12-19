@@ -1,8 +1,6 @@
 dist/*.tar.gz
 *.egg-info
-__pycache__
 *.swp
-iris/devices/__pycache__
 *__pycache__*
 capability
 test.py

@@ -215,8 +215,8 @@ def method_validator(client=None, **kwargs):
 	content = {
 		"attributes": {},
 		"destination": None,
-		"method": kwargs["method"],
-		"namespace": kwargs["namespace"],
+		"method": kwargs["method"] if "method" in kwargs else None,
+		"namespace": kwargs["namespace"] if "namespace" in kwargs else None,
 		"attribute": kwargs["attribute"] if "attribute" in kwargs else None,
 	}
 
