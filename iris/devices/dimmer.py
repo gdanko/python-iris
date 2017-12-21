@@ -4,13 +4,11 @@ from pprint import pprint
 
 class Dimmer(Device):
 	def __init__(self, **kwargs):
-		Device.__init__(self, **kwargs)
 		self.namespace = "dim"
-		self.device_type = "Dimmer"
+		Device.__init__(self, **kwargs)
 
 		module_capabilities = ["dim", "indicator", "swit"]
-		pprint(self.websocket)
-		print(2)
+
 		#capabilities = sorted(self.common_capabilities + module_capabilities)
 		#readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
 		#writable = utils.fetch_writable_attributes(readable)

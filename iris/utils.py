@@ -176,6 +176,12 @@ def classname(c):
 def generate_random(length=8):
 	return "".join(random.choice("0123456789abcdef") for x in range(length))
 
+def make_success(client=None, content_key=None, content=None):
+	make_response(client=client, success=True, content_key=content_key, content=content)
+
+def make_error(client=None, content_key=None, content=None):
+	make_response(client=client, success=False, content_key=content_key, content=content)
+
 def make_response(client=None, success=None, content_key=None, content=None):
 	client.success = success
 	status = "success" if success == True else "error"

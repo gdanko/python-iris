@@ -147,8 +147,13 @@ def send(client=None, method=None, payload=None, debug=False):
 	client.logger.debug("Sending payload: {}".format(payload))
 	client.websocket.send(payload)
 	response = utils.validate_json(client.websocket.recv())
+	if response:
+		validate_response(client=client, response=response)
+	else:
+		utils.make_error(content="Invalid JSON returned from the Iris API.")
 
-	if "Error" in response["type"]:
+def validate_response(client=None, response=None):
+	if "error" in response["type"].lower():
 		errors = []
 		if "payload" in response and "attributes" in response["payload"]:
 			attributes = response["payload"]["attributes"]
@@ -162,6 +167,6 @@ def send(client=None, method=None, payload=None, debug=False):
 		else:
 			message = "The method {} failed with an unknown error.".format(method)
 
-		utils.make_response(client=client, success=False, content_key="message", content=message)
+		utils.make_error(client=client, content_key="message", content=message)
 	else:
-		utils.make_response(client=client, success=True, content=response)
+		utils.make_success(client=client, content=response)

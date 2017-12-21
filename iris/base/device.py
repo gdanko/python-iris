@@ -9,9 +9,6 @@ class Device(Capability):
 		Capability.__init__(self, **kwargs)
 		self.namespace = "device"
 		self.common_capabilities = ["dev", "devadv", "devconn", "devpow"]
-		from pprint import pprint
-		pprint(self.websocket)
-		print(1)
 
 	def get_attribute(self, **kwargs):
 		request.get_attributes(client=self, method="get_attribute", **kwargs)

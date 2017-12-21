@@ -126,6 +126,16 @@ class NotAnIrisCoreObject(Exception):
 		self.error = "The class {} requires a valid iris.core.Iris object in the constructor. You provided {}.".format(self.classname, self.got)
 		return self.error
 
+class NotAValidWebSocket(Exception):
+	def __init__(self, classname=None, got=None):
+		self.classname = classname
+		self.got = got
+		return
+
+	def __str__(self):
+		self.error = "The class {} requires a valid websocket._core.WebSocket object.".format(self.classname)
+		return self.error
+
 class SetAttributeError(Exception):
 	def __init__(self, classname=None, attribute=None, message=None):
 		self.classname = classname
