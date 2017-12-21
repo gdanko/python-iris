@@ -28,6 +28,11 @@ def configure_database():
 			"name": "TEXT NOT NULL",
 			"address": "TEXT NOT NULL"
 		},
+		"scenes": {
+			"id": "TEXT UNIQUE NOT NULL",
+			"name": "TEXT NOT NULL",
+			"address": "TEXT NOT NULL"
+		},
 	}
 	for table_name, table_cols in columns.items():
 		drop = "DROP TABLE IF EXISTS {}".format(table_name)
@@ -76,6 +81,16 @@ def populate_rules(rules=None):
 			rule["base:id"],
 			rule["rule:name"],
 			rule["base:address"]
+		))
+		conn.commit()
+
+def populate_scenes(scenes=None):
+	for scene in scenes:
+		insert = "INSERT OR REPLACE INTO scenes (id,name,address) VALUES (?,?,?)"
+		cursor.execute(insert, (
+			scene["base:id"],
+			scene["scene:name"],
+			scene["base:address"]
 		))
 		conn.commit()
 

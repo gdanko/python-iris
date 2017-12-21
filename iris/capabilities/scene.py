@@ -3,8 +3,6 @@ import iris.request as request
 import iris.utils as utils
 from iris.capabilities.capability import Capability
 
-from pprint import pprint
-
 class Scene(Capability):
 	def __init__(self, **kwargs):
 		Capability.__init__(self, **kwargs)

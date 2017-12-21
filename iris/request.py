@@ -1,3 +1,4 @@
+from pprint import pprint
 import inspect
 import iris.database as db
 import iris.payloads as payloads
@@ -5,7 +6,6 @@ import iris.utils as utils
 import json
 import os
 import sys
-from pprint import pprint
 
 def get_attributes(client=None, **kwargs):
 	kwargs.update({
@@ -145,10 +145,15 @@ def send(client=None, method=None, payload=None, debug=False):
 	client.response = {}
 	client.logger.debug("Executing method: {0}".format(method))
 	client.logger.debug("Sending payload: {}".format(payload))
-	client.ws.send(payload)
-	response = utils.validate_json(client.ws.recv())
+	client.websocket.send(payload)
+	response = utils.validate_json(client.websocket.recv())
+	if response:
+		validate_response(client=client, response=response)
+	else:
+		utils.make_error(content="Invalid JSON returned from the Iris API.")
 
-	if "Error" in response["type"]:
+def validate_response(client=None, response=None):
+	if "error" in response["type"].lower():
 		errors = []
 		if "payload" in response and "attributes" in response["payload"]:
 			attributes = response["payload"]["attributes"]
@@ -162,6 +167,6 @@ def send(client=None, method=None, payload=None, debug=False):
 		else:
 			message = "The method {} failed with an unknown error.".format(method)
 
-		utils.make_response(client=client, success=False, content_key="message", content=message)
+		utils.make_error(client=client, content_key="message", content=message)
 	else:
-		utils.make_response(client=client, success=True, content=response)
+		utils.make_success(client=client, content=response)

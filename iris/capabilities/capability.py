@@ -15,7 +15,7 @@ class Capability(object):
 
 		iris_type = utils.classname(self.iris)
 		if iris_type == "iris.core.Iris":
-			self.ws = self.iris.ws
+			self.websocket = self.iris.websocket
 			self.logger = self.iris.logger
 		else:
 			raise exception.NotAnIrisCoreObject(classname=self.classname, got=iris_type)
