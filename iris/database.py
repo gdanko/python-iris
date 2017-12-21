@@ -11,7 +11,11 @@ def configure_database():
 		"devices": {
 			"id": "TEXT UNIQUE NOT NULL",
 			"name": "TEXT NOT NULL",
-			"address": "TEXT NOT NULL"
+			"address": "TEXT NOT NULL",
+			"vendor": "TEXT NOT NULL",
+			"model": "TEXT NOT NULL",
+			"type": "TEXT NOT NULL",
+			"protocol": "TEXT NOT NULL"
 		},
 		"places": {
 			"id": "TEXT UNIQUE NOT NULL",
@@ -40,11 +44,15 @@ def configure_database():
 
 def populate_devices(devices=None):
 	for device in devices:
-		insert = "INSERT OR REPLACE INTO devices (id,name,address) VALUES (?,?,?)"
+		insert = "INSERT OR REPLACE INTO devices (id,name,address,vendor,model,type,protocol) VALUES (?,?,?,?,?,?,?)"
 		cursor.execute(insert, (
 			device["base:id"],
 			device["dev:name"],
 			device["base:address"],
+			device["dev:vendor"],
+			device["dev:model"],
+			device["dev:devtypehint"],
+			device["devadv:protocol"],
 		))
 		conn.commit()
 

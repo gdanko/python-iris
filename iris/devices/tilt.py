@@ -1,5 +1,5 @@
 import iris.utils as utils
-from iris.capabilities.device import Device
+from iris.base.device import Device
 
 class Tils(Device):
 	def __init__(self, **kwargs):

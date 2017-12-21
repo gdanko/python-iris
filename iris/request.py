@@ -145,8 +145,8 @@ def send(client=None, method=None, payload=None, debug=False):
 	client.response = {}
 	client.logger.debug("Executing method: {0}".format(method))
 	client.logger.debug("Sending payload: {}".format(payload))
-	client.ws.send(payload)
-	response = utils.validate_json(client.ws.recv())
+	client.websocket.send(payload)
+	response = utils.validate_json(client.websocket.recv())
 
 	if "Error" in response["type"]:
 		errors = []

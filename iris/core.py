@@ -12,9 +12,9 @@ import iris.exception as exception
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.account import Account
-from iris.capabilities.place import Place
-from iris.capabilities.rule import Rule
+from iris.base.account import Account
+from iris.base.place import Place
+from iris.base.rule import Rule
 
 import sys
 from pprint import pprint
@@ -37,6 +37,7 @@ from pprint import pprint
 # Thermostat: ["clock", "dev", "devadv", "devconn", "devpow", "humid", "indicator", "temp", "therm"]
 # Door lock: ['dev', 'devadv', 'devconn', 'devpow', 'doorlock']
 # Smart plug 1st gen: ['centralitesmartplug', 'dev', 'devadv', 'devconn', 'devota', 'devpow', 'ident', 'pow', 'swit']
+# Smart plug 2nd gen: ['centralitesmartplug', 'dev', 'devadv', 'devconn', 'devota', 'devpow', 'ident', 'pow', 'swit']
 # Key fob: ['dev', 'devadv', 'devconn', 'devpow', 'pres']
 # Contact sensor: ['cont', 'dev', 'devadv', 'devconn', 'devpow', 'temp']
 # Door sensor: ['cont', 'dev', 'devadv', 'devconn', 'devpow']

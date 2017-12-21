@@ -1,14 +1,14 @@
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.capability import Capability
+from iris.base.capability import Capability
 
 from pprint import pprint
 
-class Place(Capability):
+class Account(Capability):
 	def __init__(self, **kwargs):
 		Capability.__init__(self, **kwargs)
-		self.namespace = "place"
+		self.namespace = "account"
 
 		capabilities = [self.namespace]
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
@@ -18,9 +18,8 @@ class Place(Capability):
 		def generate_method_fn(method, required, oneof, valid):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.place_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
+				request.account_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for method_name, obj in methods.items():
 			generate_method_fn(method_name, obj["required"], obj["oneof"], obj["valid"])
-

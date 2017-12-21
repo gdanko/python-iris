@@ -1,14 +1,14 @@
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.capability import Capability
+from iris.base.capability import Capability
 
 from pprint import pprint
 
-class Schedule(Capability):
+class Scene(Capability):
 	def __init__(self, **kwargs):
 		Capability.__init__(self, **kwargs)
-		self.namespace = "sched"
+		self.namespace = "scene"
 
 		capabilities = [self.namespace]
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)

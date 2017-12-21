@@ -1,14 +1,14 @@
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.capability import Capability
+from iris.base.capability import Capability
 
 from pprint import pprint
 
-class Account(Capability):
+class Rule(Capability):
 	def __init__(self, **kwargs):
 		Capability.__init__(self, **kwargs)
-		self.namespace = "account"
+		self.namespace = "rule"
 
 		capabilities = [self.namespace]
 		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
@@ -18,7 +18,7 @@ class Account(Capability):
 		def generate_method_fn(method, required, oneof, valid):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.account_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
+				request.rule_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for method_name, obj in methods.items():
