@@ -1,33 +1,37 @@
-import asyncio
-import inspect
-import json
-import os
-import pkgutil
-import re
-import sys
-import websocket
+from iris.capabilities.account import Account
+from iris.capabilities.place import Place
+from iris.capabilities.rule import Rule
+from iris.capabilities.scene import Scene
+from iris.services.session import Session
+from lomond import WebSocket
+from pprint import pprint
 import iris.authenticator as authenticator
 import iris.database as db
 import iris.exception as exception
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.account import Account
-from iris.capabilities.place import Place
-from iris.capabilities.rule import Rule
-from iris.capabilities.scene import Scene
-
+import json
+import os
+import re
 import sys
-from pprint import pprint
+import threading
+import time
 
 class Iris(object):
+	# lomond documentation
+	# http://lomond.readthedocs.io/en/latest/
 	def __init__(self, **kwargs):
-		global cookie
-		global token
-
 		self.success = None
-		self.places = {}
+		self.classname = utils.classname(self)
 		self.websocket_uri = "wss://bc.irisbylowes.com/websocket"
+
+		#data = pkgutil.get_data("iris", "data/method-validator.json")
+		#print(data)
+		# This is a hack to get it to work until I can get python data to work
+		pwd = os.path.dirname(os.path.realpath(__file__))
+		path = "{}/data/validator.json".format(pwd)
+		self.validator = json.loads(open(path, "r").read())
 
 		if not "account" in kwargs:
 			raise exception.MissingConstructorParameter(parameter="account")
@@ -38,31 +42,98 @@ class Iris(object):
 			raise exception.MissingConstructorParameter(parameter="place_name")
 
 		self.debug = kwargs["debug"] if ("debug" in kwargs and isinstance(kwargs["debug"], bool)) else False
-		self.logger = utils.configure_logger(debug=self.debug)
+		self.logger = utils.configure_logger(loggerid=self.classname, debug=self.debug)
 
 		auth = authenticator.Authenticator(
 			account=kwargs["account"],
 			debug=self.debug
 		)
 		auth.authenticate()
-		token = auth.token
-		cookie = "irisAuthToken={}".format(token)
+		self.init("irisAuthToken={}".format(auth.token))
 
-		#data = pkgutil.get_data("iris", "data/method-validator.json")
-		#print(data)
-		# This is a hack to get it to work until I can get python data to work
-		pwd = os.path.dirname(os.path.realpath(__file__))
-		path = "{}/data/validator.json".format(pwd)
-		self.validator = json.loads(open(path, "r").read())
-		self.init()
+	def process_event(self, content):
+		response = utils.validate_json(content)
+		#print("\n*** content ***")
+		#print(content)
+		#print("")
+		if response:
+			self.response = None
+			#print("\n*** response ***")
+			#pprint(response)
+			#print("")
+			if "type" in response:
+				if response["type"] == "SessionCreated":
+					self.init_session(content)
 
-	def init(self, **kwargs):
-		self.websocket = websocket.create_connection(
-			self.websocket_uri,
-			cookie=cookie
-		)
+				elif response["type"] == "base:ValueChange":
+					pass
 
-		response = utils.validate_json(self.websocket.recv())
+				elif response["type"] == "base:Added":
+					pass
+
+				elif response["type"] == "EmptyMessage":
+					self.response = response
+					self.method_ready.set()
+
+				elif response["type"] == "base:SetAttributes":
+					self.response = response
+					self.method_ready.set()
+
+				elif re.search("Response$", response["type"]):
+					self.response = response
+					self.method_ready.set()
+				else:
+					print(response["type"])
+
+	def socket_run(self):
+		for event in self.websocket:
+			if event.name == "connecting":
+				self.logger.debug("Connecting to {}".format(event.url))
+
+			elif event.name == "connect_fail":
+				raise exception.WebSocketConnectionFailed(message=event.reason)
+
+			elif event.name == "rejected":
+				raise exception.WebSocketUpgradeRejected(message=event.reason)
+
+			elif event.name == "connected":
+				self.logger.debug("Connected")
+
+			elif event.name == "ready":
+				self.logger.debug(event.response)
+
+			if event.name == "text":
+				self.process_event(event.text)
+
+			elif event.name == "disconnected":
+				if event.graceful == True:
+					message = "The websocket disconnected gracefully."
+				else:
+					message = "The websocket disconnected unexpectedly: {}".format(event.reason)
+
+				self.logger.debug(message)
+
+			elif event.name == "closing":
+				self.logger.debug("The websocket is closing: {}".format(event.reason))
+
+			elif event.name == "closed":
+				self.logger.debug("The websocket closed: {}".format(event.reason))
+
+	def init(self, cookie):
+		self.websocket = WebSocket(self.websocket_uri)
+		self.websocket.add_header("Cookie".encode("utf-8"), cookie.encode("utf-8"))
+		self.socket_ready = threading.Event()
+		self.method_ready = threading.Event()
+		threading.Thread(name="iris_listener", target=self.socket_run).start()
+
+		if self.socket_ready.wait(5):
+			session = Session(self)
+			session.SetActivePlace(placeId=self.place_id)
+			if self.success:
+				self.configure_database()
+
+	def init_session(self, content):
+		response = utils.validate_json(content)
 		request.validate_response(client=self, response=response)
 		if self.success:
 			places = [place for place in self.response["payload"]["attributes"]["places"] if place["placeName"] == self.place_name]
@@ -72,55 +143,52 @@ class Iris(object):
 				self.account_address = "SERV:account:{}".format(self.account_id)
 				self.place_id = place["placeId"]
 				self.place_address = "SERV:place:{}".format(self.place_id)
+				self.socket_ready.set()
 
-				payload = payloads.set_active_place(place_id=self.place_id)
-				request.send(client=self, method="SetActivePlace", payload=payload, debug=self.debug)
-				if self.success:
-					self.configure_database()
+	def configure_database(self):
+		db.prepare_database()
 
-	def configure_database(self, **kwargs):
-		db.configure_database()
+		account = Account(self)
+		place = Place(self)
+		rule = Rule(self)
+		scene = Scene(self)
 
-		account = Account(iris=self)
 		account.ListPlaces()
-		if account.success:
-			db.populate_places(places=account.response["payload"]["attributes"]["places"])
-		else:
-			print("places failure")
-			sys.exit(1)
-
-		place = Place(iris=self)
+		print(self.method_ready.is_set())
+		if self.method_ready.wait(5):
+			print(self.method_ready.is_set())
+			if account.success:
+				request.validate_response(client=account, response=self.response)
+				self.places = account.response["payload"]["attributes"]["places"]
+				db.populate_places(self.places)
+		
 		place.ListDevices()
-		if place.success:
-			self.devices = place.response["payload"]["attributes"]["devices"]
-			db.populate_devices(devices=self.devices)
-		else:
-			print("devices failure")
-			sys.exit(1)
+		if self.method_ready.wait(5):
+			if place.success:
+				request.validate_response(client=place, response=self.response)
+				self.devices = place.response["payload"]["attributes"]["devices"]
+				db.populate_devices(self.devices)
 
 		place.ListPersons()
-		if place.success:
-			self.people = place.response["payload"]["attributes"]["persons"]
-			db.populate_people(people=self.people)
-		else:
-			print("people failure")
-			sys.exit(1)
+		if self.method_ready.wait(5):
+			if place.success:
+				request.validate_response(client=place, response=self.response)
+				self.people = place.response["payload"]["attributes"]["persons"]
+				db.populate_people(self.people)		
 
-		rule = Rule(iris=self)
 		rule.ListRules()
-		if rule.success:
-			self.rules = rule.response["payload"]["attributes"]["rules"]
-			db.populate_rules(rules=self.rules)
-		else:
-			print("rule failure")
-			sys.exit(1)
+		if self.method_ready.wait(5):
+			if rule.success:
+				request.validate_response(client=rule, response=self.response)
+				self.rules = rule.response["payload"]["attributes"]["rules"]
+				db.populate_rules(self.rules)
 
-		scene = Scene(iris=self)
 		scene.ListScenes()
-		if scene.success:
-			self.scenes = scene.response["payload"]["attributes"]["scenes"]
-			pprint(self.scenes)
-			db.populate_scenes(scenes=self.scenes)
-		else:
-			print("scene failure")
-			sys.exit(1)			
+		if self.method_ready.wait(5):
+			if scene.success:
+				request.validate_response(client=scene, response=self.response)
+				self.scenes = scene.response["payload"]["attributes"]["scenes"]
+				db.populate_scenes(self.scenes)
+
+	def stop(self):
+		self.websocket.close()

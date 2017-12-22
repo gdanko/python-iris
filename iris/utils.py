@@ -152,9 +152,14 @@ def fetch_writable_attributes(readable):
 
 	return writable
 
-def fetch_methods(namespace, validator):
+def fetch_methods(validator, capabilities):
 	methods = {}
-	return validator[namespace]["methods"]
+	for capability in capabilities:
+		if len(validator[capability]["methods"]) > 0:
+			for method_name, obj in validator[capability]["methods"].items():
+				methods[method_name] = obj
+
+	return methods
 
 # May be able to retire this one
 def fetch_parameters(namespace, method, validator):

@@ -6,32 +6,44 @@ from pprint import pprint
 
 # Create exceptions
 
-def configure_database():
+def prepare_database():
 	columns = {
 		"devices": {
 			"id": "TEXT UNIQUE NOT NULL",
 			"name": "TEXT NOT NULL",
-			"address": "TEXT NOT NULL"
+			"address": "TEXT NOT NULL",
+			"vendor": "TEXT NOT NULL",
+			"model": "TEXT NOT NULL",
+			"type": "TEXT NOT NULL",
+			"protocol": "TEXT NOT NULL",
+			"account_id": "TEXT NOT NULL",
+			"place_id": "TEXT NOT NULL",
+			"capabilities": "TEXT NOT NULL",
 		},
 		"places": {
 			"id": "TEXT UNIQUE NOT NULL",
 			"name": "TEXT NOT NULL",
-			"address": "TEXT NOT NULL"
+			"address": "TEXT NOT NULL",
+			"account_id": "TEXT NOT NULL",
+			"capabilities": "TEXT NOT NULL",
 		},
 		"people": {
 			"id": "TEXT UNIQUE NOT NULL",
 			"name": "TEXT NOT NULL",
-			"address": "TEXT NOT NULL"
+			"address": "TEXT NOT NULL",
+			"capabilities": "TEXT NOT NULL",
 		},
 		"rules": {
 			"id": "TEXT UNIQUE NOT NULL",
 			"name": "TEXT NOT NULL",
-			"address": "TEXT NOT NULL"
+			"address": "TEXT NOT NULL",
+			"capabilities": "TEXT NOT NULL",
 		},
 		"scenes": {
 			"id": "TEXT UNIQUE NOT NULL",
 			"name": "TEXT NOT NULL",
-			"address": "TEXT NOT NULL"
+			"address": "TEXT NOT NULL",
+			"capabilities": "TEXT NOT NULL",
 		},
 	}
 	for table_name, table_cols in columns.items():
@@ -43,54 +55,66 @@ def configure_database():
 		res = cursor.execute(create)
 		conn.commit()
 
-def populate_devices(devices=None):
+def populate_devices(devices):
 	for device in devices:
-		insert = "INSERT OR REPLACE INTO devices (id,name,address) VALUES (?,?,?)"
+		insert = "INSERT OR REPLACE INTO devices (id,name,address,vendor,model,type,protocol,account_id,place_id,capabilities) VALUES (?,?,?,?,?,?,?,?,?,?)"
 		cursor.execute(insert, (
 			device["base:id"],
 			device["dev:name"],
 			device["base:address"],
+			device["dev:vendor"],
+			device["dev:model"],
+			device["dev:devtypehint"],
+			device["devadv:protocol"],
+			device["dev:account"],
+			device["dev:place"],
+			",".join([c for c in device["base:caps"] if c != "base"]),
 		))
 		conn.commit()
 
-def populate_people(people=None):
+def populate_people(people):
 	for person in people:
 		name = "{} {}".format(person["person:firstName"], person["person:lastName"])
-		insert = "INSERT OR REPLACE INTO people (id,name,address) VALUES (?,?,?)"
+		insert = "INSERT OR REPLACE INTO people (id,name,address,capabilities) VALUES (?,?,?,?)"
 		cursor.execute(insert, (
 			person["base:id"],
 			name,
 			person["base:address"],
+			",".join([c for c in person["base:caps"] if c != "base"]),
 		))
 		conn.commit()
 
-def populate_places(places=None):
+def populate_places(places):
 	for place in places:
-		insert = "INSERT OR REPLACE INTO places (id,name,address) VALUES (?,?,?)"
+		insert = "INSERT OR REPLACE INTO places (id,name,address,account_id,capabilities) VALUES (?,?,?,?,?)"
 		cursor.execute(insert, (
 			place["base:id"],
 			place["place:name"],
-			place["base:address"]
+			place["base:address"],
+			place["place:account"],
+			",".join([c for c in place["base:caps"] if c != "base"]),
 		))
 		conn.commit()
 
-def populate_rules(rules=None):
+def populate_rules(rules):
 	for rule in rules:
-		insert = "INSERT OR REPLACE INTO rules (id,name,address) VALUES (?,?,?)"
+		insert = "INSERT OR REPLACE INTO rules (id,name,address,capabilities) VALUES (?,?,?,?)"
 		cursor.execute(insert, (
 			rule["base:id"],
 			rule["rule:name"],
-			rule["base:address"]
+			rule["base:address"],
+			",".join([c for c in rule["base:caps"] if c != "base"]),
 		))
 		conn.commit()
 
-def populate_scenes(scenes=None):
+def populate_scenes(scenes):
 	for scene in scenes:
-		insert = "INSERT OR REPLACE INTO scenes (id,name,address) VALUES (?,?,?)"
+		insert = "INSERT OR REPLACE INTO scenes (id,name,address,capabilities) VALUES (?,?,?,?)"
 		cursor.execute(insert, (
 			scene["base:id"],
 			scene["scene:name"],
-			scene["base:address"]
+			scene["base:address"],
+			",".join([c for c in scene["base:caps"] if c != "base"]),
 		))
 		conn.commit()
 

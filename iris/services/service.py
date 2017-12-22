@@ -3,7 +3,7 @@ import iris.utils as utils
 import json
 import os
 
-class Capability(object):
+class Service(object):
 	def __init__(self, iris):
 		self.success = True
 		self.response = {}
@@ -17,7 +17,7 @@ class Capability(object):
 		#print(data)
 		# This is a hack to get it to work until I can get python data to work
 		pwd = os.path.dirname(os.path.realpath(__file__))
-		path = "{}/../data/capabilities.json".format(pwd)
+		path = "{}/../data/services.json".format(pwd)
 		self.validator = json.loads(open(path, "r").read())
 
 

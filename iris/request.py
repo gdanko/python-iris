@@ -23,7 +23,7 @@ def get_attributes(client=None, **kwargs):
 			destination=content["destination"],
 			namespace=content["namespace"]
 		)
-		send(client=client, payload=payload, debug=client.iris.debug)
+		send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
 		if client.success:
 			attribute = "{}:{}".format(content["namespace"], content["attribute"])
 			if attribute in client.response["payload"]["attributes"]:
@@ -65,10 +65,21 @@ def set_attributes(client=None, **kwargs):
 			attribute=content["attribute"],
 			value=content["attributes"]["value"],
 		)
-		pprint(payload)
-		send(client=client, payload=payload, debug=client.iris.debug)
-		print("")
-		pprint(client.response)
+		payload2 = {
+			"type": "base:SetAttributes",
+			"headers": {
+				"destination": "DRIV:dev:d2c0b897-98fd-40ed-8b9f-85adfed05660",
+				"correlationId": "790525f5-171f-4533-a952-0dcafb9b5310",
+				"isRequest": True
+			},
+			"payload": {
+				"messageType": "base:SetAttributes",
+				"attributes": {
+					"dim:brightness": 1
+				}
+			}
+		}
+		send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
 
 def device_method_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
@@ -78,8 +89,8 @@ def device_method_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
-	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
 def account_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
@@ -89,8 +100,8 @@ def account_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
-	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
 def hub_request(client=None, **kwargs):
 	method = kwargs["method"]
@@ -105,7 +116,7 @@ def hub_request(client=None, **kwargs):
 			method=method,
 		)
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, payload=payload, debug=client.iris.debug)
+		send(client=client, payload=payload, debug=client.debug)
 
 def place_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
@@ -115,8 +126,8 @@ def place_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
-	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
 def rule_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
@@ -125,9 +136,9 @@ def rule_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
-	payload["payload"]["attributes"]["placeId"] = client.iris.place_id
-	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
 def scene_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
@@ -136,21 +147,38 @@ def scene_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
-	payload["payload"]["attributes"]["placeId"] = client.iris.place_id
-	for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-	send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, method=content["method"], payload=payload, debug=client.debug)
+
+
+def session_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.session(
+			method=content["method"],
+			namespace=content["namespace"]
+		)
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
 def send(client=None, method=None, payload=None, debug=False):
 	payload = json.dumps(payload)
-	client.response = {}
+	client.method_ready.clear()
 	client.logger.debug("Executing method: {0}".format(method))
 	client.logger.debug("Sending payload: {}".format(payload))
-	client.websocket.send(payload)
-	response = utils.validate_json(client.websocket.recv())
-	if response:
-		validate_response(client=client, response=response)
-	else:
-		utils.make_error(content="Invalid JSON returned from the Iris API.")
+	client.websocket.send_text(payload)
+	if client.method_ready.wait(5):
+		validate_response(client=client, response=client.iris.response)
+
+def send2(client=None, method=None, payload=None, debug=False):
+	payload = json.dumps(payload)
+	client.method_ready.clear()
+	client.logger.debug("Executing method: {0}".format(method))
+	client.logger.debug("Sending payload: {}".format(payload))
+	client.websocket.send_text(payload)
+	if client.method_ready.wait(5):
+		validate_response(client=client, response=client.response)
 
 def validate_response(client=None, response=None):
 	if "error" in response["type"].lower():

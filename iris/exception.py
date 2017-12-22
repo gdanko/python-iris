@@ -98,6 +98,24 @@ class CookieParseError(Exception):
 		self.error = "Could not parse the cookie returned by the Iris login server."
 		return self.error
 
+class WebSocketConnectionFailed(Exception):
+	def __init__(self, message=None):
+		self.message = message
+		return
+
+	def __str__(self):
+		self.error = "The websocket connection failed with the following error: {}.".format(self.message)
+		return self.error
+
+class WebSocketUpgradeRejected(Exception):
+	def __init__(self, message=None):
+		self.message = message
+		return
+
+	def __str__(self):
+		self.error = "I was able to connect to the websocket but upgrade failed with the following error: {}.".format(self.message)
+		return self.error
+
 class DeviceMapError(Exception):
 	def __init__(self, message=None):
 		self.message = message

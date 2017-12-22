@@ -1,16 +1,14 @@
-def set_active_place(place_id=None):
+def session(namespace=None, method=None):
 	return {
-		"type": "sess:SetActivePlace",
+		"type": "{}:{}".format(namespace, method),
 		"headers": {
 			"destination":"SERV:sess:",
 			"correlationId": "78f7d29a-222e-4976-9d2b-d1f553cf8881",
 			"isRequest" :True
 		},
 		"payload": {
-			"messageType": "sess:SetActivePlace",
-			"attributes": {
-				"placeId": place_id
-			}
+			"messageType":  "{}:{}".format(namespace, method),
+			"attributes": {}
 		}
 	}
 

@@ -10,7 +10,7 @@ class HubInfo(Capability):
 		capabilities = ["hub", "hub4g", "hubadv", "hubalarm", "hubav", "hubbackup", "hubchime",
 			"hubconn", "hubdebug", "hubhue", "hubdebug", "hubmetric", "hubnet", "hubpow",
 			"hubrflx", "hubsercomm", "hubsounds", "hubvol", "hubzigbee", "hubzwave"]
-		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
+		readable = utils.fetch_readable_attributes(self.validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)
 
 		def generate_get_fn(attr_name, attr_namespace, attr_obj):

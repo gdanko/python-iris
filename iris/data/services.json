@@ -1,0 +1,1518 @@
+{
+    "account": {
+        "correlation_id": "a9a2ee0b-3f81-4dab-8d33-d721889fd009",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "CreateAccount": {
+                "enabled": true,
+                "required": [
+                    "email",
+                    "password",
+                    "optin"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "email": {
+                            "type": "string",
+                            "description": "The email address of the account owning person",
+                            "optional": false
+                        },
+                        "password": {
+                            "type": "string",
+                            "description": "The password of the account owning person",
+                            "optional": false
+                        },
+                        "optin": {
+                            "type": "string",
+                            "description": "If the account owner would like to receive notifications via email",
+                            "optional": false
+                        },
+                        "isPublic": {
+                            "type": "string",
+                            "description": "If the session created after create account is a public session",
+                            "optional": true
+                        },
+                        "person": {
+                            "type": "Person",
+                            "description": "Person attributes",
+                            "optional": true
+                        },
+                        "place": {
+                            "type": "Place",
+                            "description": "Place attributes",
+                            "optional": true
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "alarmservice": {
+        "correlation_id": "3b83e7f8-9409-46e7-b903-83941e097c31",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "AddAlarm": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "alarm": {
+                            "type": "string",
+                            "description": "The newly added alarm"
+                        },
+                        "alarms": {
+                            "type": "list<string>",
+                            "description": "The list of alarms in the current state"
+                        },
+                        "triggers": {
+                            "type": "list<IncidentTrigger>",
+                            "description": "The triggers associated with the newly added alarm."
+                        }
+                    }
+                }
+            },
+            "CancelAlert": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "method": {
+                            "type": "enum",
+                            "description": "How the user (actor header) cancelled the alarm(s)"
+                        },
+                        "alarms": {
+                            "type": "List<string>",
+                            "description": "The list of alarms that have been cancelled"
+                        }
+                    },
+                    "method": [
+                        "KEYPAD",
+                        "APP"
+                    ]
+                }
+            }
+        },
+        "events": {}
+    },
+    "bridgesvc": {
+        "correlation_id": "3e238aed-dd11-4efc-ada0-bcfe94aafd97",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "RegisterDevice": {
+                "enabled": true,
+                "required": [
+                    "attrs"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "attrs": {
+                            "type": "map<string>",
+                            "description": "Identifying attributes of the device.",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "RemoveDevice": {
+                "enabled": true,
+                "required": [
+                    "id"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "id": {
+                            "type": "string",
+                            "description": "The identifier for the device.",
+                            "optional": false
+                        },
+                        "accountId": {
+                            "type": "string",
+                            "description": "The account id of the device",
+                            "optional": true
+                        },
+                        "placeId": {
+                            "type": "string",
+                            "description": "The place id of the device",
+                            "optional": true
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "device": {
+        "correlation_id": "fde029d2-44a3-4ced-95c6-f6fed6dd4953",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "SyncDevices": {
+                "enabled": true,
+                "required": [
+                    "accountId",
+                    "placeId",
+                    "reflexVersion",
+                    "devices"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "accountId": {
+                            "type": "string",
+                            "description": "The account identifier of the hub requesting synchronization",
+                            "optional": false
+                        },
+                        "placeId": {
+                            "type": "string",
+                            "description": "The place identifier of the hub requesting synchronization",
+                            "optional": false
+                        },
+                        "reflexVersion": {
+                            "type": "int",
+                            "description": "The version of hub local reflexes currently supported by the hub",
+                            "optional": false
+                        },
+                        "devices": {
+                            "type": "string",
+                            "description": "A base64 encoded and gzipped json list of SyncDeviceInfo objects",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {
+            "DevicesDegraded": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Emitted by the hub to driver services when the hub detects that the degraded state of some devices has changed"
+            }
+        }
+    },
+    "eascode": {
+        "correlation_id": "051e522d-1ca8-4653-90f1-1c92664b8dad",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListEasCodes": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {}
+                }
+            }
+        },
+        "events": {}
+    },
+    "i18n": {
+        "correlation_id": "27ca21d0-84cf-4f99-9155-05605e18b9ec",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "LoadLocalizedStrings": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "bundleNames": {
+                            "type": "set<string>",
+                            "description": "The set of bundles to load, if null or empty all bundles will be loaded",
+                            "optional": true
+                        },
+                        "locale": {
+                            "type": "string",
+                            "description": "The locale to load the localized strings, if not provided or is empty en-US will be used",
+                            "optional": true
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "invite": {
+        "correlation_id": "8ff98ccd-2b1e-402e-a516-c918a0a3b66e",
+        "attributes": {},
+        "is_device": false,
+        "methods": {},
+        "events": {}
+    },
+    "ipcd": {
+        "correlation_id": "a51a3394-abf0-4f9a-91bb-063c0d5b2c73",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListDeviceTypes": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {}
+                }
+            },
+            "FindDevice": {
+                "enabled": true,
+                "required": [
+                    "deviceType",
+                    "sn"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "deviceType": {
+                            "type": "IpcdDeviceType",
+                            "description": "The type of device to search for",
+                            "optional": false
+                        },
+                        "sn": {
+                            "type": "string",
+                            "description": "The serial number of the device the user would register with",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "ForceUnregister": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "protocolAddress": {
+                            "type": "string",
+                            "description": "The protocol address of the device to forcibly remove"
+                        }
+                    }
+                }
+            }
+        },
+        "events": {
+            "DeviceClaimed": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Issued from the IPCD Service to the IPCD Briges(s)/SAD Server when a device has been claimed"
+            },
+            "DeviceRegistered": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Issued from the IPCD Service to the IPCD Bridge(s)/SAD Server when a device has been fully registered (i.e. has a driver)"
+            },
+            "DeviceUnregistered": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Issued from the IPCD Service to the IPCD Bridge(s)/SAD Server when a device has been unregistered"
+            },
+            "DeviceConnected": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Issued from the IPCD Bridge(s)/SAD Server when a device comes online.  The source should be the specific IPCD bridge/SAD Server"
+            },
+            "DeviceDisconnected": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Issued from the IPCD Bridge(s)/SAD Server when a device goes offline.  The source should be the specific IPCD bridge/SAD Server"
+            },
+            "DeviceHeartBeat": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Issued from the IPCD Bridge(s)/SAD Server with the protocol addresses of all online devices"
+            }
+        }
+    },
+    "nwssamecode": {
+        "correlation_id": "82f1b3b5-c953-40d0-a001-8e19828d5b71",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListSameCounties": {
+                "enabled": true,
+                "required": [
+                    "stateCode"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "stateCode": {
+                            "type": "string",
+                            "description": "2 or 3 char state or territory postal code from the NWS SAME Code database",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "ListSameStates": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {}
+                }
+            },
+            "GetSameCode": {
+                "enabled": true,
+                "required": [
+                    "stateCode",
+                    "county"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "stateCode": {
+                            "type": "string",
+                            "description": "2 or 3 char state or territory postal code from the NWS SAME Code database",
+                            "optional": false
+                        },
+                        "county": {
+                            "type": "string",
+                            "description": "county name specific to weather station as listed in the NWS SAME Code database",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "person": {
+        "correlation_id": "a45c0918-2b91-48a1-ba64-63deb825e48b",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "SendPasswordReset": {
+                "enabled": true,
+                "required": [
+                    "email",
+                    "method"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "email": {
+                            "type": "string",
+                            "description": "The email address of the person",
+                            "optional": false
+                        },
+                        "method": {
+                            "type": "enum",
+                            "description": "The method by which the user will be notified of their reset token",
+                            "optional": false
+                        }
+                    },
+                    "method": [
+                        "email",
+                        "ivr"
+                    ]
+                }
+            },
+            "ResetPassword": {
+                "enabled": true,
+                "required": [
+                    "email",
+                    "token",
+                    "password"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "email": {
+                            "type": "string",
+                            "description": "The email address of the person",
+                            "optional": false
+                        },
+                        "token": {
+                            "type": "string",
+                            "description": "The token the user received via email or ivr",
+                            "optional": false
+                        },
+                        "password": {
+                            "type": "string",
+                            "description": "The new password",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "ChangePassword": {
+                "enabled": true,
+                "required": [
+                    "currentPassword",
+                    "newPassword"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "currentPassword": {
+                            "type": "string",
+                            "description": "Users current password",
+                            "optional": false
+                        },
+                        "newPassword": {
+                            "type": "string",
+                            "description": "Users new password",
+                            "optional": false
+                        },
+                        "emailAddress": {
+                            "type": "string",
+                            "description": "Users Email Address",
+                            "optional": true
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "place": {
+        "correlation_id": "8cb559ee-9bdf-4eb6-aafe-015b2dc6f3a0",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListTimezones": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {}
+                }
+            },
+            "ValidateAddress": {
+                "enabled": true,
+                "required": [
+                    "streetAddress"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "Optional identifier or the place to validate",
+                            "optional": true
+                        },
+                        "streetAddress": {
+                            "type": "StreetAddress",
+                            "description": "If specified this address will be validated instead of the default place address.",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "prodcat": {
+        "correlation_id": "5f49e9d6-a2fc-445a-83bc-0476b08c9a41",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "GetProductCatalog": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for getting the product catalog",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "GetCategories": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for getting the categories",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "GetBrands": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for getting the brands",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "GetProductsByBrand": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for getting the products",
+                            "optional": true
+                        },
+                        "brand": {
+                            "type": "string",
+                            "description": ""
+                        }
+                    }
+                }
+            },
+            "GetProductsByCategory": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for getting the products",
+                            "optional": true
+                        },
+                        "category": {
+                            "type": "string",
+                            "description": ""
+                        }
+                    }
+                }
+            },
+            "GetProducts": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for getting the products",
+                            "optional": true
+                        },
+                        "include": {
+                            "type": "enum",
+                            "description": "Type of product catalog entries to include, defaults to BROWSEABLE.",
+                            "optional": true
+                        }
+                    },
+                    "include": [
+                        "ALL",
+                        "BROWSEABLE"
+                    ]
+                }
+            },
+            "FindProducts": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for finding the products",
+                            "optional": true
+                        },
+                        "search": {
+                            "type": "string",
+                            "description": ""
+                        }
+                    }
+                }
+            },
+            "GetProduct": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place whose population should be used for getting the product",
+                            "optional": true
+                        },
+                        "id": {
+                            "type": "string",
+                            "description": ""
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "promon": {
+        "correlation_id": "24c0e0e0-4c94-4c67-a5a5-e13b05243864",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "GetSettings": {
+                "enabled": true,
+                "required": [
+                    "place"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "place": {
+                            "type": "string",
+                            "description": "The place address to load the settings for",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "GetMetaData": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {}
+                }
+            },
+            "CheckAvailability": {
+                "enabled": true,
+                "required": [
+                    "zipcode",
+                    "state"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "zipcode": {
+                            "type": "string",
+                            "description": "5 digits US postal codes",
+                            "optional": false
+                        },
+                        "state": {
+                            "type": "string",
+                            "description": "The US postal service 2 character state code (such as KS, CA, NY).",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "rule": {
+        "correlation_id": "6eb0b16f-2652-49be-a9e7-e0939794eb26",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListRuleTemplates": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "ListRules": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "GetCategories": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "GetRuleTemplatesByCategory": {
+                "enabled": true,
+                "required": [
+                    "placeId",
+                    "category"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        },
+                        "category": {
+                            "type": "string",
+                            "description": "The category name",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "scene": {
+        "correlation_id": "68e2da7c-278c-4775-9305-cf81de3c44d8",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListScenes": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "ListSceneTemplates": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "scheduler": {
+        "correlation_id": "8aa12113-4b09-4c85-a2a5-289943fac9e6",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListSchedulers": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "The id of the place to list the schedulers for.",
+                            "optional": false
+                        },
+                        "includeWeekdays": {
+                            "type": "boolean",
+                            "description": "if the results should include schedule for each day of the week.  Default value is true.",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "GetScheduler": {
+                "enabled": true,
+                "required": [
+                    "target"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "target": {
+                            "type": "string",
+                            "description": "The address of the thing to schedule.",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "FireCommand": {
+                "enabled": true,
+                "required": [
+                    "target",
+                    "commandId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "target": {
+                            "type": "string",
+                            "description": "The address of the thing to schedule.",
+                            "optional": false
+                        },
+                        "commandId": {
+                            "type": "string",
+                            "description": "The id of the command to fire",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "ScheduleCommands": {
+                "enabled": true,
+                "required": [
+                    "target",
+                    "group",
+                    "commands"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "target": {
+                            "type": "string",
+                            "description": "The address of the thing to schedule.",
+                            "optional": false
+                        },
+                        "group": {
+                            "type": "string",
+                            "description": "The group for the schedules if they are being created.  If they already exist and are part of a different group, this will return an error",
+                            "optional": false
+                        },
+                        "commands": {
+                            "type": "list<TimeOfDayCommand>",
+                            "description": "A list of commands to insert/update/delete.  The referenced schedule ids will be created if needed.  If the id is null this will be considered an insert, if the id is populated and there are days this will be an update, if there is an id and no days it will be a delete.",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "ScheduleWeeklyCommand": {
+                "enabled": true,
+                "required": [
+                    "target",
+                    "schedule",
+                    "days",
+                    "messageType",
+                    "attributes"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "target": {
+                            "type": "string",
+                            "description": "The address of the thing to schedule.",
+                            "optional": false
+                        },
+                        "schedule": {
+                            "type": "string",
+                            "description": "The name of the schedule to update or create.",
+                            "optional": false
+                        },
+                        "days": {
+                            "type": "set<string>",
+                            "description": "The days of the week that this command should be run on.  There must be at least one day in this set.",
+                            "optional": false
+                        },
+                        "mode": {
+                            "type": "enum",
+                            "description": "What mode this command is scheduled in:     ABSOLUTE - The time reported in time will be used.     SUNRISE - The command will execute at local sunrise + offsetMin.  The time reported in the time field will be the calculated run time for today.     SUNSET - The command will execute at local sunset + offsetMin. The time reported in the time field will be the calculated run time for today.",
+                            "optional": true
+                        },
+                        "time": {
+                            "type": "string",
+                            "description": "The time of day formatted as HH:MM using a 24-hour clock, in place-local time (see Place#TimeZone), that the command should be sent.",
+                            "optional": true
+                        },
+                        "offsetMinutes": {
+                            "type": "int",
+                            "description": "This will always be 0 if the mode is set to ABSOLUTE.  If mode is set to SUNRISE or SUNSET this will be the offset / delta from sunrise or sunset that the event should run at.  A negative number means the event should happen before sunrise/sunset, a postive means after.",
+                            "optional": true
+                        },
+                        "messageType": {
+                            "type": "string",
+                            "description": "Default: base:SetAttributes. Type of message to be sent.",
+                            "optional": false
+                        },
+                        "attributes": {
+                            "type": "map<any>",
+                            "description": "The attributes to send with the request.",
+                            "optional": false
+                        }
+                    },
+                    "days": [
+                        "MON",
+                        "TUE",
+                        "WED",
+                        "THU",
+                        "FRI",
+                        "SAT",
+                        "SUN"
+                    ],
+                    "mode": [
+                        "ABSOLUTE",
+                        "SUNRISE",
+                        "SUNSET"
+                    ]
+                }
+            },
+            "UpdateWeeklyCommand": {
+                "enabled": true,
+                "required": [
+                    "target",
+                    "schedule",
+                    "commandId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "target": {
+                            "type": "string",
+                            "description": "The address of the thing being scheduled.",
+                            "optional": false
+                        },
+                        "schedule": {
+                            "type": "string",
+                            "description": "The name of the schedule being modified.",
+                            "optional": false
+                        },
+                        "commandId": {
+                            "type": "string",
+                            "description": "The id of the command to update. Only the specified fields will be changed.",
+                            "optional": false
+                        },
+                        "days": {
+                            "type": "set<string>",
+                            "description": "If specified it will update the schedule to only run on the requested days.",
+                            "optional": true
+                        },
+                        "mode": {
+                            "type": "enum",
+                            "description": "What mode this command is scheduled in:     ABSOLUTE - The time reported in time will be used.     SUNRISE - The command will execute at local sunrise + offsetMin.  The time reported in the time field will be the calculated run time for today.     SUNSET - The command will execute at local sunset + offsetMin. The time reported in the time field will be the calculated run time for today.",
+                            "optional": true
+                        },
+                        "time": {
+                            "type": "string",
+                            "description": "The time of day formatted as HH:MM using a 24-hour clock, in place-local time (see Place#TimeZone), that the command should be sent.",
+                            "optional": true
+                        },
+                        "offsetMinutes": {
+                            "type": "int",
+                            "description": "This will always be 0 if the mode is set to ABSOLUTE.  If mode is set to SUNRISE or SUNSET this will be the offset / delta from sunrise or sunset that the event should run at.  A negative number means the event should happen before sunrise/sunset, a postive means after.",
+                            "optional": true
+                        },
+                        "messageType": {
+                            "type": "string",
+                            "description": "Default: base:SetAttributes. Type of message to be sent.",
+                            "optional": true
+                        },
+                        "attributes": {
+                            "type": "map<any>",
+                            "description": "If specified it will update the attributes to be included in the message.",
+                            "optional": true
+                        }
+                    },
+                    "days": [
+                        "MON",
+                        "TUE",
+                        "WED",
+                        "THU",
+                        "FRI",
+                        "SAT",
+                        "SUN"
+                    ],
+                    "mode": [
+                        "ABSOLUTE",
+                        "SUNRISE",
+                        "SUNSET"
+                    ]
+                }
+            },
+            "DeleteCommand": {
+                "enabled": true,
+                "required": [
+                    "target",
+                    "schedule",
+                    "commandId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "target": {
+                            "type": "string",
+                            "description": "The address of the thing being scheduled.",
+                            "optional": false
+                        },
+                        "schedule": {
+                            "type": "string",
+                            "description": "The name of the schedule being modified.",
+                            "optional": false
+                        },
+                        "commandId": {
+                            "type": "string",
+                            "description": "The id of the command to update. Only the specified fields will be changed.",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "sess": {
+        "correlation_id": "61d12350-0802-45f6-b225-ff6d353c4d50",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "SetActivePlace": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "The id of the place to activate",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "Log": {
+                "enabled": true,
+                "required": [
+                    "category",
+                    "code"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "category": {
+                            "type": "string",
+                            "description": "The category for the log message",
+                            "optional": false
+                        },
+                        "code": {
+                            "type": "string",
+                            "description": "A unique code for the event that happened",
+                            "optional": false
+                        },
+                        "message": {
+                            "type": "string",
+                            "description": "An optional message to include",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "Tag": {
+                "enabled": true,
+                "required": [
+                    "name"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the analytic event",
+                            "optional": false
+                        },
+                        "context": {
+                            "type": "map<string>",
+                            "description": "Additional data associated with the event",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "ListAvailablePlaces": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {}
+                }
+            }
+        },
+        "events": {
+            "ActivePlaceCleared": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Emitted when the client bridge clears the current active place for a session"
+            },
+            "SessionExpired": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Emitted when the user is manually or automatically logged out and the shiro session is destroyed"
+            }
+        }
+    },
+    "subs": {
+        "correlation_id": "7a642598-2eb0-4e07-af0d-44039ae313d7",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListSubsystems": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "Reload": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {}
+                }
+            }
+        },
+        "events": {}
+    },
+    "supportsearch": {
+        "correlation_id": "14f900c8-9bd6-4336-8c4a-9ef6e415322c",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "SupportMainSearch": {
+                "enabled": true,
+                "required": [
+                    "critera",
+                    "from",
+                    "size"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "critera": {
+                            "type": "string",
+                            "description": "The string to use for searching",
+                            "optional": false
+                        },
+                        "from": {
+                            "type": "integer",
+                            "description": "starting point for results to return",
+                            "optional": false
+                        },
+                        "size": {
+                            "type": "integer",
+                            "description": "total result size to return",
+                            "optional": false
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "suppcustsession": {
+        "correlation_id": "1ceaede9-b583-43e5-8c05-703c851eccc8",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListAllActiveSessions": {
+                "enabled": true,
+                "required": [],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "limit": {
+                            "type": "int",
+                            "description": "The maximum number of sessions to return (defaults to 50)",
+                            "optional": true
+                        },
+                        "token": {
+                            "type": "string",
+                            "description": "The token from a previous query to use for retrieving the next set of results",
+                            "optional": true
+                        }
+                    }
+                }
+            }
+        },
+        "events": {}
+    },
+    "video": {
+        "correlation_id": "0006de63-a47b-42f8-a2a9-29a00891d557",
+        "attributes": {},
+        "is_device": false,
+        "methods": {
+            "ListRecordings": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place.",
+                            "optional": false
+                        },
+                        "all": {
+                            "type": "boolean",
+                            "description": "List all recordings, including ones marked for deletion but not yet deleted",
+                            "optional": true
+                        },
+                        "type": {
+                            "type": "enum",
+                            "description": "Type of recording. Required to be one of the following ANY, STREAM, or RECORDING",
+                            "optional": true
+                        }
+                    },
+                    "type": [
+                        "ANY",
+                        "STREAM",
+                        "RECORDING"
+                    ]
+                }
+            },
+            "PageRecordings": {
+                "enabled": true,
+                "required": [
+                    "placeId",
+                    "limit",
+                    "token"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place.",
+                            "optional": false
+                        },
+                        "limit": {
+                            "type": "int",
+                            "description": "max number of recordings per page.",
+                            "optional": false
+                        },
+                        "token": {
+                            "type": "string",
+                            "description": "Token value to start the current page.  It should come from the nextToken value from the previous response.",
+                            "optional": false
+                        },
+                        "all": {
+                            "type": "boolean",
+                            "description": "Default: false If specified and set to true all recordings, including ones marked for deletion but not yet deleted will be returned",
+                            "optional": true
+                        },
+                        "inprogress": {
+                            "type": "boolean",
+                            "description": "Default: true If specified and set to false inprogress recordings / streams will not be shown.  Note that inprogress=false AND type=STREAM will always return an empty result.",
+                            "optional": true
+                        },
+                        "type": {
+                            "type": "enum",
+                            "description": "Type of recording.              ANY - Will return streams and recordings, this should not generally be used.             STREAM - Will return only streams, useful for attempting to piggy-back on an existing stream.             RECORDING - Will return only recordings, some may still be in progress and therefore missing information like duration.",
+                            "optional": true
+                        },
+                        "latest": {
+                            "type": "timestamp",
+                            "description": "No recordings that occur after this value will be returned. Since recordings are returned in descending order by time, recordings at the start of the list will be closer to this time.  Note if both token and latest are specified the earlier of the two values will be used.",
+                            "optional": true
+                        },
+                        "earliest": {
+                            "type": "timestamp",
+                            "description": "No recordings that occur before this value will be returned. Since recordings are returned in descending order by time, recordings at the end of the list will be closer to this time.",
+                            "optional": true
+                        },
+                        "cameras": {
+                            "type": "set<String>",
+                            "description": "Default: [] If specified, only recordings generated by the cameras in this set will be returned.  If not specified -or- the empty set, then all recordings will be returned regardless of camera.",
+                            "optional": true
+                        },
+                        "tags": {
+                            "type": "set<String>",
+                            "description": "Default: [] If specified, only recordings with *ANY* of the given tags will be included.  If not specified -or- the empty set, then all recordings will be returned regardless of tags.",
+                            "optional": true
+                        }
+                    },
+                    "type": [
+                        "ANY",
+                        "STREAM",
+                        "RECORDING"
+                    ]
+                }
+            },
+            "StartRecording": {
+                "enabled": true,
+                "required": [
+                    "placeId",
+                    "accountId",
+                    "cameraAddress",
+                    "stream"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place.",
+                            "optional": false
+                        },
+                        "accountId": {
+                            "type": "string",
+                            "description": "UUID of the account.",
+                            "optional": false
+                        },
+                        "cameraAddress": {
+                            "type": "string",
+                            "description": "UUID of the camera.",
+                            "optional": false
+                        },
+                        "stream": {
+                            "type": "boolean",
+                            "description": "True to start live streaming, false to start recording.",
+                            "optional": false
+                        },
+                        "duration": {
+                            "type": "int",
+                            "description": "The duration to record in seconds.  If not provided the default duration of 20 minutes will be used",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "StopRecording": {
+                "enabled": true,
+                "required": [
+                    "placeId",
+                    "recordingId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place.",
+                            "optional": false
+                        },
+                        "recordingId": {
+                            "type": "string",
+                            "description": "UUID of the recording.",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "GetQuota": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place.",
+                            "optional": false
+                        }
+                    }
+                }
+            },
+            "DeleteAll": {
+                "enabled": true,
+                "required": [
+                    "placeId"
+                ],
+                "oneof": [],
+                "valid": {
+                    "params": {
+                        "placeId": {
+                            "type": "string",
+                            "description": "UUID of the place",
+                            "optional": false
+                        },
+                        "includeFavorites": {
+                            "type": "boolean",
+                            "description": "True if favorite recordings should be deleted also.",
+                            "optional": true
+                        }
+                    }
+                }
+            }
+        },
+        "events": {
+            "RecordingsDeleted": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Emitted when all recordings for a place are deleted."
+            },
+            "QuotaReport": {
+                "required": [],
+                "valid": {
+                    "params": {}
+                },
+                "description": "Emitted whenever quota is recalculated, this may not represent a change in quota, simply the current value."
+            }
+        }
+    }
+}

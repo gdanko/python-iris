@@ -4,14 +4,14 @@ import iris.utils as utils
 from iris.capabilities.capability import Capability
 
 class Scene(Capability):
-	def __init__(self, **kwargs):
-		Capability.__init__(self, **kwargs)
+	def __init__(self, init):
+		Capability.__init__(self, init)
 		self.namespace = "scene"
 
 		capabilities = [self.namespace]
-		readable = utils.fetch_readable_attributes(self.iris.validator, capabilities)
+		readable = utils.fetch_readable_attributes(self.validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)
-		methods = utils.fetch_methods(self.namespace, self.iris.validator)
+		methods = utils.fetch_methods(self.validator, capabilities)
 
 		def generate_method_fn(method, required, oneof, valid):
 			fn_name = method

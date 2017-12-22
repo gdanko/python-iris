@@ -4,13 +4,13 @@ import iris.utils as utils
 from iris.capabilities.capability import Capability
 
 class Device(Capability):
-	def __init__(self, **kwargs):
-		Capability.__init__(self, **kwargs)
+	def __init__(self, iris):
+		Capability.__init__(self, iris)
 		self.namespace = "device"
 		self.common_capabilities = ["dev", "devadv", "devconn", "devpow"]
 
-	def get_attribute(self, **kwargs):
-		request.get_attributes(client=self, method="get_attribute", **kwargs)
+	def GetAttribute(self, **kwargs):
+		request.get_attributes(client=self, method="GetAttribute", **kwargs)
 
-	def set_attribute(self, **kwargs):
-		request.set_attributes(client=self, method="set_attribute", **kwargs)
+	def SetAttribute(self, **kwargs):
+		request.set_attributes(client=self, method="SetAttribute", **kwargs)
