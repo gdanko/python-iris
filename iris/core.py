@@ -2,7 +2,10 @@ from iris.capabilities.account import Account
 from iris.capabilities.place import Place
 from iris.capabilities.rule import Rule
 from iris.capabilities.scene import Scene
-from iris.services.session import Session
+
+import iris.service as service
+#from  iris.services.session import Session
+
 from lomond import WebSocket
 from pprint import pprint
 import iris.authenticator as authenticator
@@ -26,12 +29,17 @@ class Iris(object):
 		self.classname = utils.classname(self)
 		self.websocket_uri = "wss://bc.irisbylowes.com/websocket"
 
-		#data = pkgutil.get_data("iris", "data/method-validator.json")
-		#print(data)
 		# This is a hack to get it to work until I can get python data to work
 		pwd = os.path.dirname(os.path.realpath(__file__))
-		path = "{}/data/validator.json".format(pwd)
-		self.validator = json.loads(open(path, "r").read())
+		path = "{}/data/capabilities.json".format(pwd)
+		self.capability_validator = json.loads(open(path, "r").read())
+
+		path = "{}/data/services.json".format(pwd)
+		self.service_validator = json.loads(open(path, "r").read())
+
+		db.prepare_database()
+		db.populate_capabilities(self.capability_validator)
+		db.populate_services(self.service_validator)
 
 		if not "account" in kwargs:
 			raise exception.MissingConstructorParameter(parameter="account")
@@ -53,14 +61,13 @@ class Iris(object):
 
 	def process_event(self, content):
 		response = utils.validate_json(content)
-		#print("\n*** content ***")
-		#print(content)
-		#print("")
 		if response:
+			pprint(response); print("")
 			self.response = None
-			#print("\n*** response ***")
-			#pprint(response)
-			#print("")
+			#if "correlationId" in response["headers"]:
+			#	namespace, method = db.namespace_and_method_from_cid(response["headers"]["correlationId"])
+			#	print(namespace)
+			#	print(method)
 			if "type" in response:
 				if response["type"] == "SessionCreated":
 					self.init_session(content)
@@ -127,10 +134,11 @@ class Iris(object):
 		threading.Thread(name="iris_listener", target=self.socket_run).start()
 
 		if self.socket_ready.wait(5):
-			session = Session(self)
+			session = service.Session(self)
 			session.SetActivePlace(placeId=self.place_id)
-			if self.success:
+			if session.success:
 				self.configure_database()
+				pprint(self.websocket.__dict__)
 
 	def init_session(self, content):
 		response = utils.validate_json(content)
@@ -146,17 +154,13 @@ class Iris(object):
 				self.socket_ready.set()
 
 	def configure_database(self):
-		db.prepare_database()
-
 		account = Account(self)
 		place = Place(self)
 		rule = Rule(self)
 		scene = Scene(self)
 
 		account.ListPlaces()
-		print(self.method_ready.is_set())
 		if self.method_ready.wait(5):
-			print(self.method_ready.is_set())
 			if account.success:
 				request.validate_response(client=account, response=self.response)
 				self.places = account.response["payload"]["attributes"]["places"]
@@ -190,5 +194,11 @@ class Iris(object):
 				self.scenes = scene.response["payload"]["attributes"]["scenes"]
 				db.populate_scenes(self.scenes)
 
+		#cid = db.find_correlation_id(namespace="rule", method="ListRules")
+		#print(cid)
+
 	def stop(self):
 		self.websocket.close()
+
+	def disconnect(self):
+		self.stop()

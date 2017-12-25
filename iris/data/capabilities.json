@@ -1,6 +1,5 @@
 {
     "account": {
-        "correlation_id": "70fea640-47f4-4652-9115-1ddfe27cab21",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -84,6 +83,7 @@
         "is_device": false,
         "methods": {
             "ListDevices": {
+                "correlation_id": "74305749-3c21-4354-bc29-11f05a84a453",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -92,6 +92,7 @@
                 }
             },
             "ListHubs": {
+                "correlation_id": "88a2dcb5-627f-448a-a69d-e60798258b60",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -100,6 +101,7 @@
                 }
             },
             "ListPlaces": {
+                "correlation_id": "23452bb5-c687-4cf4-a977-b3a9922f40de",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -108,6 +110,7 @@
                 }
             },
             "ListInvoices": {
+                "correlation_id": "3a05383c-6b36-49e4-9f1a-4b688485f0a3",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -116,6 +119,7 @@
                 }
             },
             "ListAdjustments": {
+                "correlation_id": "dce1828a-3ddc-42f0-bc84-3bd19a341343",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -124,6 +128,7 @@
                 }
             },
             "SignupTransition": {
+                "correlation_id": "90a29661-25e3-466b-b5e3-605d7bec87a0",
                 "enabled": true,
                 "required": [
                     "stepcompleted"
@@ -140,6 +145,7 @@
                 }
             },
             "UpdateBillingInfoCC": {
+                "correlation_id": "daa64fbf-ad19-44d7-b663-54e604dc1264",
                 "enabled": true,
                 "required": [
                     "billingToken"
@@ -156,6 +162,7 @@
                 }
             },
             "SkipPremiumTrial": {
+                "correlation_id": "61222df6-459b-420c-9b99-cc3cc3fa129a",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -164,6 +171,7 @@
                 }
             },
             "CreateBillingAccount": {
+                "correlation_id": "02ecedeb-fcf4-4ac7-88e8-f61aa86af2e1",
                 "enabled": true,
                 "required": [
                     "billingToken",
@@ -186,6 +194,7 @@
                 }
             },
             "UpdateServicePlan": {
+                "correlation_id": "78cbb25a-83a9-45e9-a789-fad6e45cba42",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -214,6 +223,7 @@
                 }
             },
             "AddPlace": {
+                "correlation_id": "cf146437-3be9-4be1-b4b8-c14d57d93494",
                 "enabled": true,
                 "required": [
                     "place",
@@ -251,6 +261,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "f78d629c-bd2e-4396-be85-6a4a64661579",
                 "enabled": false,
                 "required": [],
                 "oneof": [],
@@ -265,6 +276,7 @@
                 }
             },
             "DelinquentAccountEvent": {
+                "correlation_id": "af888d18-fb76-49b7-9e0e-7cf67ffbd25c",
                 "enabled": true,
                 "required": [
                     "accountId"
@@ -281,6 +293,7 @@
                 }
             },
             "IssueCredit": {
+                "correlation_id": "ff380cd1-a7e5-4700-8d8e-6605bc2377a1",
                 "enabled": true,
                 "required": [
                     "amountInCents"
@@ -302,6 +315,7 @@
                 }
             },
             "IssueInvoiceRefund": {
+                "correlation_id": "5774a98e-34ca-4f2f-9b12-6dfb7926a9d8",
                 "enabled": true,
                 "required": [
                     "invoiceNumber"
@@ -318,6 +332,7 @@
                 }
             },
             "Activate": {
+                "correlation_id": "1c23b8a3-9ba6-4c5b-883c-1eda7ac6ade0",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -329,11 +344,11 @@
         "events": {}
     },
     "accountmig": {
-        "correlation_id": "f759a6e7-49d5-44ef-80e5-184d06ac2cf8",
         "attributes": {},
         "is_device": false,
         "methods": {
             "MigrateBillingAccount": {
+                "correlation_id": "fe574d2f-9d3a-423f-8f14-9a590e597965",
                 "enabled": true,
                 "required": [
                     "billingToken",
@@ -369,7 +384,6 @@
         "events": {}
     },
     "alarm": {
-        "correlation_id": "d14f2eb9-050e-404e-b755-ac98c7c48a54",
         "attributes": {
             "alertState": {
                 "readonly": true,
@@ -440,7 +454,6 @@
         "events": {}
     },
     "incident": {
-        "correlation_id": "6aae8364-ff04-4b68-87b4-b8e5758e68d5",
         "attributes": {
             "placeId": {
                 "readonly": true,
@@ -572,6 +585,7 @@
         "is_device": false,
         "methods": {
             "Verify": {
+                "correlation_id": "3ef4497a-2add-44b8-8923-931f097b5240",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -580,6 +594,7 @@
                 }
             },
             "Cancel": {
+                "correlation_id": "61a07e01-2820-41a8-ac22-708a07a9c8a0",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -588,6 +603,7 @@
                 }
             },
             "ListHistoryEntries": {
+                "correlation_id": "54df66a1-2aab-41cc-a2e2-0146a10b62b8",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -660,7 +676,6 @@
         }
     },
     "subalarm": {
-        "correlation_id": "ca4c39c2-6b52-48b9-a6b7-b090e8995917",
         "attributes": {
             "alarmState": {
                 "readonly": true,
@@ -844,6 +859,7 @@
         "is_device": false,
         "methods": {
             "ListIncidents": {
+                "correlation_id": "463c9865-0911-4fee-9384-dc62275ed33d",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -852,6 +868,7 @@
                 }
             },
             "Arm": {
+                "correlation_id": "80860d33-685a-41ab-9cbf-c8d2688216dc",
                 "enabled": true,
                 "required": [
                     "mode"
@@ -867,6 +884,7 @@
                 }
             },
             "ArmBypassed": {
+                "correlation_id": "51d4242e-d680-442f-bed2-52eeb8ef0ae8",
                 "enabled": true,
                 "required": [
                     "mode"
@@ -882,6 +900,7 @@
                 }
             },
             "Disarm": {
+                "correlation_id": "a582235b-78bd-4df4-84fe-f0f6628ece72",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -890,6 +909,7 @@
                 }
             },
             "Panic": {
+                "correlation_id": "1eb1368a-e9f8-4a80-925d-f458b7ec313e",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -898,6 +918,7 @@
                 }
             },
             "SetProvider": {
+                "correlation_id": "0f808211-e495-444b-a9b9-377a09ab52f1",
                 "enabled": true,
                 "required": [
                     "provider"
@@ -920,7 +941,6 @@
         "events": {}
     },
     "alert": {
-        "correlation_id": "7a9e8e88-6689-486c-8bce-255129f9c78c",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -956,7 +976,6 @@
         "events": {}
     },
     "aosmithwaterheatercontroller": {
-        "correlation_id": "f1a47db8-f3db-4f5f-9b52-ec3170b2fc2d",
         "attributes": {
             "updaterate": {
                 "readonly": false,
@@ -1083,7 +1102,6 @@
         "events": {}
     },
     "atmos": {
-        "correlation_id": "de979140-26f4-4548-9691-6de5b78a1d24",
         "attributes": {
             "pressure": {
                 "readonly": true,
@@ -1097,7 +1115,6 @@
         "events": {}
     },
     "bridge": {
-        "correlation_id": "d05c04e9-2b82-4f15-905a-3a74685f1502",
         "attributes": {
             "pairedDevices": {
                 "readonly": true,
@@ -1132,6 +1149,7 @@
         "is_device": true,
         "methods": {
             "StartPairing": {
+                "correlation_id": "4167f3e8-a299-44f4-89d3-1a217ffe4963",
                 "enabled": true,
                 "required": [
                     "device",
@@ -1153,6 +1171,7 @@
                 }
             },
             "StopPairing": {
+                "correlation_id": "67d43d2d-0e22-463f-935d-3e7691aa1f71",
                 "enabled": true,
                 "required": [
                     "device"
@@ -1171,7 +1190,6 @@
         "events": {}
     },
     "bridgechild": {
-        "correlation_id": "cb6069f0-8fac-42d3-b856-cd627bd6cc4b",
         "attributes": {
             "parentAddress": {
                 "readonly": true,
@@ -1191,7 +1209,6 @@
         "events": {}
     },
     "but": {
-        "correlation_id": "08a3e8ba-2398-4125-b657-9e301eab7986",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -1215,7 +1232,6 @@
         "events": {}
     },
     "camera": {
-        "correlation_id": "835d9daf-c220-42b8-8a85-7bfd42e486ba",
         "attributes": {
             "privacy": {
                 "readonly": true,
@@ -1328,6 +1344,7 @@
         "is_device": true,
         "methods": {
             "StartStreaming": {
+                "correlation_id": "0bd30c3c-95e4-42bb-a6bc-22b6d57c32ce",
                 "enabled": true,
                 "required": [
                     "device",
@@ -1370,7 +1387,6 @@
         "events": {}
     },
     "cameraptz": {
-        "correlation_id": "2572c62f-adf0-4ec2-9a5f-962dcef29381",
         "attributes": {
             "currentPan": {
                 "readonly": true,
@@ -1448,6 +1464,7 @@
         "is_device": true,
         "methods": {
             "GotoHome": {
+                "correlation_id": "d80ead5b-c146-45c3-a538-9d475fce951a",
                 "enabled": true,
                 "required": [
                     "device"
@@ -1463,6 +1480,7 @@
                 }
             },
             "GotoAbsolute": {
+                "correlation_id": "b6695e77-61dc-4592-984a-a83074ad6950",
                 "enabled": true,
                 "required": [
                     "device",
@@ -1495,6 +1513,7 @@
                 }
             },
             "GotoRelative": {
+                "correlation_id": "59c8724a-f8f6-4d07-8c2b-6bcbce91bcbd",
                 "enabled": true,
                 "required": [
                     "device",
@@ -1530,7 +1549,6 @@
         "events": {}
     },
     "subcameras": {
-        "correlation_id": "339af5bc-1e91-446b-b3e0-ec8a8c0d2c14",
         "attributes": {
             "cameras": {
                 "readonly": true,
@@ -1570,7 +1588,6 @@
         "events": {}
     },
     "camerastatus": {
-        "correlation_id": "28646261-8712-40a1-bee1-c2b53ab1366a",
         "attributes": {
             "camera": {
                 "readonly": true,
@@ -1614,7 +1631,6 @@
         "events": {}
     },
     "co": {
-        "correlation_id": "cf8ce694-3ead-48ee-b5e5-f9dfa6a6359e",
         "attributes": {
             "co": {
                 "readonly": true,
@@ -1654,7 +1670,6 @@
         "events": {}
     },
     "subcare": {
-        "correlation_id": "ec0df3c9-b4f3-4fc2-81dc-a972aea49f7d",
         "attributes": {
             "triggeredDevices": {
                 "readonly": true,
@@ -1793,6 +1808,7 @@
         "is_device": false,
         "methods": {
             "Panic": {
+                "correlation_id": "c175749b-6748-4fad-b70b-8540aa31ed60",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -1801,6 +1817,7 @@
                 }
             },
             "Acknowledge": {
+                "correlation_id": "1c1a9f4c-cb31-4315-9c0a-d517eb9bfb76",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -1809,6 +1826,7 @@
                 }
             },
             "Clear": {
+                "correlation_id": "8167fbf8-e7ef-4784-8644-d995766dca46",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -1817,6 +1835,7 @@
                 }
             },
             "ListActivity": {
+                "correlation_id": "08b692b4-8aaa-4106-9258-c27c87a750cc",
                 "enabled": true,
                 "required": [
                     "start",
@@ -1850,6 +1869,7 @@
                 }
             },
             "ListDetailedActivity": {
+                "correlation_id": "104c088f-fecc-494d-b8c0-deeb4521d806",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -1874,6 +1894,7 @@
                 }
             },
             "ListBehaviors": {
+                "correlation_id": "7f461966-800f-4166-9870-aacfb031cf34",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -1882,6 +1903,7 @@
                 }
             },
             "ListBehaviorTemplates": {
+                "correlation_id": "530cc331-ede0-4898-baa3-0ff13c7ae226",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -1890,6 +1912,7 @@
                 }
             },
             "AddBehavior": {
+                "correlation_id": "2bdc6906-3ef4-4a6f-a019-ffa687e551a1",
                 "enabled": true,
                 "required": [
                     "behavior"
@@ -1906,6 +1929,7 @@
                 }
             },
             "UpdateBehavior": {
+                "correlation_id": "70f6de20-ead8-4150-abaa-a629b8ef881e",
                 "enabled": true,
                 "required": [
                     "behavior"
@@ -1922,6 +1946,7 @@
                 }
             },
             "RemoveBehavior": {
+                "correlation_id": "bf662364-ea28-4521-a4db-d07dcf25be05",
                 "enabled": true,
                 "required": [
                     "id"
@@ -2010,7 +2035,6 @@
         }
     },
     "cellbackup": {
-        "correlation_id": "126330a9-12c1-425e-8392-3ee5122540cc",
         "attributes": {
             "status": {
                 "readonly": true,
@@ -2053,6 +2077,7 @@
         "is_device": false,
         "methods": {
             "Ban": {
+                "correlation_id": "dcf64bf5-8629-4a3d-937e-f7a4b2f8826b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -2061,6 +2086,7 @@
                 }
             },
             "Unban": {
+                "correlation_id": "68a11006-80a3-4d30-980a-ea77619e7bb6",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -2087,7 +2113,6 @@
         }
     },
     "centralitesmartplug": {
-        "correlation_id": "a2e8cac4-833c-4eae-8ec2-70f1c7c4453f",
         "attributes": {
             "homeid": {
                 "readonly": true,
@@ -2105,6 +2130,7 @@
         "is_device": true,
         "methods": {
             "SetLearnMode": {
+                "correlation_id": "a30657dc-e7c7-451b-841a-209f76cc8ba1",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2120,6 +2146,7 @@
                 }
             },
             "SendNif": {
+                "correlation_id": "efa4a25a-61f3-4446-a9b0-7a8e803cd443",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2135,6 +2162,7 @@
                 }
             },
             "Reset": {
+                "correlation_id": "c7df65d1-b9e2-4ecf-9058-ac80b96464c7",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2150,6 +2178,7 @@
                 }
             },
             "Pair": {
+                "correlation_id": "d48a4b7f-ce59-43ea-89b0-b86d97b4a499",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2165,6 +2194,7 @@
                 }
             },
             "Query": {
+                "correlation_id": "cf6a156c-f041-41a5-b3b5-2d2481ddf9e5",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2183,7 +2213,6 @@
         "events": {}
     },
     "subclimate": {
-        "correlation_id": "2ac447d0-8786-4b82-8dd8-56b9d75f6fc2",
         "attributes": {
             "controlDevices": {
                 "readonly": true,
@@ -2267,6 +2296,7 @@
         "is_device": false,
         "methods": {
             "EnableScheduler": {
+                "correlation_id": "6156e2cf-b2d1-4835-af0f-aa43a37f8de7",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -2280,6 +2310,7 @@
                 }
             },
             "DisableScheduler": {
+                "correlation_id": "b7bbab2b-906e-47c2-92e4-fa610611daa3",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -2296,7 +2327,6 @@
         "events": {}
     },
     "clock": {
-        "correlation_id": "1955263b-0489-4861-9cb6-9a3a6703bf69",
         "attributes": {
             "year": {
                 "readonly": true,
@@ -2360,7 +2390,6 @@
         "events": {}
     },
     "color": {
-        "correlation_id": "4b99a32c-d69b-4210-8101-4355c14db6d7",
         "attributes": {
             "hue": {
                 "readonly": false,
@@ -2384,7 +2413,6 @@
         "events": {}
     },
     "colortemp": {
-        "correlation_id": "c05211ad-44a8-4290-b4db-1721559607a9",
         "attributes": {
             "colortemp": {
                 "readonly": false,
@@ -2410,7 +2438,6 @@
         "events": {}
     },
     "cont": {
-        "correlation_id": "55f8a735-f54c-4c26-bee0-f04cddecb224",
         "attributes": {
             "contact": {
                 "readonly": true,
@@ -2446,7 +2473,6 @@
         "events": {}
     },
     "daynight": {
-        "correlation_id": "b7f1cea8-55ef-4191-b86b-c2bfa1806e41",
         "attributes": {
             "mode": {
                 "readonly": true,
@@ -2470,7 +2496,6 @@
         "events": {}
     },
     "devadv": {
-        "correlation_id": "78e09435-4445-4723-acff-f9fbf58d4447",
         "attributes": {
             "drivername": {
                 "readonly": true,
@@ -2554,6 +2579,7 @@
         "is_device": true,
         "methods": {
             "UpgradeDriver": {
+                "correlation_id": "d8246f3c-65c2-4a13-bd2d-1414535ca9a3",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2579,6 +2605,7 @@
                 }
             },
             "GetReflexes": {
+                "correlation_id": "632a1fa5-7b14-4753-81d1-e8fd7800f0ed",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2626,7 +2653,6 @@
         }
     },
     "dev": {
-        "correlation_id": "918bed31-fb0a-4090-9f01-fa43b6936127",
         "attributes": {
             "account": {
                 "readonly": true,
@@ -2674,6 +2700,7 @@
         "is_device": false,
         "methods": {
             "ListHistoryEntries": {
+                "correlation_id": "aef35c2a-b29b-4d68-951b-6d0e78de33e1",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -2693,6 +2720,7 @@
                 }
             },
             "Remove": {
+                "correlation_id": "2f7a9987-26fe-43d7-8ad3-53b9b6ff1f05",
                 "enabled": true,
                 "required": [
                     "timeout"
@@ -2709,6 +2737,7 @@
                 }
             },
             "ForceRemove": {
+                "correlation_id": "c1f66ee1-ceec-443d-86b2-7ccc5c0678d0",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -2742,7 +2771,6 @@
         }
     },
     "devconn": {
-        "correlation_id": "41370452-3382-4c40-b051-859b3d612524",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -2783,6 +2811,7 @@
         "is_device": true,
         "methods": {
             "LostDevice": {
+                "correlation_id": "558e7258-b6cf-45b2-bf8a-aa5b9db0c173",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2801,7 +2830,6 @@
         "events": {}
     },
     "devota": {
-        "correlation_id": "1ff106e5-5dce-49e1-abb6-983c507ac7a3",
         "attributes": {
             "currentVersion": {
                 "readonly": true,
@@ -2855,6 +2883,7 @@
         "is_device": true,
         "methods": {
             "FirmwareUpdate": {
+                "correlation_id": "6e27ae52-abf4-48e8-ba68-946842ce266d",
                 "enabled": true,
                 "required": [
                     "device",
@@ -2885,6 +2914,7 @@
                 }
             },
             "FirmwareUpdateCancel": {
+                "correlation_id": "17b1623a-2b4e-4bbc-afee-f80ddc31472b",
                 "enabled": true,
                 "required": [
                     "device"
@@ -2940,7 +2970,6 @@
         }
     },
     "devpow": {
-        "correlation_id": "40e957c6-011f-4d20-a235-a23b8da46267",
         "attributes": {
             "source": {
                 "readonly": true,
@@ -3015,11 +3044,11 @@
         }
     },
     "devmock": {
-        "correlation_id": "e0c46dce-8c23-4a22-b726-1f9480d800ae",
         "attributes": {},
         "is_device": true,
         "methods": {
             "SetAttributes": {
+                "correlation_id": "f6ca3049-a35f-4be8-a721-b10e38e31023",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3039,6 +3068,7 @@
                 }
             },
             "Connect": {
+                "correlation_id": "e42db133-1c8a-4634-b27e-f9980b2b5107",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3054,6 +3084,7 @@
                 }
             },
             "Disconnect": {
+                "correlation_id": "f166ca94-670a-4f0a-948e-6825be957831",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3072,7 +3103,6 @@
         "events": {}
     },
     "dim": {
-        "correlation_id": "782f1f3b-efba-4edd-9faa-b28478272f38",
         "attributes": {
             "brightness": {
                 "readonly": false,
@@ -3100,6 +3130,7 @@
         "is_device": true,
         "methods": {
             "RampBrightness": {
+                "correlation_id": "2122b432-c10d-471f-8beb-2bdfac460ede",
                 "enabled": true,
                 "required": [
                     "device",
@@ -3127,6 +3158,7 @@
                 }
             },
             "IncrementBrightness": {
+                "correlation_id": "983287b5-f427-46d4-b34e-ab37416ffa01",
                 "enabled": true,
                 "required": [
                     "device",
@@ -3148,6 +3180,7 @@
                 }
             },
             "DecrementBrightness": {
+                "correlation_id": "bf2a9992-b726-49ea-a544-867707108dab",
                 "enabled": true,
                 "required": [
                     "device",
@@ -3172,7 +3205,6 @@
         "events": {}
     },
     "doorlock": {
-        "correlation_id": "bc777c07-fe21-41da-84eb-4269f60dfe28",
         "attributes": {
             "lockstate": {
                 "readonly": false,
@@ -3231,6 +3263,7 @@
         "is_device": true,
         "methods": {
             "AuthorizePerson": {
+                "correlation_id": "924dedd8-4836-464a-b7b9-04d1bc99d5de",
                 "enabled": true,
                 "required": [
                     "device",
@@ -3252,6 +3285,7 @@
                 }
             },
             "DeauthorizePerson": {
+                "correlation_id": "3cfc57c6-b2d4-4e11-bfe4-4f61bba164fc",
                 "enabled": true,
                 "required": [
                     "device",
@@ -3273,6 +3307,7 @@
                 }
             },
             "BuzzIn": {
+                "correlation_id": "e2cc04d0-4292-4ab7-bf73-019a525314c1",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3288,6 +3323,7 @@
                 }
             },
             "ClearAllPins": {
+                "correlation_id": "ee34ac1a-3ae4-440a-a4fe-48603da9866b",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3376,7 +3412,6 @@
         }
     },
     "subdoorsnlocks": {
-        "correlation_id": "831519a4-8b91-4aa0-96de-8f8aa0eac418",
         "attributes": {
             "lockDevices": {
                 "readonly": true,
@@ -3496,6 +3531,7 @@
         "is_device": false,
         "methods": {
             "AuthorizePeople": {
+                "correlation_id": "84143f6e-400e-4e60-946c-22e4a44793de",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -3513,6 +3549,7 @@
                 }
             },
             "SynchAuthorization": {
+                "correlation_id": "ffe23d13-f356-4141-87eb-b6556d542f16",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -3572,7 +3609,6 @@
         }
     },
     "ecowater": {
-        "correlation_id": "3469225e-983a-401d-9616-bee67eea894e",
         "attributes": {
             "excessiveUse": {
                 "readonly": true,
@@ -3616,7 +3652,6 @@
         "events": {}
     },
     "fan": {
-        "correlation_id": "db86c542-c084-4c65-908e-2060aa275c9a",
         "attributes": {
             "speed": {
                 "readonly": false,
@@ -3650,7 +3685,6 @@
         "events": {}
     },
     "flow": {
-        "correlation_id": "ac0c174c-fee4-4cf0-8d18-6f0b5b8cfd1c",
         "attributes": {
             "flow": {
                 "readonly": true,
@@ -3664,7 +3698,6 @@
         "events": {}
     },
     "glass": {
-        "correlation_id": "dbf92578-44f6-4c0b-b038-4861a67c39db",
         "attributes": {
             "break": {
                 "readonly": true,
@@ -3688,7 +3721,6 @@
         "events": {}
     },
     "halo": {
-        "correlation_id": "0e39a915-fc8b-48b1-8559-dc8e71597f03",
         "attributes": {
             "devicestate": {
                 "readonly": true,
@@ -3786,6 +3818,7 @@
         "is_device": true,
         "methods": {
             "StartHush": {
+                "correlation_id": "390e569b-0904-4d61-af82-ccc13f3593cf",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3801,6 +3834,7 @@
                 }
             },
             "SendHush": {
+                "correlation_id": "27445f1c-9e3d-48e2-bd4d-aa236a5371b1",
                 "enabled": true,
                 "required": [
                     "device",
@@ -3827,6 +3861,7 @@
                 }
             },
             "CancelHush": {
+                "correlation_id": "72c2d0fb-578d-417d-b769-86345ab03d77",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3842,6 +3877,7 @@
                 }
             },
             "StartTest": {
+                "correlation_id": "a9516066-1fbe-4c2c-9aac-efeb7ac1c02c",
                 "enabled": true,
                 "required": [
                     "device"
@@ -3860,7 +3896,6 @@
         "events": {}
     },
     "honeywelltcc": {
-        "correlation_id": "60ac1618-5a1a-45c2-aeb2-d0fdef72d1a2",
         "attributes": {
             "requiresLogin": {
                 "readonly": true,
@@ -3883,7 +3918,6 @@
         "events": {}
     },
     "hub4g": {
-        "correlation_id": "c8323420-1915-4230-a7f9-812932a8ddcf",
         "attributes": {
             "present": {
                 "readonly": true,
@@ -3991,6 +4025,7 @@
         "is_device": false,
         "methods": {
             "GetInfo": {
+                "correlation_id": "c83f7d99-92d2-4724-8d7c-cd14fb6c8b81",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -3999,6 +4034,7 @@
                 }
             },
             "ResetStatistics": {
+                "correlation_id": "5ce19bd4-eda7-47c0-a8dc-83bc0b63a646",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4007,6 +4043,7 @@
                 }
             },
             "GetStatistics": {
+                "correlation_id": "951232f6-345f-4d49-aba5-712e92739ec8",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4018,7 +4055,6 @@
         "events": {}
     },
     "hubadv": {
-        "correlation_id": "9f847999-5a89-4ec5-b9e7-5ee3563be86f",
         "attributes": {
             "mac": {
                 "readonly": true,
@@ -4167,6 +4203,7 @@
         "is_device": false,
         "methods": {
             "Restart": {
+                "correlation_id": "d8039912-314e-4846-9f1d-fd747569ef00",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4175,6 +4212,7 @@
                 }
             },
             "Reboot": {
+                "correlation_id": "f471e17e-076f-4e23-be51-ea3cdf1144a1",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4183,6 +4221,7 @@
                 }
             },
             "FirmwareUpdate": {
+                "correlation_id": "7fecff4c-84e1-4ae1-af88-5d0182b47c47",
                 "enabled": true,
                 "required": [
                     "url",
@@ -4218,6 +4257,7 @@
                 }
             },
             "FactoryReset": {
+                "correlation_id": "0547b6db-15bf-4173-b9bd-51100a2d575a",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4226,6 +4266,7 @@
                 }
             },
             "GetKnownDevices": {
+                "correlation_id": "c55833b9-7a9f-4650-8606-07830710b6b6",
                 "enabled": true,
                 "required": [
                     "protocols"
@@ -4242,6 +4283,7 @@
                 }
             },
             "GetDeviceInfo": {
+                "correlation_id": "9dad9bbb-5df6-47db-b286-f06443935ef7",
                 "enabled": true,
                 "required": [
                     "protocolAddress"
@@ -4344,7 +4386,6 @@
         }
     },
     "hubalarm": {
-        "correlation_id": "42db8451-dc54-4695-acba-30bbfeec9e61",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -4735,6 +4776,7 @@
         "is_device": false,
         "methods": {
             "Activate": {
+                "correlation_id": "00414da2-d3ed-405c-8534-5c60c7504e0b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4743,6 +4785,7 @@
                 }
             },
             "Suspend": {
+                "correlation_id": "0dd1e2b4-782a-4d2c-b279-cd7101c030d2",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4751,6 +4794,7 @@
                 }
             },
             "Arm": {
+                "correlation_id": "4109ae45-5453-4a6e-8d40-47e857a23829",
                 "enabled": true,
                 "required": [
                     "mode",
@@ -4825,6 +4869,7 @@
                 }
             },
             "Disarm": {
+                "correlation_id": "b2011c20-2969-458f-8e29-dc8fe9dc6ff7",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4842,6 +4887,7 @@
                 }
             },
             "Panic": {
+                "correlation_id": "9171a4c8-e6da-41d2-8bcc-0556cba46dcb",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4863,6 +4909,7 @@
                 }
             },
             "ClearIncident": {
+                "correlation_id": "60c1d724-2f1a-4e3f-9e28-84396887a743",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -4882,7 +4929,6 @@
         }
     },
     "hubav": {
-        "correlation_id": "2155d793-bda1-4778-a369-7702564ddd40",
         "attributes": {
             "numAvailable": {
                 "readonly": true,
@@ -4912,6 +4958,7 @@
         "is_device": false,
         "methods": {
             "pair": {
+                "correlation_id": "6a90f35d-b541-4743-a2d4-2a110c4c20fb",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -4928,6 +4975,7 @@
                 }
             },
             "release": {
+                "correlation_id": "e57b52fe-400f-42a9-863b-d9589450f643",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -4944,6 +4992,7 @@
                 }
             },
             "getState": {
+                "correlation_id": "1493bbfd-0cf2-4cab-b1d2-6f681a2fa5a5",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -4960,6 +5009,7 @@
                 }
             },
             "getIPAddress": {
+                "correlation_id": "76cb1712-806c-4045-9895-5c693ec0acc2",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -4976,6 +5026,7 @@
                 }
             },
             "getModel": {
+                "correlation_id": "05fa68bb-acb6-4371-8383-1ded9eb0049c",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -4992,6 +5043,7 @@
                 }
             },
             "audioStart": {
+                "correlation_id": "40e6ad05-6474-4680-a3ab-2e20a2aaa017",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -5018,6 +5070,7 @@
                 }
             },
             "audioStop": {
+                "correlation_id": "05229739-10cd-471b-b080-7584cbec8eeb",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -5034,6 +5087,7 @@
                 }
             },
             "audioPause": {
+                "correlation_id": "5b155fe5-7fd9-4064-8a56-3f3074f910b7",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -5050,6 +5104,7 @@
                 }
             },
             "audioSeekTo": {
+                "correlation_id": "27a08655-009c-48c9-a306-f4930f2fca4d",
                 "enabled": true,
                 "required": [
                     "uuid",
@@ -5082,6 +5137,7 @@
                 }
             },
             "setVolume": {
+                "correlation_id": "b34300f8-b9ef-46ef-bd94-71c4435f5035",
                 "enabled": true,
                 "required": [
                     "uuid",
@@ -5104,6 +5160,7 @@
                 }
             },
             "getVolume": {
+                "correlation_id": "c06d413b-cea2-4b15-b378-c48eabf2e4c1",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -5120,6 +5177,7 @@
                 }
             },
             "setMute": {
+                "correlation_id": "118d9210-b635-4c42-b0a6-969a35684512",
                 "enabled": true,
                 "required": [
                     "uuid",
@@ -5142,6 +5200,7 @@
                 }
             },
             "getMute": {
+                "correlation_id": "c516a85a-095b-43b4-856f-5bd1b4fa312e",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -5158,6 +5217,7 @@
                 }
             },
             "audioInfo": {
+                "correlation_id": "af03a7ee-f349-4e40-8935-35f387ed47a2",
                 "enabled": true,
                 "required": [
                     "uuid"
@@ -5204,11 +5264,11 @@
         }
     },
     "hubbackup": {
-        "correlation_id": "4aece785-8159-4f71-88a5-01cf3b2d7133",
         "attributes": {},
         "is_device": false,
         "methods": {
             "Backup": {
+                "correlation_id": "72a62f8a-d860-429e-8d6e-accdf3940055",
                 "enabled": true,
                 "required": [
                     "type"
@@ -5228,6 +5288,7 @@
                 }
             },
             "Restore": {
+                "correlation_id": "13155854-14b3-42e9-a695-cfe52daf2256",
                 "enabled": true,
                 "required": [
                     "type",
@@ -5288,7 +5349,6 @@
         }
     },
     "hub": {
-        "correlation_id": "cded3a50-84ae-4537-9f33-d2540b7924c6",
         "attributes": {
             "id": {
                 "readonly": true,
@@ -5371,6 +5431,7 @@
         "is_device": false,
         "methods": {
             "PairingRequest": {
+                "correlation_id": "723f7b4f-6992-42a4-bc0f-b2a4a9d7b35d",
                 "enabled": true,
                 "required": [
                     "actionType",
@@ -5397,6 +5458,7 @@
                 }
             },
             "UnpairingRequest": {
+                "correlation_id": "41e21253-1c0c-4367-a620-7210ba44da85",
                 "enabled": true,
                 "required": [
                     "actionType",
@@ -5438,6 +5500,7 @@
                 }
             },
             "ListHubs": {
+                "correlation_id": "69c1c0b0-d04d-4d36-b506-a18b92a0bb1a",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5446,6 +5509,7 @@
                 }
             },
             "ResetLogLevels": {
+                "correlation_id": "8bf063e4-8449-4311-82ea-e551cce66239",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5454,6 +5518,7 @@
                 }
             },
             "SetLogLevel": {
+                "correlation_id": "888e7a48-e097-4290-b972-1eab2beda33d",
                 "enabled": true,
                 "required": [
                     "level"
@@ -5490,6 +5555,7 @@
                 }
             },
             "GetLogs": {
+                "correlation_id": "be98365d-3679-44af-a9ed-61e23ff71a77",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5498,6 +5564,7 @@
                 }
             },
             "StreamLogs": {
+                "correlation_id": "bb655c66-cf0f-4598-9ed2-b18037b5af0e",
                 "enabled": true,
                 "required": [
                     "duration"
@@ -5526,6 +5593,7 @@
                 }
             },
             "GetConfig": {
+                "correlation_id": "f7b2390b-981a-44ae-9f55-4f960ce69925",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5545,6 +5613,7 @@
                 }
             },
             "SetConfig": {
+                "correlation_id": "b38454d4-efdd-44b1-a40a-47d36af76d36",
                 "enabled": true,
                 "required": [
                     "config"
@@ -5561,6 +5630,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "368debc9-4a01-4a9a-8c31-23a60f2b880f",
                 "enabled": false,
                 "required": [],
                 "oneof": [],
@@ -5587,11 +5657,11 @@
         }
     },
     "hubchime": {
-        "correlation_id": "04df44d0-5e65-45cd-b508-5a1a06134c15",
         "attributes": {},
         "is_device": false,
         "methods": {
             "chime": {
+                "correlation_id": "16980e83-c049-426f-9f0b-3a0783eb2bf6",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5603,7 +5673,6 @@
         "events": {}
     },
     "hubconn": {
-        "correlation_id": "58ea3a5d-091e-4be1-9576-3e4b00b6a877",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -5652,11 +5721,11 @@
         "events": {}
     },
     "hubdebug": {
-        "correlation_id": "cbd1e536-9e28-4bd9-83ab-005b1e3b6a3b",
         "attributes": {},
         "is_device": false,
         "methods": {
             "GetFiles": {
+                "correlation_id": "c4ca9017-123a-4889-96f0-7c559a0f4ef4",
                 "enabled": true,
                 "required": [
                     "paths"
@@ -5673,6 +5742,7 @@
                 }
             },
             "ExecProcess": {
+                "correlation_id": "34fc822a-0db2-4f08-b7cb-dff145c182f0",
                 "enabled": true,
                 "required": [
                     "cmd"
@@ -5704,6 +5774,7 @@
                 }
             },
             "GetAgentDb": {
+                "correlation_id": "a372f5a8-2cb1-49b7-8e43-4df1f9b7fa7d",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5712,6 +5783,7 @@
                 }
             },
             "GetSyslog": {
+                "correlation_id": "c68eba97-a3aa-4f5f-b280-9e943b560c9e",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5720,6 +5792,7 @@
                 }
             },
             "GetBootlog": {
+                "correlation_id": "40e685be-19ab-4703-a907-0db361610ffd",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5728,6 +5801,7 @@
                 }
             },
             "GetProcesses": {
+                "correlation_id": "cbad74d3-66be-4eda-8d3e-308ed9fa5c4b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5736,6 +5810,7 @@
                 }
             },
             "GetLoad": {
+                "correlation_id": "dec0fd46-e601-4b8d-862f-e085a55596bf",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5747,7 +5822,6 @@
         "events": {}
     },
     "hubhue": {
-        "correlation_id": "9bf63cbb-1c7d-40bd-86b3-a0b7b180389f",
         "attributes": {
             "bridgesAvailable": {
                 "readonly": true,
@@ -5779,7 +5853,6 @@
         "events": {}
     },
     "hubmetric": {
-        "correlation_id": "553b126c-e265-412d-903a-e37aadc4ef1b",
         "attributes": {
             "metricsjobs": {
                 "readonly": true,
@@ -5791,6 +5864,7 @@
         "is_device": false,
         "methods": {
             "StartMetricsJob": {
+                "correlation_id": "783ff149-9bb5-4a50-b73b-8e1b86cf92f1",
                 "enabled": true,
                 "required": [
                     "jobname",
@@ -5825,6 +5899,7 @@
                 }
             },
             "EndMetricsJobs": {
+                "correlation_id": "a0b7f817-7dff-4467-bec4-8554d8ed68f8",
                 "enabled": true,
                 "required": [
                     "jobname"
@@ -5841,6 +5916,7 @@
                 }
             },
             "GetMetricsJobInfo": {
+                "correlation_id": "c2953079-68f8-45a3-bc09-477b5a8469c5",
                 "enabled": true,
                 "required": [
                     "jobname"
@@ -5857,6 +5933,7 @@
                 }
             },
             "ListMetrics": {
+                "correlation_id": "e72d03c0-ac88-43b5-a75f-ac9d64a731cd",
                 "enabled": true,
                 "required": [
                     "regex"
@@ -5873,6 +5950,7 @@
                 }
             },
             "GetStoredMetrics": {
+                "correlation_id": "dc4251eb-9446-4d2e-a03d-c4c6e31225f5",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5884,7 +5962,6 @@
         "events": {}
     },
     "hubnet": {
-        "correlation_id": "5ed940a7-0e70-4fbc-82e2-035ed17bdfa1",
         "attributes": {
             "type": {
                 "readonly": true,
@@ -5943,6 +6020,7 @@
         "is_device": false,
         "methods": {
             "GetRoutingTable": {
+                "correlation_id": "5bb21f2f-5dcb-4e5d-9829-2b3015c17d0f",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -5954,7 +6032,6 @@
         "events": {}
     },
     "hubpow": {
-        "correlation_id": "d6b64a39-0105-4107-a568-d4565f09f41c",
         "attributes": {
             "source": {
                 "readonly": true,
@@ -5999,7 +6076,6 @@
         }
     },
     "hubrflx": {
-        "correlation_id": "85b0a377-99d6-4f05-b85c-cc9d9c38664f",
         "attributes": {
             "numDrivers": {
                 "readonly": true,
@@ -6045,7 +6121,6 @@
         }
     },
     "hubsercomm": {
-        "correlation_id": "843cb0d3-5b64-48eb-a735-ca8be93948f7",
         "attributes": {
             "numAvailable": {
                 "readonly": true,
@@ -6093,6 +6168,7 @@
         "is_device": false,
         "methods": {
             "getCameraPassword": {
+                "correlation_id": "9aff42e6-2ab0-4371-ad46-a26ae0cf039f",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -6101,6 +6177,7 @@
                 }
             },
             "pair": {
+                "correlation_id": "964eb131-4600-4e31-be70-48fa935af860",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6117,6 +6194,7 @@
                 }
             },
             "reset": {
+                "correlation_id": "95685667-70db-489f-9802-82147e0fb350",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6133,6 +6211,7 @@
                 }
             },
             "reboot": {
+                "correlation_id": "f6b5e85b-c107-4bc2-9816-5b377d992161",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6149,6 +6228,7 @@
                 }
             },
             "config": {
+                "correlation_id": "153d32a6-9c11-402d-a34a-6e44db4dd82a",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6171,6 +6251,7 @@
                 }
             },
             "upgrade": {
+                "correlation_id": "c66f6045-0998-48b2-a368-a416bebc4d3a",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6193,6 +6274,7 @@
                 }
             },
             "getState": {
+                "correlation_id": "ae7241cd-941f-4f87-bfb3-7016742f6bc3",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6209,6 +6291,7 @@
                 }
             },
             "getVersion": {
+                "correlation_id": "dbf784b1-79ec-479c-a5bb-727d8e5b44e4",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6225,6 +6308,7 @@
                 }
             },
             "getDayNight": {
+                "correlation_id": "adb6c00e-f600-49fe-b978-e9da74ecd9c8",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6241,6 +6325,7 @@
                 }
             },
             "getIPAddress": {
+                "correlation_id": "d61166da-641a-4798-b40f-16e80156531a",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6257,6 +6342,7 @@
                 }
             },
             "getModel": {
+                "correlation_id": "4a41e7fe-a05e-4ff1-aa5e-6202aac0150d",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6273,6 +6359,7 @@
                 }
             },
             "getInfo": {
+                "correlation_id": "9f59cb0b-2ab7-454e-a7c7-10dfc6d5de1e",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6294,6 +6381,7 @@
                 }
             },
             "getAttrs": {
+                "correlation_id": "e52a0f34-df70-46ea-90ea-0079cf642f2b",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6310,6 +6398,7 @@
                 }
             },
             "motionDetectStart": {
+                "correlation_id": "8a5fae83-b259-4862-b721-45af263423b6",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6342,6 +6431,7 @@
                 }
             },
             "motionDetectStop": {
+                "correlation_id": "363e6e52-4182-4daa-b5c8-76e579887b7d",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6358,6 +6448,7 @@
                 }
             },
             "videoStreamStart": {
+                "correlation_id": "149f9efe-2b72-4510-8565-e055afbf5733",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6432,6 +6523,7 @@
                 }
             },
             "videoStreamStop": {
+                "correlation_id": "fd23bd65-63fa-4c6f-92fa-d6e067404f14",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6448,6 +6540,7 @@
                 }
             },
             "wifiScanStart": {
+                "correlation_id": "a0b56a8b-fd52-4d2d-862a-b37a93efc9bc",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6464,6 +6557,7 @@
                 }
             },
             "wifiScanEnd": {
+                "correlation_id": "696447f3-e545-45bc-b468-fe8917a91ce8",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6480,6 +6574,7 @@
                 }
             },
             "wifiConnect": {
+                "correlation_id": "bc9bf608-91f3-4c1b-86be-e672399fbcd6",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6513,6 +6608,7 @@
                 }
             },
             "wifiDisconnect": {
+                "correlation_id": "bad2551a-4a50-4269-94c6-c7127b862b78",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6529,6 +6625,7 @@
                 }
             },
             "wifiGetAttrs": {
+                "correlation_id": "70099086-702d-4bba-836a-63fc995b504c",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6545,6 +6642,7 @@
                 }
             },
             "getCustomAttrs": {
+                "correlation_id": "f149a657-052c-4344-aa9b-375581539692",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6561,6 +6659,7 @@
                 }
             },
             "setCustomAttrs": {
+                "correlation_id": "04ef1560-ea9a-4185-89df-87618a28f4d1",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6625,6 +6724,7 @@
                 }
             },
             "purgeCamera": {
+                "correlation_id": "29dfa2b2-5696-457d-b274-b2d39265eca3",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6641,6 +6741,7 @@
                 }
             },
             "ptzGetAttrs": {
+                "correlation_id": "802fa35e-29db-406a-983e-92f5c769a354",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6657,6 +6758,7 @@
                 }
             },
             "ptzGotoHome": {
+                "correlation_id": "f6199f73-2e49-48ca-a9c9-af282c805eb3",
                 "enabled": true,
                 "required": [
                     "mac"
@@ -6673,6 +6775,7 @@
                 }
             },
             "ptzGotoAbsolute": {
+                "correlation_id": "ed7035f8-632a-4e4f-bdb3-37fb68c59f64",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6713,6 +6816,7 @@
                 }
             },
             "ptzGotoRelative": {
+                "correlation_id": "a06102ae-ec78-495e-a015-b0027b375cee",
                 "enabled": true,
                 "required": [
                     "mac",
@@ -6832,7 +6936,6 @@
         }
     },
     "hubsounds": {
-        "correlation_id": "7d04304e-ed12-4ee2-a6d4-2aa62165ff06",
         "attributes": {
             "playing": {
                 "readonly": true,
@@ -6850,6 +6953,7 @@
         "is_device": false,
         "methods": {
             "PlayURL": {
+                "correlation_id": "378af5e7-bad6-45c6-b06a-7985d3d241cc",
                 "enabled": true,
                 "required": [
                     "url",
@@ -6872,6 +6976,7 @@
                 }
             },
             "PlayTone": {
+                "correlation_id": "aa600f38-9640-413c-ae76-89c3c1f41b8e",
                 "enabled": true,
                 "required": [
                     "tone",
@@ -6904,6 +7009,7 @@
                 }
             },
             "Quiet": {
+                "correlation_id": "c03a8d69-27c2-4845-8bb7-3867837767bc",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -6915,7 +7021,6 @@
         "events": {}
     },
     "hubvol": {
-        "correlation_id": "5e010d06-24b7-4715-80aa-7febebb9c159",
         "attributes": {
             "volume": {
                 "readonly": false,
@@ -6935,7 +7040,6 @@
         "events": {}
     },
     "hubzigbee": {
-        "correlation_id": "65728c60-ed6c-48db-b43f-37cbfadf3999",
         "attributes": {
             "panid": {
                 "readonly": true,
@@ -7049,6 +7153,7 @@
         "is_device": false,
         "methods": {
             "Reset": {
+                "correlation_id": "c9fa9054-b093-41ed-aa11-7f751d5ba810",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7067,6 +7172,7 @@
                 }
             },
             "Scan": {
+                "correlation_id": "17c03877-98a9-4a0c-bc8f-bf64d199dbe6",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7075,6 +7181,7 @@
                 }
             },
             "GetConfig": {
+                "correlation_id": "586af11b-75a2-4fd9-b017-fe269ca663de",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7083,6 +7190,7 @@
                 }
             },
             "GetStats": {
+                "correlation_id": "7b0706df-af81-4cff-b1b0-7f1ae3a9ff71",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7091,6 +7199,7 @@
                 }
             },
             "GetNodeDesc": {
+                "correlation_id": "2af8cf5c-d303-46a5-9e90-6ecd53b0c0b1",
                 "enabled": true,
                 "required": [
                     "nwk"
@@ -7107,6 +7216,7 @@
                 }
             },
             "GetActiveEp": {
+                "correlation_id": "31f6b9cc-3bb2-4157-9919-dcb1a34dbf7e",
                 "enabled": true,
                 "required": [
                     "nwk"
@@ -7123,6 +7233,7 @@
                 }
             },
             "GetSimpleDesc": {
+                "correlation_id": "8c292646-a66a-41c5-8338-783833563f5d",
                 "enabled": true,
                 "required": [
                     "nwk",
@@ -7145,6 +7256,7 @@
                 }
             },
             "GetPowerDesc": {
+                "correlation_id": "8ec049a1-4865-4a42-8608-25b7e9b8d10e",
                 "enabled": true,
                 "required": [
                     "nwk"
@@ -7161,6 +7273,7 @@
                 }
             },
             "Identify": {
+                "correlation_id": "89910a82-7d02-4600-8018-d1d92557753f",
                 "enabled": true,
                 "required": [
                     "eui64",
@@ -7183,6 +7296,7 @@
                 }
             },
             "Remove": {
+                "correlation_id": "6619aeb3-465e-4f21-a9d5-af7c7206e899",
                 "enabled": true,
                 "required": [
                     "eui64"
@@ -7199,6 +7313,7 @@
                 }
             },
             "FactoryReset": {
+                "correlation_id": "a916ba95-61d9-486f-8572-c0cfed7984b3",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7207,6 +7322,7 @@
                 }
             },
             "FormNetwork": {
+                "correlation_id": "c3920cbc-ea01-4225-ab54-44285242ab8b",
                 "enabled": true,
                 "required": [
                     "eui64",
@@ -7265,6 +7381,7 @@
                 }
             },
             "FixMigration": {
+                "correlation_id": "ae9ae952-de1d-4531-ba79-d4bff17de03d",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7273,6 +7390,7 @@
                 }
             },
             "NetworkInformation": {
+                "correlation_id": "fdea9b08-2bb2-4dbd-9d20-482a6a2e3480",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7284,7 +7402,6 @@
         "events": {}
     },
     "hubzwave": {
-        "correlation_id": "61b8ea60-f3fb-497c-b591-451818a78f84",
         "attributes": {
             "hardware": {
                 "readonly": true,
@@ -7433,6 +7550,7 @@
         "is_device": false,
         "methods": {
             "FactoryReset": {
+                "correlation_id": "c2eaf45d-609f-4cbe-afce-7a3c86137a39",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7441,6 +7559,7 @@
                 }
             },
             "Reset": {
+                "correlation_id": "40b6c8bd-e16e-4028-a7d1-e4ec82a8bb49",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7459,6 +7578,7 @@
                 }
             },
             "ForcePrimary": {
+                "correlation_id": "23cd7343-9989-46b8-965c-68a330ab942f",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7467,6 +7587,7 @@
                 }
             },
             "ForceSecondary": {
+                "correlation_id": "a072d4e5-7384-4de6-a2c9-32d7c66324f3",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7475,6 +7596,7 @@
                 }
             },
             "NetworkInformation": {
+                "correlation_id": "3ddefe32-088a-40ce-bafc-3f87ef626671",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7483,6 +7605,7 @@
                 }
             },
             "Heal": {
+                "correlation_id": "c33acb50-373a-4b30-90ac-bf9f081c7d74",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7502,6 +7625,7 @@
                 }
             },
             "CancelHeal": {
+                "correlation_id": "ebeb735f-aedb-47fd-a669-f96717cbb67e",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -7510,6 +7634,7 @@
                 }
             },
             "RemoveZombie": {
+                "correlation_id": "0ce02bba-f62c-41e4-8e7e-70556d4726f3",
                 "enabled": true,
                 "required": [
                     "node"
@@ -7526,6 +7651,7 @@
                 }
             },
             "Associate": {
+                "correlation_id": "bfc81e51-0041-4aa7-86d4-ddfb364e69bd",
                 "enabled": true,
                 "required": [
                     "node",
@@ -7548,6 +7674,7 @@
                 }
             },
             "AssignReturnRoutes": {
+                "correlation_id": "0cf6b5c7-2354-4369-9934-d0b480240968",
                 "enabled": true,
                 "required": [
                     "node"
@@ -7575,7 +7702,6 @@
         }
     },
     "huebridge": {
-        "correlation_id": "b555650f-96f7-484a-9552-2a3aeb14a9eb",
         "attributes": {
             "ipaddress": {
                 "readonly": true,
@@ -7625,11 +7751,11 @@
         "events": {}
     },
     "ident": {
-        "correlation_id": "04314316-0810-4275-a43b-9e5777c52d10",
         "attributes": {},
         "is_device": true,
         "methods": {
             "Identify": {
+                "correlation_id": "1f835c67-2fa4-43e5-aaf8-33fde50545a0",
                 "enabled": true,
                 "required": [
                     "device"
@@ -7648,7 +7774,6 @@
         "events": {}
     },
     "ill": {
-        "correlation_id": "27501ad6-630c-4143-a0ad-5d6a1c704a12",
         "attributes": {
             "illuminance": {
                 "readonly": true,
@@ -7674,7 +7799,6 @@
         "events": {}
     },
     "indicator": {
-        "correlation_id": "2bbc7b4f-ecbb-4f29-8f99-dec4fd737640",
         "attributes": {
             "indicator": {
                 "readonly": true,
@@ -7711,7 +7835,6 @@
         "events": {}
     },
     "ipinfo": {
-        "correlation_id": "16782689-ddf5-40c5-8752-0e7fae5d39bd",
         "attributes": {
             "ip": {
                 "readonly": true,
@@ -7743,7 +7866,6 @@
         "events": {}
     },
     "irrcont": {
-        "correlation_id": "9dca1048-7838-45ff-8c7e-94e1ffae49f2",
         "attributes": {
             "numZones": {
                 "readonly": true,
@@ -7826,6 +7948,7 @@
         "is_device": true,
         "methods": {
             "WaterNowV2": {
+                "correlation_id": "66381404-b17d-4684-a2fb-1778c838b15d",
                 "enabled": true,
                 "required": [
                     "device",
@@ -7853,6 +7976,7 @@
                 }
             },
             "CancelV2": {
+                "correlation_id": "99cc11a6-778a-4bd0-baf1-26b97e886826",
                 "enabled": true,
                 "required": [
                     "device",
@@ -7874,6 +7998,7 @@
                 }
             },
             "WaterNow": {
+                "correlation_id": "03185250-516c-42fd-a224-36664b700802",
                 "enabled": true,
                 "required": [
                     "device",
@@ -7900,6 +8025,7 @@
                 }
             },
             "Cancel": {
+                "correlation_id": "c01d579f-8e91-4f73-b468-6e7c83e17027",
                 "enabled": true,
                 "required": [
                     "device"
@@ -7923,7 +8049,6 @@
         "events": {}
     },
     "irrsched": {
-        "correlation_id": "2d3460ab-b2a0-48d4-94db-00d2a7c966cb",
         "attributes": {
             "refreshSchedule": {
                 "readonly": false,
@@ -7935,6 +8060,7 @@
         "is_device": true,
         "methods": {
             "EnableSchedule": {
+                "correlation_id": "258e4cbf-f8cb-4cbb-874f-cf7aca743d99",
                 "enabled": true,
                 "required": [
                     "device"
@@ -7950,6 +8076,7 @@
                 }
             },
             "DisableSchedule": {
+                "correlation_id": "ec13cdc8-6272-46e3-a791-f86f18d165f7",
                 "enabled": true,
                 "required": [
                     "device"
@@ -7969,6 +8096,7 @@
                 }
             },
             "ClearEvenOddSchedule": {
+                "correlation_id": "e2e808a4-a4f7-4321-95fa-39a5e6ef244b",
                 "enabled": true,
                 "required": [
                     "device"
@@ -7992,6 +8120,7 @@
                 }
             },
             "SetEvenOddSchedule": {
+                "correlation_id": "ca44d11d-2877-4fa5-bbf2-ac4eedb728f1",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8023,6 +8152,7 @@
                 }
             },
             "ClearIntervalSchedule": {
+                "correlation_id": "0b3fdeb8-d19f-4193-aad6-d486e47f1f66",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8046,6 +8176,7 @@
                 }
             },
             "SetIntervalSchedule": {
+                "correlation_id": "98e96648-f869-4710-aaa3-5a9f64a14e79",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8077,6 +8208,7 @@
                 }
             },
             "SetIntervalStart": {
+                "correlation_id": "6a6899e3-ecd7-427d-afa3-eb5542a8421d",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8104,6 +8236,7 @@
                 }
             },
             "ClearWeeklySchedule": {
+                "correlation_id": "11992f02-a58a-48da-aef6-30cdb49022eb",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8127,6 +8260,7 @@
                 }
             },
             "SetWeeklySchedule": {
+                "correlation_id": "67f841e7-8149-4830-b443-89e962aa0f55",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8211,7 +8345,6 @@
         }
     },
     "irr": {
-        "correlation_id": "3e2c9551-9222-4c80-85ce-e5ef415d4e1e",
         "attributes": {
             "zoneState": {
                 "readonly": true,
@@ -8297,7 +8430,6 @@
         "events": {}
     },
     "keypad": {
-        "correlation_id": "daa8c2ca-df7e-40cb-bc43-ddbbaf5ad170",
         "attributes": {
             "alarmState": {
                 "readonly": false,
@@ -8351,6 +8483,7 @@
         "is_device": true,
         "methods": {
             "BeginArming": {
+                "correlation_id": "46f1f6a5-b33c-41bf-8bb4-143c3776c86f",
                 "enabled": true,
                 "required": [
                     "device",
@@ -8382,6 +8515,7 @@
                 }
             },
             "Armed": {
+                "correlation_id": "947a9931-0aa7-4c41-99f5-9dbbd7ed193b",
                 "enabled": true,
                 "required": [
                     "device",
@@ -8407,6 +8541,7 @@
                 }
             },
             "Disarmed": {
+                "correlation_id": "c5f8d7fa-7372-4079-9d37-1b51334adecf",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8422,6 +8557,7 @@
                 }
             },
             "Soaking": {
+                "correlation_id": "b4c1b9ff-fd33-42af-aafc-ac562bb45bdd",
                 "enabled": true,
                 "required": [
                     "device",
@@ -8453,6 +8589,7 @@
                 }
             },
             "Alerting": {
+                "correlation_id": "54c6992f-fddb-4dee-9159-7e481c6aa6fc",
                 "enabled": true,
                 "required": [
                     "device",
@@ -8479,6 +8616,7 @@
                 }
             },
             "Chime": {
+                "correlation_id": "87468a58-0049-492a-9919-5644b03a78b4",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8494,6 +8632,7 @@
                 }
             },
             "ArmingUnavailable": {
+                "correlation_id": "6224ff62-491c-4a1b-8ee3-3b649c0b8391",
                 "enabled": true,
                 "required": [
                     "device"
@@ -8554,7 +8693,6 @@
         }
     },
     "sublawnngarden": {
-        "correlation_id": "04bab3bc-35e0-4d35-b3b3-b32dea9713db",
         "attributes": {
             "controllers": {
                 "readonly": true,
@@ -8608,6 +8746,7 @@
         "is_device": false,
         "methods": {
             "StopWatering": {
+                "correlation_id": "bd0dc49d-2a31-49a4-be5a-cbc8c626185b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8626,6 +8765,7 @@
                 }
             },
             "SwitchScheduleMode": {
+                "correlation_id": "f8ffc201-fe78-401d-9af8-c64ef0ae9dbb",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8649,6 +8789,7 @@
                 }
             },
             "EnableScheduling": {
+                "correlation_id": "8dea795c-431d-440e-a9f4-4331ba25f9e8",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8662,6 +8803,7 @@
                 }
             },
             "DisableScheduling": {
+                "correlation_id": "3834ffdb-652f-4b88-a199-9b395e8c31e6",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8675,6 +8817,7 @@
                 }
             },
             "Skip": {
+                "correlation_id": "ef46ba45-bf9d-40af-a7c2-b1b57d5c2e59",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8692,6 +8835,7 @@
                 }
             },
             "CancelSkip": {
+                "correlation_id": "ca08130f-7808-40c8-abc3-309544af893b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8705,6 +8849,7 @@
                 }
             },
             "ConfigureIntervalSchedule": {
+                "correlation_id": "28a23c37-f7d3-43b1-a815-0fa23ed1b274",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8726,6 +8871,7 @@
                 }
             },
             "CreateWeeklyEvent": {
+                "correlation_id": "de6e7aea-1a6f-41f7-91c7-847266a48a9b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8751,6 +8897,7 @@
                 }
             },
             "UpdateWeeklyEvent": {
+                "correlation_id": "4adb2cf7-2c89-4f79-991e-0b596abf4719",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8794,6 +8941,7 @@
                 }
             },
             "RemoveWeeklyEvent": {
+                "correlation_id": "f1060b0c-a544-4ca9-bcb2-3b6005d75b79",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8825,6 +8973,7 @@
                 }
             },
             "CreateScheduleEvent": {
+                "correlation_id": "e4467615-58ed-4eca-a431-00f0934171bb",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8855,6 +9004,7 @@
                 }
             },
             "UpdateScheduleEvent": {
+                "correlation_id": "b4a8e09b-ea78-4a4c-b81d-d1aa6b501cdc",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8889,6 +9039,7 @@
                 }
             },
             "RemoveScheduleEvent": {
+                "correlation_id": "227abbb1-6636-4c5b-85e0-3fdb9de3183d",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8915,6 +9066,7 @@
                 }
             },
             "SyncSchedule": {
+                "correlation_id": "e3e011c2-af5f-401a-bf87-f3bf6dafbfea",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -8938,6 +9090,7 @@
                 }
             },
             "SyncScheduleEvent": {
+                "correlation_id": "93b3b2cc-9637-4778-ad5f-dc89da9e70bb",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9102,7 +9255,6 @@
         }
     },
     "gas": {
-        "correlation_id": "f6e4379a-0c98-491b-a993-d781fc663ec3",
         "attributes": {
             "state": {
                 "readonly": true,
@@ -9126,7 +9278,6 @@
         "events": {}
     },
     "leakh2o": {
-        "correlation_id": "ffb4a896-280b-4c99-97db-486934663332",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -9148,6 +9299,7 @@
         "is_device": true,
         "methods": {
             "leakh2o": {
+                "correlation_id": "80e8e0b4-e283-4230-afa6-88b85f27f947",
                 "enabled": true,
                 "required": [
                     "device"
@@ -9169,7 +9321,6 @@
         "events": {}
     },
     "light": {
-        "correlation_id": "1b1809c5-fca0-4d65-8dc3-003791098141",
         "attributes": {
             "colormode": {
                 "readonly": false,
@@ -9188,7 +9339,6 @@
         "events": {}
     },
     "sublightsnswitches": {
-        "correlation_id": "69432a5c-9cf6-4cca-b19a-2483ffb155d0",
         "attributes": {
             "switchDevices": {
                 "readonly": true,
@@ -9214,7 +9364,6 @@
         "events": {}
     },
     "lutronbridge": {
-        "correlation_id": "73550f6d-69f1-4f77-9d6a-c3898ea403b9",
         "attributes": {
             "href": {
                 "readonly": true,
@@ -9246,7 +9395,6 @@
         "events": {}
     },
     "mobiledevice": {
-        "correlation_id": "d3295e96-1576-4b84-9f4e-15ba35d70b42",
         "attributes": {
             "personId": {
                 "readonly": true,
@@ -9356,11 +9504,11 @@
         "events": {}
     },
     "incidentmock": {
-        "correlation_id": "568f97e7-8f0e-46a3-932a-e0c7b2149533",
         "attributes": {},
         "is_device": false,
         "methods": {
             "Contacted": {
+                "correlation_id": "18862dcb-f77e-44b4-a3dc-acf28cbd64fd",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9374,6 +9522,7 @@
                 }
             },
             "DispatchCancelled": {
+                "correlation_id": "9423d5c8-6395-41a4-a8b8-4731857f1ca3",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9387,6 +9536,7 @@
                 }
             },
             "DispatchAccepted": {
+                "correlation_id": "114adb4d-fb57-4e33-a0d2-e099f24737f0",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9404,6 +9554,7 @@
                 }
             },
             "DispatchRefused": {
+                "correlation_id": "937886f3-c285-4242-bd93-ab1e722e1387",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9424,7 +9575,6 @@
         "events": {}
     },
     "mot": {
-        "correlation_id": "65de011b-65aa-4ed9-b0c9-05e99de66382",
         "attributes": {
             "motion": {
                 "readonly": true,
@@ -9448,7 +9598,6 @@
         "events": {}
     },
     "motdoor": {
-        "correlation_id": "a84ba0a1-1e42-4d4f-bc7d-1b50935e0e67",
         "attributes": {
             "doorstate": {
                 "readonly": false,
@@ -9483,7 +9632,6 @@
         "events": {}
     },
     "nesttherm": {
-        "correlation_id": "49972c51-582f-4bb5-b0c0-c0bedf39fe9b",
         "attributes": {
             "hasleaf": {
                 "readonly": true,
@@ -9521,7 +9669,6 @@
         "events": {}
     },
     "person": {
-        "correlation_id": "63870b43-46e7-4a29-a683-c05daf466adf",
         "attributes": {
             "firstName": {
                 "readonly": false,
@@ -9617,6 +9764,7 @@
         "is_device": false,
         "methods": {
             "SetSecurityAnswers": {
+                "correlation_id": "89313d4a-b2da-47c8-a231-1fcb4d2a0d47",
                 "enabled": true,
                 "required": [
                     "securityQuestion1",
@@ -9659,6 +9807,7 @@
                 }
             },
             "GetSecurityAnswers": {
+                "correlation_id": "600c28b3-b4a5-4fab-a510-ed85a5344ce4",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9667,6 +9816,7 @@
                 }
             },
             "AddMobileDevice": {
+                "correlation_id": "79f4179e-22bb-45de-9014-6db7a721dc89",
                 "enabled": true,
                 "required": [
                     "osType"
@@ -9743,6 +9893,7 @@
                 }
             },
             "RemoveMobileDevice": {
+                "correlation_id": "c584cd11-af60-40ed-b78e-b5631baa9c69",
                 "enabled": true,
                 "required": [
                     "deviceIndex"
@@ -9759,6 +9910,7 @@
                 }
             },
             "ListMobileDevices": {
+                "correlation_id": "4da127a5-4066-4719-973a-c62118b0eeee",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9767,6 +9919,7 @@
                 }
             },
             "ListHistoryEntries": {
+                "correlation_id": "f4d80511-a05c-4026-a781-7fd74c58d95f",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9786,6 +9939,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "8e6b86d5-376d-42a8-877e-243cfc9d250c",
                 "enabled": false,
                 "required": [],
                 "oneof": [],
@@ -9794,6 +9948,7 @@
                 }
             },
             "RemoveFromPlace": {
+                "correlation_id": "72e06f17-102c-4a7e-ad4f-c6d26d9ddf76",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9808,6 +9963,7 @@
                 }
             },
             "ChangePin": {
+                "correlation_id": "0e375674-94ac-4b00-9929-90b77d16e539",
                 "enabled": true,
                 "required": [
                     "newPin"
@@ -9829,6 +9985,7 @@
                 }
             },
             "ChangePinV2": {
+                "correlation_id": "fadf8584-2a19-4210-82f4-f866ff35439a",
                 "enabled": true,
                 "required": [
                     "place",
@@ -9851,6 +10008,7 @@
                 }
             },
             "VerifyPin": {
+                "correlation_id": "8b4ffa03-49c1-411c-a20f-51e4809c5cf0",
                 "enabled": true,
                 "required": [
                     "place",
@@ -9873,6 +10031,7 @@
                 }
             },
             "AcceptInvitation": {
+                "correlation_id": "bec01814-5029-42be-affc-2620e3a36d01",
                 "enabled": true,
                 "required": [
                     "code",
@@ -9895,6 +10054,7 @@
                 }
             },
             "RejectInvitation": {
+                "correlation_id": "189ea2f8-9d23-4249-bcdd-c084142ce638",
                 "enabled": true,
                 "required": [
                     "code",
@@ -9922,6 +10082,7 @@
                 }
             },
             "PendingInvitations": {
+                "correlation_id": "4576db61-95f8-4620-81e9-5e78488e9d07",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9930,6 +10091,7 @@
                 }
             },
             "PromoteToAccount": {
+                "correlation_id": "51a5b419-5cfb-4e42-a3cc-d3c13d40bdc4",
                 "enabled": true,
                 "required": [
                     "place"
@@ -9946,6 +10108,7 @@
                 }
             },
             "DeleteLogin": {
+                "correlation_id": "38af15fc-f47a-4159-bf63-85cb176a3240",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9954,6 +10117,7 @@
                 }
             },
             "ListAvailablePlaces": {
+                "correlation_id": "47d8e872-3503-462f-a48f-b331d24b917d",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -9962,6 +10126,7 @@
                 }
             },
             "AcceptPolicy": {
+                "correlation_id": "0edde14c-eceb-4d88-ade9-263272abdba8",
                 "enabled": true,
                 "required": [
                     "type"
@@ -9982,6 +10147,7 @@
                 }
             },
             "RejectPolicy": {
+                "correlation_id": "8839e209-13ef-4a5c-a2cc-6cfcad1ac004",
                 "enabled": true,
                 "required": [
                     "type"
@@ -10027,7 +10193,6 @@
         }
     },
     "petdoor": {
-        "correlation_id": "23b9ea2d-c7c5-47af-a4c1-299499139c3b",
         "attributes": {
             "lockstate": {
                 "readonly": false,
@@ -10072,6 +10237,7 @@
         "is_device": true,
         "methods": {
             "RemoveToken": {
+                "correlation_id": "58b87987-9d78-4078-8cdd-97b1af08a51a",
                 "enabled": true,
                 "required": [
                     "device",
@@ -10153,7 +10319,6 @@
         }
     },
     "pettoken": {
-        "correlation_id": "16dc1ccf-bc9e-47da-b1d3-f4d0d379e979",
         "attributes": {
             "tokenNum": {
                 "readonly": true,
@@ -10201,7 +10366,6 @@
         "events": {}
     },
     "place": {
-        "correlation_id": "5307c608-ac23-4641-900e-8fdf159c1525",
         "attributes": {
             "account": {
                 "readonly": true,
@@ -10376,6 +10540,7 @@
         "is_device": false,
         "methods": {
             "ListDevices": {
+                "correlation_id": "c8878744-b8c1-4d43-93a5-99a47efb99c7",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10384,6 +10549,7 @@
                 }
             },
             "GetHub": {
+                "correlation_id": "b33dde09-1e82-4d8b-91e2-8329ecb78b60",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10392,6 +10558,7 @@
                 }
             },
             "StartAddingDevices": {
+                "correlation_id": "2845f366-215d-4ee6-a2f8-bd0ccd73051e",
                 "enabled": true,
                 "required": [
                     "time"
@@ -10408,6 +10575,7 @@
                 }
             },
             "StopAddingDevices": {
+                "correlation_id": "30e0e4bd-f19b-4d91-9e13-d5dd81734bdf",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10416,6 +10584,7 @@
                 }
             },
             "RegisterHub": {
+                "correlation_id": "1a07e07c-5b34-4336-86a3-b8d21715538f",
                 "enabled": true,
                 "required": [
                     "hubId"
@@ -10432,6 +10601,7 @@
                 }
             },
             "AddPerson": {
+                "correlation_id": "36d6baa4-acdd-42b5-be45-d4417e55b54d",
                 "enabled": true,
                 "required": [
                     "person"
@@ -10453,6 +10623,7 @@
                 }
             },
             "ListPersons": {
+                "correlation_id": "99bc7419-07bd-4981-a88d-6029d96af7dd",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10461,6 +10632,7 @@
                 }
             },
             "ListPersonsWithAccess": {
+                "correlation_id": "a5367358-8cec-4091-b6eb-a7927371a0a8",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10469,6 +10641,7 @@
                 }
             },
             "ListDashboardEntries": {
+                "correlation_id": "91a6a116-75c2-4eff-8b6d-2e53f3c383e4",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10488,6 +10661,7 @@
                 }
             },
             "ListHistoryEntries": {
+                "correlation_id": "80f33b96-a5dd-4d80-b2b5-28db130c743a",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10507,6 +10681,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "fcbd2cf0-d2fd-401f-8d45-0c11dbe71b64",
                 "enabled": false,
                 "required": [],
                 "oneof": [],
@@ -10515,6 +10690,7 @@
                 }
             },
             "CreateInvitation": {
+                "correlation_id": "3bc811d6-6581-43dd-b7bf-843d9434adca",
                 "enabled": true,
                 "required": [
                     "firstName",
@@ -10548,6 +10724,7 @@
                 }
             },
             "SendInvitation": {
+                "correlation_id": "d6511028-eabd-419f-bcfc-c4f93b817cb2",
                 "enabled": true,
                 "required": [
                     "invitation"
@@ -10564,6 +10741,7 @@
                 }
             },
             "PendingInvitations": {
+                "correlation_id": "f257bab2-4808-4af4-a42d-6db2f2a55256",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10572,6 +10750,7 @@
                 }
             },
             "CancelInvitation": {
+                "correlation_id": "ae89ba08-23ca-4750-986a-7e64cc79c0be",
                 "enabled": true,
                 "required": [
                     "code"
@@ -10588,6 +10767,7 @@
                 }
             },
             "UpdateAddress": {
+                "correlation_id": "04b6c6b2-ca89-405f-9c29-8cb2474b5b04",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10602,6 +10782,7 @@
                 }
             },
             "RegisterHubV2": {
+                "correlation_id": "b60d563d-d9b0-451c-9b2f-142a13295bf8",
                 "enabled": true,
                 "required": [
                     "hubId"
@@ -10621,7 +10802,6 @@
         "events": {}
     },
     "subplacemonitor": {
-        "correlation_id": "81f896da-e291-41bd-9c4d-6d9a9b41d062",
         "attributes": {
             "updatedDevices": {
                 "readonly": true,
@@ -10740,7 +10920,6 @@
         }
     },
     "population": {
-        "correlation_id": "f4f7d608-e1f9-43c0-a733-3a5609f0b2b1",
         "attributes": {
             "name": {
                 "readonly": true,
@@ -10764,6 +10943,7 @@
         "is_device": false,
         "methods": {
             "GetPopulations": {
+                "correlation_id": "926e7229-930e-4b57-ad20-d73e7b370cc3",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -10775,7 +10955,6 @@
         "events": {}
     },
     "pow": {
-        "correlation_id": "01885e04-0b6b-430f-8d02-a547b2b84641",
         "attributes": {
             "instantaneous": {
                 "readonly": true,
@@ -10801,7 +10980,6 @@
         "events": {}
     },
     "pres": {
-        "correlation_id": "3cb70681-495b-4822-b7b7-47c8dc691fce",
         "attributes": {
             "presence": {
                 "readonly": true,
@@ -10842,7 +11020,6 @@
         "events": {}
     },
     "subspres": {
-        "correlation_id": "16f72246-0c53-4e0a-9462-48339077900e",
         "attributes": {
             "occupied": {
                 "readonly": true,
@@ -10890,6 +11067,7 @@
         "is_device": false,
         "methods": {
             "GetPresenceAnalysis": {
+                "correlation_id": "7574d5f9-7ef8-43f3-91ab-23d1546d0ca4",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11082,7 +11260,6 @@
         }
     },
     "product": {
-        "correlation_id": "c7b6f5dc-d513-4f51-850b-56f6166bce69",
         "attributes": {
             "id": {
                 "readonly": true,
@@ -11357,7 +11534,6 @@
         "events": {}
     },
     "prodcat": {
-        "correlation_id": "96b30bfc-1861-4bc7-b1b4-ce9fe43a1cae",
         "attributes": {
             "publisher": {
                 "readonly": true,
@@ -11393,6 +11569,7 @@
         "is_device": false,
         "methods": {
             "GetProductCatalog": {
+                "correlation_id": "645cbbdb-2339-42b7-873d-7416673724ae",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11401,6 +11578,7 @@
                 }
             },
             "GetCategories": {
+                "correlation_id": "326f36f8-a246-4590-824c-e412ab030097",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11409,6 +11587,7 @@
                 }
             },
             "GetBrands": {
+                "correlation_id": "fe437ce8-1310-4f4a-9ea8-c259a7d7839a",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11417,6 +11596,7 @@
                 }
             },
             "GetProductsByBrand": {
+                "correlation_id": "fe1dede0-5186-4f86-8cee-e5daee1947fc",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11430,6 +11610,7 @@
                 }
             },
             "GetProductsByCategory": {
+                "correlation_id": "3a2bbf70-6291-4968-99ed-85f6bb0bdccf",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11443,6 +11624,7 @@
                 }
             },
             "GetProducts": {
+                "correlation_id": "f0e726a5-0147-45ee-a4bc-65a510d38e25",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11451,6 +11633,7 @@
                 }
             },
             "GetAllProducts": {
+                "correlation_id": "72413dac-5ef3-480a-b838-7a5da09b2643",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11459,6 +11642,7 @@
                 }
             },
             "FindProducts": {
+                "correlation_id": "85e04cde-153f-49f1-84c4-4ee5a0bb14ae",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11472,6 +11656,7 @@
                 }
             },
             "GetProduct": {
+                "correlation_id": "c5956fd2-b8c9-43ef-bac6-53784dda00d9",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11501,7 +11686,6 @@
         }
     },
     "promon": {
-        "correlation_id": "9e15b62f-f9c4-4231-983e-c98026edcb23",
         "attributes": {
             "notifyWhenAvailable": {
                 "readonly": false,
@@ -11642,6 +11826,7 @@
         "is_device": false,
         "methods": {
             "CheckAvailability": {
+                "correlation_id": "79b84151-1313-4c50-aa0b-98c80beefd1f",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11650,6 +11835,7 @@
                 }
             },
             "JoinTrial": {
+                "correlation_id": "6839bbe1-f95f-4f4b-bc84-d3fc3bf250e6",
                 "enabled": true,
                 "required": [
                     "code"
@@ -11665,6 +11851,7 @@
                 }
             },
             "ValidateAddress": {
+                "correlation_id": "f5013a5f-2a7b-4e99-967c-379e62ee1ac4",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11679,6 +11866,7 @@
                 }
             },
             "UpdateAddress": {
+                "correlation_id": "35c64222-1cbd-499d-b5c0-2cd003a72fef",
                 "enabled": true,
                 "required": [
                     "residential"
@@ -11700,6 +11888,7 @@
                 }
             },
             "ListDepartments": {
+                "correlation_id": "483b84e5-7bae-4e09-b9a5-ea59d5f049ca",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11708,6 +11897,7 @@
                 }
             },
             "CheckSensors": {
+                "correlation_id": "7e0a682d-b041-437d-8517-40578157ae79",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11716,6 +11906,7 @@
                 }
             },
             "Activate": {
+                "correlation_id": "376a9e2c-b338-496f-8d08-7d6492ac1405",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11730,6 +11921,7 @@
                 }
             },
             "TestCall": {
+                "correlation_id": "f2bf2428-8277-4a7a-9f62-1e9da58e705b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11738,6 +11930,7 @@
                 }
             },
             "Reset": {
+                "correlation_id": "f59d877f-05bd-42ac-8176-5e744950c653",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11749,7 +11942,6 @@
         "events": {}
     },
     "video": {
-        "correlation_id": "b2c7eb12-c967-4ce3-aa0f-808daab81bd8",
         "attributes": {
             "name": {
                 "readonly": false,
@@ -11861,6 +12053,7 @@
         "is_device": false,
         "methods": {
             "View": {
+                "correlation_id": "77a5a062-1bbf-4ee3-9800-304f4e1efb0b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11869,6 +12062,7 @@
                 }
             },
             "Download": {
+                "correlation_id": "5eaa1c2d-9e82-4274-a864-f04e1b2ee6a4",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11877,6 +12071,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "92aaaa28-e799-4c2d-8131-04acb5140792",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11885,6 +12080,7 @@
                 }
             },
             "Resurrect": {
+                "correlation_id": "7a06a9bc-3bc7-45dc-b2d3-1928c09ec423",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11896,7 +12092,6 @@
         "events": {}
     },
     "humid": {
-        "correlation_id": "f4a3ee3c-696c-4843-9039-1a05eb602df8",
         "attributes": {
             "humidity": {
                 "readonly": true,
@@ -11912,7 +12107,6 @@
         "events": {}
     },
     "rule": {
-        "correlation_id": "2fd6ef97-1ffc-4d55-a465-f3aa22ab3c79",
         "attributes": {
             "name": {
                 "readonly": false,
@@ -11964,6 +12158,7 @@
         "is_device": false,
         "methods": {
             "Enable": {
+                "correlation_id": "1c28011b-ebbf-496b-9dc2-defe11836b74",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11972,6 +12167,7 @@
                 }
             },
             "Disable": {
+                "correlation_id": "6c64cfdd-2eec-403a-ac1e-8df548b09a35",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11980,6 +12176,7 @@
                 }
             },
             "UpdateContext": {
+                "correlation_id": "2db2a5f7-08c0-45da-b65d-1c3665d3e1b5",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -11994,6 +12191,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "7f0c0248-3601-4423-841d-6b1364df4558",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12002,6 +12200,7 @@
                 }
             },
             "ListHistoryEntries": {
+                "correlation_id": "256817f0-2975-4c4a-b873-bd99e3eea3a4",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12021,6 +12220,7 @@
                 }
             },
             "ListRules": {
+                "correlation_id": "2780c28c-6b36-4f55-b318-6a106798b0de",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12032,7 +12232,6 @@
         "events": {}
     },
     "ruletmpl": {
-        "correlation_id": "6169e20c-0bb3-473f-b1c9-a202bd569818",
         "attributes": {
             "keywords": {
                 "readonly": true,
@@ -12098,6 +12297,7 @@
         "is_device": false,
         "methods": {
             "CreateRule": {
+                "correlation_id": "41fef403-77a5-43ca-89e4-e030aeb01067",
                 "enabled": true,
                 "required": [
                     "placeId",
@@ -12129,6 +12329,7 @@
                 }
             },
             "Resolve": {
+                "correlation_id": "cffea69f-6be4-4e30-8500-c9415c31d7ed",
                 "enabled": true,
                 "required": [
                     "placeId"
@@ -12148,7 +12349,6 @@
         "events": {}
     },
     "subsafety": {
-        "correlation_id": "8a7c1eda-029a-4b0a-9d2f-9943536e2ed3",
         "attributes": {
             "totalDevices": {
                 "readonly": true,
@@ -12303,6 +12503,7 @@
         "is_device": false,
         "methods": {
             "Trigger": {
+                "correlation_id": "ca94ac5d-dcbf-48df-85dd-296c4da49182",
                 "enabled": true,
                 "required": [
                     "cause"
@@ -12318,6 +12519,7 @@
                 }
             },
             "Clear": {
+                "correlation_id": "7ad24d8c-ce07-47e3-b1ba-af3e182cd75f",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12329,7 +12531,6 @@
         "events": {}
     },
     "scene": {
-        "correlation_id": "7e9521fe-6de4-418a-9035-0715b5f0f753",
         "attributes": {
             "name": {
                 "readonly": false,
@@ -12407,6 +12608,7 @@
         "is_device": false,
         "methods": {
             "Fire": {
+                "correlation_id": "9a9fe8ab-2d8f-476e-96e0-0cde9eeba6e1",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12415,6 +12617,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "fe847254-ce49-443c-b5a9-94ff3371b939",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12423,6 +12626,7 @@
                 }
             },
             "ListScenes": {
+                "correlation_id": "c3162039-c015-41e2-a294-faf1d22aa528",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12434,7 +12638,6 @@
         "events": {}
     },
     "scenetmpl": {
-        "correlation_id": "7042c7e0-1e2d-4baa-9f62-81ccd4e56d3c",
         "attributes": {
             "added": {
                 "readonly": true,
@@ -12476,6 +12679,7 @@
         "is_device": false,
         "methods": {
             "Create": {
+                "correlation_id": "0bf2808b-e851-4a41-8b8a-dd731a461223",
                 "enabled": true,
                 "required": [
                     "placeId"
@@ -12502,6 +12706,7 @@
                 }
             },
             "ResolveActions": {
+                "correlation_id": "7bc0b368-ce80-4dd5-ba5e-f890926fac96",
                 "enabled": true,
                 "required": [
                     "placeId"
@@ -12521,7 +12726,6 @@
         "events": {}
     },
     "schedulable": {
-        "correlation_id": "e4d16f75-6fa9-4ac8-bb08-45024114de79",
         "attributes": {
             "type": {
                 "readonly": true,
@@ -12546,6 +12750,7 @@
         "is_device": true,
         "methods": {
             "EnableSchedule": {
+                "correlation_id": "1f49dab9-58f2-435a-9003-7a9f9d0b484b",
                 "enabled": true,
                 "required": [
                     "device"
@@ -12561,6 +12766,7 @@
                 }
             },
             "DisableSchedule": {
+                "correlation_id": "9ea11b29-bae3-4d04-8eb3-80a85e212627",
                 "enabled": true,
                 "required": [
                     "device"
@@ -12579,7 +12785,6 @@
         "events": {}
     },
     "sched": {
-        "correlation_id": "c9b97c74-080d-4c2f-a8bc-fde57d9c7a41",
         "attributes": {
             "group": {
                 "readonly": true,
@@ -12633,6 +12838,7 @@
         "is_device": false,
         "methods": {
             "Delete": {
+                "correlation_id": "774d5281-74a3-49a4-a814-f8021c1efe29",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12641,6 +12847,7 @@
                 }
             },
             "DeleteCommand": {
+                "correlation_id": "ec0b1b1c-fd97-44e0-9663-031ef898ea56",
                 "enabled": true,
                 "required": [
                     "commandId"
@@ -12660,7 +12867,6 @@
         "events": {}
     },
     "scheduler": {
-        "correlation_id": "42e24060-9552-4403-834d-9ca4f9da4d06",
         "attributes": {
             "placeId": {
                 "readonly": true,
@@ -12708,6 +12914,7 @@
         "is_device": false,
         "methods": {
             "FireCommand": {
+                "correlation_id": "afde8dbb-791d-4796-b0af-fb9422e5ddcf",
                 "enabled": true,
                 "required": [
                     "commandId"
@@ -12724,6 +12931,7 @@
                 }
             },
             "AddWeeklySchedule": {
+                "correlation_id": "bd52607f-6d46-4489-9577-25b50b684e17",
                 "enabled": true,
                 "required": [
                     "id"
@@ -12745,6 +12953,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "2e168e68-647c-4a0d-9901-2b801b8dd73e",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -12756,7 +12965,6 @@
         "events": {}
     },
     "subsecuritymode": {
-        "correlation_id": "6b5db813-4686-49a1-9b86-a6743e478c11",
         "attributes": {
             "devices": {
                 "readonly": false,
@@ -12806,7 +13014,6 @@
         "events": {}
     },
     "subsecurity": {
-        "correlation_id": "d2a34b03-d4df-4adc-af32-01fa16ddc0ef",
         "attributes": {
             "securityDevices": {
                 "readonly": true,
@@ -12986,6 +13193,7 @@
         "is_device": false,
         "methods": {
             "Panic": {
+                "correlation_id": "5832f62e-03a8-404c-b50b-acef335cef36",
                 "enabled": true,
                 "required": [
                     "silent"
@@ -13001,6 +13209,7 @@
                 }
             },
             "Arm": {
+                "correlation_id": "a950274d-c95c-4188-856f-4d525adc3220",
                 "enabled": true,
                 "required": [
                     "mode"
@@ -13016,6 +13225,7 @@
                 }
             },
             "ArmBypassed": {
+                "correlation_id": "2699733a-16fd-4f75-8282-887c50949af5",
                 "enabled": true,
                 "required": [
                     "mode"
@@ -13031,6 +13241,7 @@
                 }
             },
             "Acknowledge": {
+                "correlation_id": "9ba55a93-c418-47ac-a4cc-07ad9cf7e015",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13039,6 +13250,7 @@
                 }
             },
             "Disarm": {
+                "correlation_id": "8473f2bd-fe94-4c49-b4fe-978bd458983a",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13142,7 +13354,6 @@
         }
     },
     "shade": {
-        "correlation_id": "cfd30d64-a7b4-4fa0-ab7a-e8b8f71645e1",
         "attributes": {
             "level": {
                 "readonly": false,
@@ -13172,6 +13383,7 @@
         "is_device": true,
         "methods": {
             "GoToOpen": {
+                "correlation_id": "00e2ab14-d2d5-4295-bb15-32a620410694",
                 "enabled": true,
                 "required": [
                     "device"
@@ -13187,6 +13399,7 @@
                 }
             },
             "GoToClosed": {
+                "correlation_id": "e5b2aa43-c42a-423b-bc72-637e5d673da3",
                 "enabled": true,
                 "required": [
                     "device"
@@ -13202,6 +13415,7 @@
                 }
             },
             "GoToFavorite": {
+                "correlation_id": "fff9ebb3-db0a-46f3-803f-5d1844e4d733",
                 "enabled": true,
                 "required": [
                     "device"
@@ -13220,7 +13434,6 @@
         "events": {}
     },
     "smoke": {
-        "correlation_id": "804bc467-a341-41f4-b4a1-b639e57b5b45",
         "attributes": {
             "smoke": {
                 "readonly": true,
@@ -13244,7 +13457,6 @@
         "events": {}
     },
     "soilmoisture": {
-        "correlation_id": "23b4d48f-8f83-4442-b516-7c5ba2da7eaf",
         "attributes": {
             "watercontent": {
                 "readonly": true,
@@ -13277,7 +13489,6 @@
         "events": {}
     },
     "somfy1": {
-        "correlation_id": "50fae61e-50fe-46af-81fa-7453fe0942c0",
         "attributes": {
             "mode": {
                 "readonly": false,
@@ -13305,7 +13516,6 @@
         "events": {}
     },
     "somfyv1": {
-        "correlation_id": "2f20da1e-cdc2-43e6-8643-8c85dc5394fd",
         "attributes": {
             "type": {
                 "readonly": false,
@@ -13355,6 +13565,7 @@
         "is_device": true,
         "methods": {
             "GoToOpen": {
+                "correlation_id": "8ef70b14-c6f8-4342-bcf0-cafa291eaa62",
                 "enabled": true,
                 "required": [
                     "device"
@@ -13370,6 +13581,7 @@
                 }
             },
             "GoToClosed": {
+                "correlation_id": "42790bbf-cd15-4583-ac24-0ea211b049cc",
                 "enabled": true,
                 "required": [
                     "device"
@@ -13385,6 +13597,7 @@
                 }
             },
             "GoToFavorite": {
+                "correlation_id": "89725c79-8cff-48a7-a404-c80baf8b494c",
                 "enabled": true,
                 "required": [
                     "device"
@@ -13403,7 +13616,6 @@
         "events": {}
     },
     "spaceheater": {
-        "correlation_id": "fdb45132-7c9d-4c96-bd26-c3974854d886",
         "attributes": {
             "setpoint": {
                 "readonly": false,
@@ -13439,7 +13651,6 @@
         "events": {}
     },
     "subs": {
-        "correlation_id": "cd1e2500-4a1d-40a2-9c5a-ae5fee5dec67",
         "attributes": {
             "name": {
                 "readonly": true,
@@ -13491,6 +13702,7 @@
         "is_device": false,
         "methods": {
             "Activate": {
+                "correlation_id": "d55ff796-fcc7-479a-8f2f-024da27e3ac5",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13499,6 +13711,7 @@
                 }
             },
             "Suspend": {
+                "correlation_id": "bf9c3ea3-fadc-4f6e-8a28-ebde7cfdb80e",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13507,6 +13720,7 @@
                 }
             },
             "Delete": {
+                "correlation_id": "d9b5e1b0-ed8f-4279-942e-5870ca71873e",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13515,6 +13729,7 @@
                 }
             },
             "ListHistoryEntries": {
+                "correlation_id": "db830d0d-74a2-40f2-b453-a099bbf54c6b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13542,7 +13757,6 @@
         "events": {}
     },
     "supportagent": {
-        "correlation_id": "779ed3ff-343f-4079-bdd5-d178c0f4fdad",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -13632,6 +13846,7 @@
         "is_device": false,
         "methods": {
             "ListAgents": {
+                "correlation_id": "442682bc-cdfa-4999-9ad6-8ae540baf4c4",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13640,6 +13855,7 @@
                 }
             },
             "CreateSupportAgent": {
+                "correlation_id": "49e6a971-515a-4d77-b588-930f700fbeeb",
                 "enabled": true,
                 "required": [
                     "email",
@@ -13694,6 +13910,7 @@
                 }
             },
             "FindAgentById": {
+                "correlation_id": "a3d5b40d-b0e8-4577-a366-4511f2a160b9",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13702,6 +13919,7 @@
                 }
             },
             "FindAgentByEmail": {
+                "correlation_id": "590af39c-27e2-4461-8201-e9c0d6aa8cd2",
                 "enabled": true,
                 "required": [
                     "email"
@@ -13718,6 +13936,7 @@
                 }
             },
             "DeleteAgent": {
+                "correlation_id": "4887f005-4571-4a5c-a376-8e3f7a1ff5c2",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -13726,6 +13945,7 @@
                 }
             },
             "ResetAgentPassword": {
+                "correlation_id": "2eb3b033-eaf2-4845-af66-a158f32198f7",
                 "enabled": true,
                 "required": [
                     "email",
@@ -13748,6 +13968,7 @@
                 }
             },
             "EditPreferences": {
+                "correlation_id": "c6d1acb9-10a5-4030-a6f4-7e9c0c3c0fb2",
                 "enabled": true,
                 "required": [
                     "email",
@@ -13773,7 +13994,6 @@
         "events": {}
     },
     "salogentry": {
-        "correlation_id": "7ee058ce-ed8c-4024-9cab-a46f3d89dae6",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -13827,6 +14047,7 @@
         "is_device": false,
         "methods": {
             "CreateAgentLogEntry": {
+                "correlation_id": "f44a1ed6-2ddf-450f-b951-ffe5cb8ac824",
                 "enabled": true,
                 "required": [
                     "agentId",
@@ -13875,6 +14096,7 @@
                 }
             },
             "ListAgentLogEntries": {
+                "correlation_id": "ce377a75-e67d-4628-9109-f4cb24094a3f",
                 "enabled": true,
                 "required": [
                     "agentId",
@@ -13906,7 +14128,6 @@
         "events": {}
     },
     "suppcustinteraction": {
-        "correlation_id": "2db0068d-c2df-4ae3-8d8c-dc7ad44cb431",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -13978,6 +14199,7 @@
         "is_device": false,
         "methods": {
             "CreateInteraction": {
+                "correlation_id": "13897314-7450-4640-be23-ef29083fb9c2",
                 "enabled": true,
                 "required": [
                     "account",
@@ -14039,6 +14261,7 @@
                 }
             },
             "UpdateInteraction": {
+                "correlation_id": "98d99d29-0ce6-4da8-a426-f2323284842e",
                 "enabled": true,
                 "required": [
                     "id",
@@ -14107,6 +14330,7 @@
                 }
             },
             "ListInteractions": {
+                "correlation_id": "b3f9a470-d474-40b5-a8a2-4e0bb001b530",
                 "enabled": true,
                 "required": [
                     "account",
@@ -14141,6 +14365,7 @@
                 }
             },
             "ListInteractionsForTimeframe": {
+                "correlation_id": "800ea99f-ba91-4ecb-9111-824c0f473f87",
                 "enabled": true,
                 "required": [
                     "startDate",
@@ -14176,7 +14401,6 @@
         "events": {}
     },
     "suppcustsession": {
-        "correlation_id": "57f0f867-01a2-4687-90bf-c064167951ff",
         "attributes": {
             "created": {
                 "readonly": true,
@@ -14242,6 +14466,7 @@
         "is_device": false,
         "methods": {
             "StartSession": {
+                "correlation_id": "42a14e70-ea06-4dd5-bf98-378bc793eed0",
                 "enabled": true,
                 "required": [
                     "agent",
@@ -14276,6 +14501,7 @@
                 }
             },
             "FindActiveSession": {
+                "correlation_id": "b9d6fd0a-5125-47f9-94b0-908e367bbf66",
                 "enabled": true,
                 "required": [
                     "agent",
@@ -14298,6 +14524,7 @@
                 }
             },
             "ListSessions": {
+                "correlation_id": "e45dc7ee-0503-466d-ae5b-89e9258a4a21",
                 "enabled": true,
                 "required": [
                     "account"
@@ -14314,6 +14541,7 @@
                 }
             },
             "CloseSession": {
+                "correlation_id": "5b68c234-a0aa-450a-bfbe-5f04a68e829b",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -14325,7 +14553,6 @@
         "events": {}
     },
     "swit": {
-        "correlation_id": "f4177c0f-eb70-4939-8dd4-5234e45a130c",
         "attributes": {
             "state": {
                 "readonly": false,
@@ -14355,7 +14582,6 @@
         "events": {}
     },
     "temp": {
-        "correlation_id": "6a64d0d3-abb4-4cfc-a244-94ccb67fb475",
         "attributes": {
             "temperature": {
                 "readonly": true,
@@ -14369,7 +14595,6 @@
         "events": {}
     },
     "test": {
-        "correlation_id": "5d7725c4-890f-43dc-b9c3-a60d5b65c3a7",
         "attributes": {
             "lastTestTime": {
                 "readonly": true,
@@ -14391,7 +14616,6 @@
         }
     },
     "therm": {
-        "correlation_id": "d72c7009-2233-43d9-8316-41090d9680af",
         "attributes": {
             "coolsetpoint": {
                 "readonly": false,
@@ -14545,6 +14769,7 @@
         "is_device": true,
         "methods": {
             "changeFilter": {
+                "correlation_id": "0a2e4492-f25a-475d-bd6e-65354e7b1755",
                 "enabled": true,
                 "required": [
                     "device"
@@ -14560,6 +14785,7 @@
                 }
             },
             "SetIdealTemperature": {
+                "correlation_id": "4d08cffe-f431-407e-91b0-6b7432e47589",
                 "enabled": true,
                 "required": [
                     "device",
@@ -14581,6 +14807,7 @@
                 }
             },
             "IncrementIdealTemperature": {
+                "correlation_id": "6190d0a4-e815-40be-a37c-74e287dbac7e",
                 "enabled": true,
                 "required": [
                     "device",
@@ -14602,6 +14829,7 @@
                 }
             },
             "DecrementIdealTemperature": {
+                "correlation_id": "420ab638-a032-404d-a4e4-f22e7ff7b08c",
                 "enabled": true,
                 "required": [
                     "device",
@@ -14653,7 +14881,6 @@
         }
     },
     "tilt": {
-        "correlation_id": "63e4a5cc-a88e-416b-941b-d00ddd63f746",
         "attributes": {
             "tiltstate": {
                 "readonly": false,
@@ -14677,7 +14904,6 @@
         "events": {}
     },
     "twinstar": {
-        "correlation_id": "3bba80b2-d479-4e04-866c-9f1d604e58b9",
         "attributes": {
             "ecomode": {
                 "readonly": false,
@@ -14695,7 +14921,6 @@
         "events": {}
     },
     "valv": {
-        "correlation_id": "3383f89a-8b1f-4284-a59f-fd90957cb31f",
         "attributes": {
             "valvestate": {
                 "readonly": false,
@@ -14722,7 +14947,6 @@
         "events": {}
     },
     "vent": {
-        "correlation_id": "1fd01f84-1a77-438f-84ad-09e882b70fb5",
         "attributes": {
             "ventstate": {
                 "readonly": true,
@@ -14754,7 +14978,6 @@
         "events": {}
     },
     "waterhardness": {
-        "correlation_id": "c716f245-a9a6-4ca7-b4ce-89db367e5df7",
         "attributes": {
             "hardness": {
                 "readonly": true,
@@ -14768,7 +14991,6 @@
         "events": {}
     },
     "waterheater": {
-        "correlation_id": "ef35a75c-e9d6-4352-978e-cd31c44b96c7",
         "attributes": {
             "heatingstate": {
                 "readonly": true,
@@ -14805,7 +15027,6 @@
         "events": {}
     },
     "watersoftener": {
-        "correlation_id": "d263ae79-be8b-49f2-8ad1-3b53c6fff02f",
         "attributes": {
             "rechargeStatus": {
                 "readonly": true,
@@ -14867,6 +15088,7 @@
         "is_device": true,
         "methods": {
             "rechargeNow": {
+                "correlation_id": "3f869ff3-4f44-4cb4-991e-4f42552ecd54",
                 "enabled": true,
                 "required": [
                     "device"
@@ -14885,7 +15107,6 @@
         "events": {}
     },
     "subwater": {
-        "correlation_id": "88329261-560b-4e46-96b6-e0bc4688f23b",
         "attributes": {
             "primaryWaterHeater": {
                 "readonly": false,
@@ -14993,7 +15214,6 @@
         }
     },
     "noaa": {
-        "correlation_id": "c6460e0a-0189-4372-ac77-c83205f4064e",
         "attributes": {
             "alertstate": {
                 "readonly": true,
@@ -15056,6 +15276,7 @@
         "is_device": true,
         "methods": {
             "ScanStations": {
+                "correlation_id": "62bce7bd-63a9-41df-9f93-1fb074414a88",
                 "enabled": true,
                 "required": [
                     "device"
@@ -15071,6 +15292,7 @@
                 }
             },
             "PlayStation": {
+                "correlation_id": "cd9fcc6e-fd9e-4083-8d68-8ecb01382013",
                 "enabled": true,
                 "required": [
                     "device",
@@ -15098,6 +15320,7 @@
                 }
             },
             "StopPlayingStation": {
+                "correlation_id": "4453dde2-b6eb-40c8-876f-e6cbf77f1aa6",
                 "enabled": true,
                 "required": [
                     "device"
@@ -15113,6 +15336,7 @@
                 }
             },
             "SelectStation": {
+                "correlation_id": "3b438f65-34f1-4dee-b0e4-26454cee13e4",
                 "enabled": true,
                 "required": [
                     "device",
@@ -15137,7 +15361,6 @@
         "events": {}
     },
     "subweather": {
-        "correlation_id": "4159c04b-c9b4-4a76-ae2e-e8b8ec4cafa8",
         "attributes": {
             "weatherRadios": {
                 "readonly": true,
@@ -15171,6 +15394,7 @@
         "is_device": false,
         "methods": {
             "SnoozeAllAlerts": {
+                "correlation_id": "c8c3d508-f9e2-4b74-b212-77182708ce21",
                 "enabled": true,
                 "required": [],
                 "oneof": [],
@@ -15182,7 +15406,6 @@
         "events": {}
     },
     "schedweek": {
-        "correlation_id": "be79b639-bad5-41fb-a6cd-6f6f53fc9fb9",
         "attributes": {
             "mon": {
                 "readonly": true,
@@ -15230,6 +15453,7 @@
         "is_device": false,
         "methods": {
             "ScheduleWeeklyCommand": {
+                "correlation_id": "22856a64-8a52-4384-9f12-c6e9f1cbb69b",
                 "enabled": true,
                 "required": [
                     "days",
@@ -15286,6 +15510,7 @@
                 }
             },
             "UpdateWeeklyCommand": {
+                "correlation_id": "3baf040c-ff05-4bd9-832a-b2f0165b0a52",
                 "enabled": true,
                 "required": [
                     "commandId"
@@ -15349,7 +15574,6 @@
         "events": {}
     },
     "wifi": {
-        "correlation_id": "3f5a0786-346e-474f-8a05-42380681cac0",
         "attributes": {
             "enabled": {
                 "readonly": false,
@@ -15415,6 +15639,7 @@
         "is_device": true,
         "methods": {
             "Connect": {
+                "correlation_id": "58fa1e88-2454-44b0-b495-399c79ee39ab",
                 "enabled": true,
                 "required": [
                     "device",
@@ -15452,6 +15677,7 @@
                 }
             },
             "Disconnect": {
+                "correlation_id": "218fdcaf-dd0a-4a14-aabf-9ee5b3e670e4",
                 "enabled": true,
                 "required": [
                     "device"
@@ -15470,11 +15696,11 @@
         "events": {}
     },
     "wifiscan": {
-        "correlation_id": "843b89f9-45be-4ba3-a4fa-caaa959a9b99",
         "attributes": {},
         "is_device": true,
         "methods": {
             "StartWifiScan": {
+                "correlation_id": "8cda3034-b8c0-4112-8c61-7adb2700699f",
                 "enabled": true,
                 "required": [
                     "device",
@@ -15496,6 +15722,7 @@
                 }
             },
             "EndWifiScan": {
+                "correlation_id": "19203c38-1e38-47b8-8e77-bbac13218022",
                 "enabled": true,
                 "required": [
                     "device"

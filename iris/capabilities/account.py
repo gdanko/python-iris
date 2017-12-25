@@ -11,9 +11,9 @@ class Account(Capability):
 		self.namespace = "account"
 
 		capabilities = [self.namespace]
-		readable = utils.fetch_readable_attributes(self.validator, capabilities)
+		readable = utils.fetch_readable_attributes(self.iris.capability_validator, capabilities)
 		writable = utils.fetch_writable_attributes(readable)
-		methods = utils.fetch_methods(self.validator, capabilities)
+		methods = utils.fetch_methods(self.iris.capability_validator, capabilities)
 
 		def generate_method_fn(method, required, oneof, valid):
 			fn_name = method

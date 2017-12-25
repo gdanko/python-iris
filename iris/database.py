@@ -45,6 +45,11 @@ def prepare_database():
 			"address": "TEXT NOT NULL",
 			"capabilities": "TEXT NOT NULL",
 		},
+		"correlation": {
+			"id": "TEXT UNIQUE NOT NULL",
+			"namespace": "TEXT NOT NULL",
+			"method": "TEXT NOT NULL",
+		},
 	}
 	for table_name, table_cols in columns.items():
 		drop = "DROP TABLE IF EXISTS {}".format(table_name)
@@ -118,6 +123,30 @@ def populate_scenes(scenes):
 		))
 		conn.commit()
 
+def populate_capabilities(validator):
+	for namespace, namespace_obj in validator.items():
+		if ("methods" in namespace_obj) and (len(namespace_obj["methods"]) > 0):
+			for method_name, method_obj in namespace_obj["methods"].items():
+				insert = "INSERT OR REPLACE INTO correlation (id, namespace, method) VALUES (?,?,?)"
+				cursor.execute(insert, (
+					method_obj["correlation_id"],
+					namespace,
+					method_name
+				))
+				conn.commit()
+
+def populate_services(validator):
+	for namespace, namespace_obj in validator.items():
+		if ("methods" in namespace_obj) and (len(namespace_obj["methods"]) > 0):
+			for method_name, method_obj in namespace_obj["methods"].items():
+				insert = "INSERT OR REPLACE INTO correlation (id, namespace, method) VALUES (?,?,?)"
+				cursor.execute(insert, (
+					method_obj["correlation_id"],
+					namespace,
+					method_name
+				))
+				conn.commit()
+
 def find_address(table=None, name=None, id=None):
 	selector = None
 	selected = None
@@ -136,7 +165,23 @@ def find_id(table=None, name=None):
 	select = "SELECT id FROM {} WHERE name='{}'".format(table, name)
 	cursor.execute(select)
 	result = cursor.fetchone()
+	return result["id"] if ((result) and ("id" in result)) else None
+
+def find_correlation_id(namespace=None, method=None):
+	select = "SELECT id FROM correlation WHERE namespace='{}' AND method='{}'".format(namespace, method)
+	cursor.execute(select)
+	result = cursor.fetchone()
 	return result["id"] if ((result) and ("id" in result)) else None	
+
+def namespace_and_method_from_cid(cid=None):
+	select = "SELECT namespace,method FROM correlation WHERE id='{}'".format(cid)
+	cursor.execute(select)
+	result = cursor.fetchone()
+	if result:
+		if ("namespace" in result) and ("method" in result):
+			return result["namespace"], result["method"]
+	
+	return None, None
 
 def _dict_factory(cursor, row):
 	d = {}

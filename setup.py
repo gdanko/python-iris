@@ -15,7 +15,7 @@ setup(
 	packages = ["iris", "iris/devices"],
 	package_dir = {
 		"iris": "iris",
-		"devices": "iris/devices"
+		"capabilities": "iris/capabilities"
 	},
 	install_requires = [
 		"requests",
@@ -25,10 +25,8 @@ setup(
 	include_package_data = True,
 	package_data = {
 		"iris": [
-			"data/method_validator.json"
-		],
-		"iris/devices": [
-			"data/method_validator.json"
+			"data/capabilities.json",
+			"data/services.json",
 		]
 	},
 	#scripts = ["scripts/iris"],

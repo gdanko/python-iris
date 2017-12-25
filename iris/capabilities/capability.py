@@ -1,7 +1,5 @@
 import iris.exception as exception
 import iris.utils as utils
-import json
-import os
 
 class Capability(object):
 	def __init__(self, iris):
@@ -12,14 +10,6 @@ class Capability(object):
 
 		if not iris:
 			raise exception.MissingConstructorParameter(classname=self.classname, parameter="iris")
-
-		#data = pkgutil.get_data("iris", "data/method-validator.json")
-		#print(data)
-		# This is a hack to get it to work until I can get python data to work
-		pwd = os.path.dirname(os.path.realpath(__file__))
-		path = "{}/../data/capabilities.json".format(pwd)
-		self.validator = json.loads(open(path, "r").read())
-
 
 		iris_type = utils.classname(iris)
 		if iris_type == "iris.core.Iris":

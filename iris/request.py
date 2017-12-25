@@ -63,22 +63,8 @@ def set_attributes(client=None, **kwargs):
 			destination=content["destination"],
 			namespace=content["namespace"],
 			attribute=content["attribute"],
-			value=content["attributes"]["value"],
+			value=content["attributes"]["value"].upper(),
 		)
-		payload2 = {
-			"type": "base:SetAttributes",
-			"headers": {
-				"destination": "DRIV:dev:d2c0b897-98fd-40ed-8b9f-85adfed05660",
-				"correlationId": "790525f5-171f-4533-a952-0dcafb9b5310",
-				"isRequest": True
-			},
-			"payload": {
-				"messageType": "base:SetAttributes",
-				"attributes": {
-					"dim:brightness": 1
-				}
-			}
-		}
 		send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
 
 def device_method_request(client=None, **kwargs):
@@ -89,6 +75,7 @@ def device_method_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
@@ -100,6 +87,7 @@ def account_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
@@ -115,6 +103,8 @@ def hub_request(client=None, **kwargs):
 			destination=client.iris.hub_address,
 			method=method,
 		)
+		cid = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, payload=payload, debug=client.debug)
 
@@ -126,6 +116,8 @@ def place_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
+		cid = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
@@ -137,6 +129,7 @@ def rule_request(client=None, **kwargs):
 			namespace=content["namespace"]
 		)
 		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
@@ -148,6 +141,7 @@ def scene_request(client=None, **kwargs):
 			namespace=content["namespace"]
 		)
 		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
@@ -159,10 +153,12 @@ def session_request(client=None, **kwargs):
 			method=content["method"],
 			namespace=content["namespace"]
 		)
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
 def send(client=None, method=None, payload=None, debug=False):
+	pprint(payload); print("")
 	payload = json.dumps(payload)
 	client.method_ready.clear()
 	client.logger.debug("Executing method: {0}".format(method))
@@ -170,15 +166,6 @@ def send(client=None, method=None, payload=None, debug=False):
 	client.websocket.send_text(payload)
 	if client.method_ready.wait(5):
 		validate_response(client=client, response=client.iris.response)
-
-def send2(client=None, method=None, payload=None, debug=False):
-	payload = json.dumps(payload)
-	client.method_ready.clear()
-	client.logger.debug("Executing method: {0}".format(method))
-	client.logger.debug("Sending payload: {}".format(payload))
-	client.websocket.send_text(payload)
-	if client.method_ready.wait(5):
-		validate_response(client=client, response=client.response)
 
 def validate_response(client=None, response=None):
 	if "error" in response["type"].lower():
