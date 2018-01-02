@@ -1,7 +1,7 @@
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.capability import Capability
+from iris.base import Capability
 from pprint import pprint
 
 class Device(Capability):

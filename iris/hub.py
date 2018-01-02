@@ -1,8 +1,7 @@
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.capability import Capability
-from pprint import pprint
+from iris.base import Capability
 
 class Hub(Capability):
 	def __init__(self, iris):
@@ -130,7 +129,8 @@ class Info(Capability):
 
 		capabilities = ["hub", "hub4g", "hubadv", "hubalarm", "hubav", "hubbackup", "hubchime",
 			"hubconn", "hubdebug", "hubhue", "hubdebug", "hubmetric", "hubnet", "hubpow",
-			"hubrflx", "hubsercomm", "hubsounds", "hubvol", "hubzigbee", "hubzwave"]		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
+			"hubrflx", "hubsercomm", "hubsounds", "hubvol", "hubzigbee", "hubzwave"]
+		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
 
 		if self.iris.capability_validator[self.namespace]["is_device"] == True:
 			for method_name, obj in methods.items():

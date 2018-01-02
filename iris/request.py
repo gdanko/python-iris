@@ -121,6 +121,18 @@ def place_request(client=None, **kwargs):
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
+def prodcat_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.method(
+			destination=client.iris.account_address,
+			method=content["method"],
+			namespace=content["namespace"]
+		)
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, method=content["method"], payload=payload, debug=client.debug)
+
 def rule_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
 	if client.success:
@@ -158,7 +170,6 @@ def session_request(client=None, **kwargs):
 		send(client=client, method=content["method"], payload=payload, debug=client.debug)
 
 def send(client=None, method=None, payload=None, debug=False):
-	pprint(payload); print("")
 	payload = json.dumps(payload)
 	client.method_ready.clear()
 	client.logger.debug("Executing method: {0}".format(method))
@@ -183,5 +194,6 @@ def validate_response(client=None, response=None):
 			message = "The method {} failed with an unknown error.".format(method)
 
 		utils.make_error(client=client, content_key="message", content=message)
+
 	else:
 		utils.make_success(client=client, content=response)

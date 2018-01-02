@@ -1,8 +1,7 @@
+from iris.base import Capability
 import iris.payloads as payloads
 import iris.request as request
 import iris.utils as utils
-from iris.capabilities.capability import Capability
-from pprint import pprint
 import sys
 
 class Subsystem(Capability):

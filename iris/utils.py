@@ -1,3 +1,6 @@
+from distutils.version import LooseVersion, StrictVersion
+from pprint import pprint
+from uuid import UUID
 import datetime
 import inspect
 import iris.database as db
@@ -11,9 +14,6 @@ import re
 import sys
 import time
 import yaml
-from distutils.version import LooseVersion, StrictVersion
-from pprint import pprint
-from uuid import UUID
 
 # Set up the logger
 def configure_logger(loggerid=None, debug=False):
@@ -117,57 +117,6 @@ def farenheit_to_celsius(temp):
 def celsius_to_farenheit(temp):
 	return (((temp * 9) / 5) + 32)
 
-# Validator functions
-def fetch_readable_attributes(validator, capabilities):
-	readable = {
-		"base": {
-			"address": {
-				"description": "Address of the device in the format DRIV::namespace::id.",
-				"readonly": True,
-				"required": True,
-				"type": "string"
-			},
-			"id": {
-				"description": "UUID of the device.",
-				"readonly": True,
-				"required": True,
-				"type": "uuid"
-			}
-		}
-	}
-	readable = {}
-	for capability in capabilities:
-		readable[capability] = validator[capability]["attributes"]
-	return readable
-
-def fetch_writable_attributes(readable):
-	writable = {}
-	for namespace in readable.keys():
-		namespace_writable = [{name: obj} for name, obj in readable[namespace].items() if obj["readonly"] == False]
-		if len(namespace_writable) > 0:
-			writable[namespace] = {}
-			for item in namespace_writable:
-				for name, obj in item.items():
-					writable[namespace][name] = obj
-
-	return writable
-
-def fetch_methods(validator, capabilities):
-	methods = {}
-	for capability in capabilities:
-		if len(validator[capability]["methods"]) > 0:
-			for method_name, obj in validator[capability]["methods"].items():
-				methods[method_name] = obj
-
-	return methods
-
-# May be able to retire this one
-def fetch_parameters(namespace, method, validator):
-	required = validator[namespace]["methods"][method]["required"]
-	oneof = validator[namespace]["methods"][method]["oneof"]
-	valid = validator[namespace]["methods"][method]["valid"]
-	return required, oneof, valid
-
 # Miscellaneous functions
 def classname(c):
 	try:
@@ -216,22 +165,28 @@ def __too_many_optional_error(method, oneof):
 	return "the {0} method will accept only one of the following parameters: {1}".format(method, ", ".join(oneof))
 
 def method_validator(client=None, **kwargs):
-	if ("required" in kwargs) and ("oneof" in kwargs) and ("valid" in kwargs):
-		required = kwargs["required"]
-		oneof = kwargs["oneof"]
-		valid = kwargs["valid"]
-	else: 
-		required, oneof, valid = fetch_parameters(kwargs["namespace"], kwargs["method"], client.iris.validator)
+	directory = kwargs["directory"] if "directory" in kwargs else None
+	method = kwargs["method"] if "method" in kwargs else None
+	namespace = kwargs["namespace"] if "namespace" in kwargs else None
+	attribute = kwargs["attribute"] if "attribute" in kwargs else None
+
+	params = db.fetch_method_parameters(directory, namespace, method)
 
 	content = {
 		"attributes": {},
 		"destination": None,
-		"method": kwargs["method"] if "method" in kwargs else None,
-		"namespace": kwargs["namespace"] if "namespace" in kwargs else None,
-		"attribute": kwargs["attribute"] if "attribute" in kwargs else None,
+		"method": method,
+		"namespace": namespace,
+		"attribute": attribute,
 	}
-
-	if "params" not in valid: return content
+	if len(params.keys()) > 0:
+		valid = {"params": params}
+		required = [name for name, obj in valid["params"].items() if obj["required"] == 1]
+		for name, obj in valid["params"].items():
+			if obj["valid"] is not None:
+				valid[name] = re.split("\s*,\s*", obj["valid"])
+	else:
+		return content
 
 	errors = []
 	method = kwargs["method"] if "method" in kwargs else "unknown method"
@@ -245,15 +200,6 @@ def method_validator(client=None, **kwargs):
 		missing = list( set(required) - set(kwargs.keys()) )
 		if (len(missing) != 0):
 			errors.append(__missing_attributes_error(method, missing))
-
-	if oneof:
-		if len(oneof) > 0:
-			for oneof_list in oneof:
-				if len(set(oneof_list).intersection(kwargs.keys())) <= 0:
-					errors.append(__missing_optional_error(method, oneof_list))
-
-				if len(set(oneof_list).intersection(kwargs.keys())) > 1:
-					errors.append(__too_many_optional_error(method, oneof_list))
 
 	for param, obj in valid["params"].items():
 		if param in kwargs and param in valid["params"]:
@@ -336,7 +282,6 @@ def method_validator(client=None, **kwargs):
 	if "placeId" in content["attributes"]:
 		if not is_uuid(content["attributes"]["placeId"]):
 			placeId = db.find_place_id(table="places", name=content["attributes"]["placeId"])
-
 			if placeId:
 				content["attributes"]["placeId"] = placeId
 			else:
