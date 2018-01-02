@@ -5,3 +5,4 @@ dist/*.tar.gz
 capability
 test.py
 payloads.txt
+.DS_Store
