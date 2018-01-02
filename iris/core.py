@@ -34,7 +34,7 @@ class Iris(object):
 
 		copyfile(
 			"{}/data/iris.db".format(PACKAGE_ROOT),
-			"{}/iris.db".format(os.path.expanduser("~"))
+			"{}/.iris.db".format(os.path.expanduser("~"))
 		)
 
 		db.prepare_database()
