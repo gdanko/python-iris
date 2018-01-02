@@ -20,7 +20,7 @@ def read(fname):
 
 setup(
 	name = "iris",
-	version = "0.3.0",
+	version = "0.3.1",
 	author = "Gary Danko",
 	author_email = "gdanko@gmail.com",
 	url = "https://github.com/gdanko/python-iris",

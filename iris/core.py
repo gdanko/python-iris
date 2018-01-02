@@ -1,43 +1,37 @@
-#from iris.capabilities.account import Account
-#from iris.capabilities.place import Place
-#from iris.capabilities.rule import Rule
-#from iris.capabilities.scene import Scene
-from lomond import WebSocket
-from pprint import pprint
 from shutil import copyfile
+import os
+
+PACKAGE_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+copyfile(
+	"{}/data/iris.db".format(PACKAGE_ROOT),
+	"{}/.iris.db".format(os.path.expanduser("~"))
+)
+
+from iris.base import Account
+from iris.base import Place
+from iris.service import Rule
+from iris.service import Scene
+from iris.service import Session
+from lomond import WebSocket
+from pprint import pprint, pformat
 import iris.authenticator as authenticator
 import iris.base as base
 import iris.database as db
 import iris.exception as exception
 import iris.payloads as payloads
 import iris.request as request
-import iris.service as service
 import iris.utils as utils
-import logging
-import os
-import pkgutil
+import json
 import re
 import sys
 import threading
-import time
-import yaml
-
-PACKAGE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 class Iris(object):
-	# lomond documentation
-	# http://lomond.readthedocs.io/en/latest/
 	def __init__(self, **kwargs):
 		self.success = None
 		self.classname = utils.classname(self)
 		self.websocket_uri = "wss://bc.irisbylowes.com/websocket"
-
-		copyfile(
-			"{}/data/iris.db".format(PACKAGE_ROOT),
-			"{}/.iris.db".format(os.path.expanduser("~"))
-		)
-
-		db.prepare_database()
 
 		if not "account" in kwargs:
 			raise exception.MissingConstructorParameter(parameter="account")
@@ -67,7 +61,8 @@ class Iris(object):
 					name = db.name_from_address(address=response["headers"]["source"])
 					if name != None:
 						response["headers"]["name"] = name
-			pprint(response); print("")
+
+			self.logger.debug(pformat(response))
 			#if "correlationId" in response["headers"]:
 			#	namespace, method = db.namespace_and_method_from_cid(response["headers"]["correlationId"])
 			#	print(namespace)
@@ -143,10 +138,10 @@ class Iris(object):
 		t = threading.Thread(name="iris_listener", target=self.socket_run)
 		t.start()
 		if self.socket_ready.wait(5):
-				session = service.Session(self)
+				session = Session(self)
 				session.SetActivePlace(placeId=self.place_id)
-				pprint(session.response)
 				if session.success:
+					db.prepare_database()
 					self.configure_database()
 
 	def init_session(self, content):
@@ -163,10 +158,10 @@ class Iris(object):
 				self.socket_ready.set()
 
 	def configure_database(self):
-		account = base.Account(self)
-		place = base.Place(self)
-		rule = service.Rule(self)
-		scene = service.Scene(self)
+		account = Account(self)
+		place = Place(self)
+		rule = Rule(self)
+		scene = Scene(self)
 
 		account.ListPlaces()
 		if self.method_ready.wait(5):
@@ -202,9 +197,6 @@ class Iris(object):
 				request.validate_response(client=scene, response=self.response)
 				self.scenes = scene.response["payload"]["attributes"]["scenes"]
 				db.populate_scenes(self.scenes)
-
-		#cid = db.find_correlation_id(namespace="rule", method="ListRules")
-		#print(cid)
 
 	def stop(self):
 		self.websocket.close()
