@@ -29,15 +29,13 @@ setup(
 	packages = ["iris"],
 	package_dir = {"iris": "iris"},
 	package_data = {
-		"iris": ["data/iris.yaml", "data/iris.db"],
+		"iris": ["data/iris.db"],
 	},
 	install_requires = [
 		"requests",
 		"lomond",
 		"pyyaml"
 	],
-	include_package_data = True,
-
 
 	# See https://pypi.python.org/pypi?%3Aaction=list_classifiers
 	classifiers = [

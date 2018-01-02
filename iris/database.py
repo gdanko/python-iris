@@ -212,9 +212,6 @@ def fetch_methods(directory, capabilities):
 
 def fetch_method_parameters(directory, namespace, method):
 	parameters = {}
-	#directory = "capability"
-	#namespace = "dim"
-	#method = "RampBrightness"
 	select = "SELECT method_parameters.* FROM methods JOIN method_parameters on methods.directory=method_parameters.directory AND methods.namespace=method_parameters.namespace AND methods.method=method_parameters.method WHERE methods.directory='{}' AND methods.namespace='{}' AND methods.method='{}' AND methods.enabled=1".format(directory, namespace, method)
 	res = cursor.execute(select)
 	conn.commit()
