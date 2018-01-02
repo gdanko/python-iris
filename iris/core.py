@@ -56,11 +56,11 @@ class Iris(object):
 		if response:
 			
 			self.response = None
-			if response["type"] == "base:ValueChange":
-				if "source" in response["headers"]:
-					name = db.name_from_address(address=response["headers"]["source"])
-					if name != None:
-						response["headers"]["name"] = name
+			#if response["type"] == "base:ValueChange":
+			#	if "source" in response["headers"]:
+			#		name = db.name_from_address(address=response["headers"]["source"])
+			#		if name != None:
+			#			response["headers"]["name"] = name
 
 			self.logger.debug(pformat(response))
 			#if "correlationId" in response["headers"]:

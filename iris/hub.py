@@ -1,12 +1,29 @@
-import iris.payloads as payloads
+from iris.base import Capability
+import iris.database as db
 import iris.request as request
 import iris.utils as utils
-from iris.base import Capability
 
 class Hub(Capability):
 	def __init__(self, iris):
 		Capability.__init__(self, iris)
-		self.common_capabilities = ["dev", "devadv", "devconn", "devpow"]
+		self.classname = utils.classname(self)
+
+		def generate_method_fn(obj, directory, namespace, method):
+			fn_name = method
+			def fn(self, **kwargs):
+				request.hub_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
+			setattr(obj, fn_name, fn)
+
+		common_capabilities = ["dev", "devadv", "devconn", "devpow"]
+		module_capabilities = [self.namespace]
+		capabilities = sorted(common_capabilities + module_capabilities)
+		readable = db.fetch_readable_attributes("capability", capabilities)
+		writable = db.fetch_writable_attributes("capability", capabilities)
+		methods = db.fetch_methods("capability", capabilities)
+
+		for namespace_name, namespace_obj in methods.items():
+			for method_name in namespace_obj:
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)
 
 	def GetAttribute(self, **kwargs):
 		request.get_attributes(client=self, method="GetAttribute", **kwargs)
@@ -16,244 +33,90 @@ class Hub(Capability):
 
 class Hub4G(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hub4g"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Advanced(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubadv"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Alarm(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubalarm"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Backup(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubbackup"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Base(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hub"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Chime(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubchime"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Connection(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubconn"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Debug(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubdebug"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Hue(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubhue"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
-
-class Info(Capability):
-	def __init__(self, **kwargs):
 		Hub.__init__(self, **kwargs)
-		self.namespace = "hub"
-
-		capabilities = ["hub", "hub4g", "hubadv", "hubalarm", "hubav", "hubbackup", "hubchime",
-			"hubconn", "hubdebug", "hubhue", "hubdebug", "hubmetric", "hubnet", "hubpow",
-			"hubrflx", "hubsercomm", "hubsounds", "hubvol", "hubzigbee", "hubzwave"]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
 
 class Metrics(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubmetric"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Network(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubnet"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Power(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubpow"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Reflex(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubrflx"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class SerComm(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubsercomm"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Sounds(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubsounds"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Volume(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubvol"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Zigbee(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubzigbee"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		Hub.__init__(self, **kwargs)
 
 class Zwave(Capability):
 	def __init__(self, **kwargs):
-		Hub.__init__(self, **kwargs)
 		self.namespace = "hubzwave"
-
-		capabilities = [self.namespace]
-		readble, writable, methods = get_rwm(self.iris.capability_validator, capabilities)
-
-		if self.iris.capability_validator[self.namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
-
-def generate_method_fn(obj, method, enabled, required, oneof, valid):
-	if enabled == True:
-		fn_name = method
-		def fn(self, **kwargs):
-			pprint(fn_name)
-			request.hub_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
-		setattr(obj, fn_name, fn)
-
-def get_rwm(validator, capabilities):
-	readable = utils.fetch_readable_attributes(validator, capabilities)
-	writable = utils.fetch_writable_attributes(readable)
-	methods = utils.fetch_methods(validator, capabilities)
-	return readable, writable, methods
+		Hub.__init__(self, **kwargs)

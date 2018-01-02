@@ -1,8 +1,8 @@
-def session(namespace=None, method=None):
+def service(destination=None, namespace=None, method=None):
 	return {
 		"type": "{}:{}".format(namespace, method),
 		"headers": {
-			"destination":"SERV:sess:",
+			"destination": destination,
 			"correlationId": "78f7d29a-222e-4976-9d2b-d1f553cf8881",
 			"isRequest" :True
 		},

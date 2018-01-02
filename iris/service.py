@@ -1,19 +1,15 @@
 from iris.base import Capability
 import iris.database as db
-import iris.payloads as payloads
 import iris.request as request
-import iris.utils as utils
-import sys
 
 class Service(Capability):
 	def __init__(self, iris):
 		Capability.__init__(self, iris)
-		self.classname = utils.classname(self)
 
-		def generate_method_fn(obj, directory, method):
+		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.session_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargs)
+				request.service_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(obj, fn_name, fn)
 
 		capabilities = [self.namespace]
@@ -23,7 +19,7 @@ class Service(Capability):
 
 		for namespace_name, namespace_obj in methods.items():
 			for method_name in namespace_obj:
-				generate_method_fn(self.__class__, "service", method_name)
+				generate_method_fn(self.__class__, "service", namespace_name, method_name)
 
 	def GetAttribute(self, **kwargs):
 		request.get_attributes(client=self, method="GetAttribute", **kwargs)

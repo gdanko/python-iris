@@ -34,15 +34,15 @@ class Account(Capability):
 		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
-		def generate_method_fn(obj, directory, method):
+		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.account_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargs)
+				request.account_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for namespace_name, namespace_obj in methods.items():
 			for method_name in namespace_obj:
-				generate_method_fn(self.__class__, "capability", method_name)
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)
 
 class Place(Capability):
 	def __init__(self, init):
@@ -54,15 +54,15 @@ class Place(Capability):
 		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
-		def generate_method_fn(obj, directory, method):
+		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.place_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargs)
+				request.place_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for namespace_name, namespace_obj in methods.items():
 			for method_name in namespace_obj:
-				generate_method_fn(self.__class__, "capability", method_name)
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)
 
 class ProductCatalog(Capability):
 	def __init__(self, init):
@@ -74,15 +74,15 @@ class ProductCatalog(Capability):
 		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
-		def generate_method_fn(obj, directory, method):
+		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.prodcat_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargs)
+				request.prodcat_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for namespace_name, namespace_obj in methods.items():
 			for method_name in namespace_obj:
-				generate_method_fn(self.__class__, "capability", method_name)
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)
 
 class Rule(Capability):
 	def __init__(self, init):
@@ -94,15 +94,15 @@ class Rule(Capability):
 		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
-		def generate_method_fn(obj, directory, method):
+		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.rule_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargs)
+				request.rule_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for namespace_name, namespace_obj in methods.items():
 			for method_name in namespace_obj:
-				generate_method_fn(self.__class__, "capability", method_name)
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)
 
 class Scene(Capability):
 	def __init__(self, init):
@@ -114,7 +114,7 @@ class Scene(Capability):
 		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
-		def generate_method_fn(obj, directory, method):
+		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
 				request.scene_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargss)
@@ -122,24 +122,24 @@ class Scene(Capability):
 
 		for namespace_name, namespace_obj in methods.items():
 			for method_name in namespace_obj:
-				generate_method_fn(self.__class__, "capability", method_name)
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)
 
 class Schedule(Capability):
 	def __init__(self, init):
 		Capability.__init__(self, init)
-		self.namespace = "sched"
+		self.namespace = "schedule"
 
 		capabilities = [self.namespace]
 		readable = db.fetch_readable_attributes("capability", capabilities)
 		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
-		def generate_method_fn(obj, directory, method):
+		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.scene_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargs)
+				request.scene_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for namespace_name, namespace_obj in methods.items():
 			for method_name in namespace_obj:
-				generate_method_fn(self.__class__, "capability", method_name)
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)

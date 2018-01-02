@@ -74,50 +74,6 @@ def populate_scenes(scenes):
 		))
 		conn.commit()
 
-def populate_validator(validator):
-	for directory in validator:
-		for namespace in validator[directory]:
-			if "methods" in validator[directory][namespace]:
-				for method_name, method_obj in validator[directory][namespace]["methods"].items():
-					cid_insert = "INSERT OR REPLACE INTO correlation (id, type, namespace, method) VALUES (?, ?,?,?)"
-					cursor.execute(cid_insert, (
-						method_obj["correlation_id"],
-						directory,
-						namespace,
-						method_name,
-					))
-					conn.commit()
-
-					if "parameters" in method_obj:
-						for param_name, param_obj in method_obj["parameters"].items():
-							pname = param_name
-
-							pdesc = re.sub(r"\s+", " ", param_obj["description"]) if "description" in param_obj else None
-							ptype = param_obj["type"]
-
-							if "required" in param_obj:
-								prequired = 1 if param_obj["required"] == True else 0
-							else:
-								prequired = None
-
-							pmin = param_obj["min"] if "min" in param_obj else None
-							pmax = param_obj["max"] if "max" in param_obj else None
-						
-							param_insert = "INSERT OR REPLACE INTO parameters (type,namespace,method,enabled,pname,pdesc,ptype,prequired,pmin,pmax) VALUES (?,?,?,?,?,?,?,?,?,?)"
-							cursor.execute(param_insert, (
-								directory,
-								namespace,
-								method_name,
-								method_obj["enabled"],
-								pname,
-								pdesc,
-								ptype,
-								prequired,
-								pmin,
-								pmax
-							))
-							conn.commit()
-
 def find_address(table=None, name=None, id=None):
 	selector = None
 	selected = None
@@ -198,7 +154,7 @@ def fetch_writable_attributes(directory, capabilities):
 
 def fetch_methods(directory, capabilities):
 	methods = {}
-	select = "SELECT * FROM methods WHERE directory='{}' AND namespace IN ({}) AND enabled=1".format(directory, quote_list(capabilities))
+	select = "SELECT * FROM methods WHERE  enabled=1".format(directory, quote_list(capabilities))
 	res = cursor.execute(select)
 	conn.commit()
 	for row in res:
@@ -221,16 +177,11 @@ def fetch_method_parameters(directory, namespace, method):
 
 	return parameters
 
-#def namespace_and_method_from_cid(cid=None):
-#	unions = ["SELECT namespace, method, address FROM {}".format(t) for t in columns.keys()]
-#	select = "SELECT * FROM ({}) WHERE address='{}'".format(" UNION ".join(unions), cid)
-#	cursor.execute(select)
-#	result = cursor.fetchone()
-#	if result:
-#		if ("namespace" in result) and ("method" in result):
-#			return result["namespace"], result["method"]
-#	
-#	return None, None
+def fetch_attribute(directory, namespace, attribute):
+	select = "SELECT * FROM attributes WHERE directory='{}' AND namespace='{}' AND name='{}'".format(directory, namespace, attribute)
+	cursor.execute(select)
+	result = cursor.fetchone()
+	return result if result else None
 
 def _dict_factory(cursor, row):
 	d = {}

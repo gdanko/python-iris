@@ -130,18 +130,18 @@ def classname(c):
 def generate_random(length=8):
 	return "".join(random.choice("0123456789abcdef") for x in range(length))
 
-def make_success(client=None, content_key=None, content=None):
-	make_response(client=client, success=True, content_key=content_key, content=content)
+def make_success(client=None, content_key=None, content=None, namespace=None, method=None):
+	make_response(client=client, success=True, content_key=content_key, content=content, namespace=namespace, method=method)
 
-def make_error(client=None, content_key=None, content=None):
-	make_response(client=client, success=False, content_key=content_key, content=content)
+def make_error(client=None, content_key=None, content=None, namespace=None, method=None):
+	make_response(client=client, success=False, content_key=content_key, content=content, namespace=namespace, method=method)
 
-def make_response(client=None, success=None, content_key=None, content=None):
+def make_response(client=None, success=None, content_key=None, content=None, namespace=None, method=None):
 	client.success = success
 	status = "success" if success == True else "error"
 
 	if content_key:	
-		client.response = {"status": status, content_key: content}
+		response = {"status": status, content_key: content}
 	else:
 		if content:
 			if isinstance(content, dict):
@@ -151,7 +151,12 @@ def make_response(client=None, success=None, content_key=None, content=None):
 				response = {"status": status, "message": content}
 		else:
 			response = {"status": status, "message": "Unknown"}
-		client.response = response
+
+	if namespace:
+		response["namespace"] = namespace
+	if method:
+		response["method"] = method
+	client.response = response
 
 # Method and set/get attribute validation
 # These will eventually be combined
@@ -222,51 +227,7 @@ def method_validator(client=None, **kwargs):
 			else:
 				content["attributes"][param] = kwargs[param]
 
-	# Try to figure out the destination
-	if "device" in content["attributes"]:
-		device_address = None
-		if is_uuid(content["attributes"]["device"]):
-			identifier_type = "uuid"
-			device_address = db.find_address(table="devices", id=content["attributes"]["device"])
-		else:
-			identifier_type = "name"
-			device_address = db.find_address(table="devices", name=content["attributes"]["device"])
-
-		if device_address:
-			content["destination"] = device_address
-			content["attributes"].pop("device")
-		else:
-			errors.append("The device with the {} of {} was not found.".format(identifier_type, content["attributes"]["device"]))
-
-	if "person" in content["attributes"]:
-		person_address = None
-		if is_uuid(content["attributes"]["person"]):
-			identifier_type = "uuid"
-			person_address = db.find_address(table="people", id=content["attributes"]["person"])
-		else:
-			identifier_type = "name"
-			person_address = db.find_address(table="people", name=content["attributes"]["person"])
-
-		if person_address:
-			content["destination"] = person_address
-			content["attributes"].pop("person")
-		else:
-			errors.append("The person with the {} of {} was not found.".format(identifier_type, content["attributes"]["person"]))
-
-	if "place" in content["attributes"]:
-		place_address = None
-		if is_uuid(content["attributes"]["place"]):
-			identifier_type = "uuid"
-			place_address = db.find_address(table="places", id=content["attributes"]["place"])
-		else:
-			identifier_type = "name"
-			place_address = db.find_address(table="places", name=content["attributes"]["place"])
-
-		if place_address:
-			content["destination"] = place_address
-			content["attributes"].pop("place")
-		else:
-			errors.append("The place with the {} of {} was not found.".format(identifier_type, content["attributes"]["place"]))
+	get_destination(content, errors)
 
 	# For functions that require a personId in the attributes
 	if "personId" in content["attributes"]:
@@ -308,6 +269,110 @@ def method_validator(client=None, **kwargs):
 		make_response(client=client, success=False, content="; ".join(errors))
 	else:
 		return content
+
+def attribute_validator(client=None, **kwargs):
+	attribute = kwargs["attribute"] if "attribute" in kwargs else None
+	device = kwargs["device"] if "device" in kwargs else None
+	directory = kwargs["directory"] if "directory" in kwargs else None
+	method = kwargs["method"] if "method" in kwargs else None
+	namespace = kwargs["namespace"] if "namespace" in kwargs else None
+	value = kwargs["value"] if "value" in kwargs else None
+	errors = []
+
+	content = {
+		"attribute": attribute,
+		"destination": None,
+		"method": method,
+		"namespace": namespace,
+	}
+
+	required = ["attribute", "device", "namespace"]
+	if method == "SetAttribute": required.append("value")
+
+	if isinstance(required, list) and len(required) > 0:
+		missing = list( set(required) - set(kwargs.keys()) )
+		if (len(missing) != 0):
+			errors.append(__missing_attributes_error(method, missing))
+
+	for key, value in kwargs.items():
+		if (key in required) and (key != "value"):
+			content[key] = value
+
+	attr = db.fetch_attribute(directory=directory, namespace=namespace, attribute=attribute)
+	if attr:
+		if method == "SetAttribute":
+			if ("valid" in attr) and (attr["valid"]is not None):
+				attr["valid"] = re.split("\s*,\s*", attr["valid"])
+			
+			if ("valid" in attr) and (isinstance(attr["valid"], list)):
+				lower = [valid.lower() for valid in attr["valid"]]
+				quoted = ["'{}'".format(valid) for valid in lower]
+				if isinstance(value, str):
+					value = value.lower()
+				if not value in lower:
+					errors.append("\"{}\" is an invalid valid for the \"{}\" attribute. Valid values are: {}.".format(value, attribute, ", ".join(quoted)))
+
+			elif ("min" in attr) and ("max" in attr):
+				if (attr["min"] is not None) and (attr["max"] is not None):
+					if value < attr["min"]:
+						errors.append("The value \"{}\" specified for the \"{}\" attribute is lower than the minimum allowed value of {}.".format(value, attribute, attr["min"]))
+					if value > attr["max"]:
+						errors.append("The value \"{}\" specified for the \"{}\" attribute is higher than the maximum allowed value of {}.".format(value, attribute, attr["max"]))
+
+			content["value"] = value	
+
+	else:
+		errors.append("The attribute \"{}\" does not exist in the namespace \"{}\".".format(attribute, namespace))
+
+	get_destination(content, errors)
+
+	if len(errors) > 0:
+		make_response(client=client, success=False, content="; ".join(errors))
+	else:
+		return content
+
+def get_destination(content, errors):
+	if "device" in content:
+		device_address = None
+		if is_uuid(content["device"]):
+			identifier_type = "uuid"
+			device_address = db.find_address(table="devices", id=content["device"])
+		else:
+			identifier_type = "name"
+			device_address = db.find_address(table="devices", name=content["device"])
+
+		if device_address:
+			content["destination"] = device_address
+		else:
+			errors.append("The device with the {} of {} was not found.".format(identifier_type, content["device"]))
+
+	if "person" in content:
+		person_address = None
+		if is_uuid(content["person"]):
+			identifier_type = "uuid"
+			person_address = db.find_address(table="people", id=content["person"])
+		else:
+			identifier_type = "name"
+			person_address = db.find_address(table="people", name=content["person"])
+
+		if person_address:
+			content["destination"] = person_address
+		else:
+			errors.append("The person with the {} of {} was not found.".format(identifier_type, content["person"]))
+
+	if "place" in content:
+		place_address = None
+		if is_uuid(content["place"]):
+			identifier_type = "uuid"
+			place_address = db.find_address(table="places", id=content["place"])
+		else:
+			identifier_type = "name"
+			place_address = db.find_address(table="places", name=content["place"])
+
+		if place_address:
+			content["destination"] = place_address
+		else:
+			errors.append("The place with the {} of {} was not found.".format(identifier_type, content["place"]))
 
 # Begin python-specific
 def __check_python_version(req_version):

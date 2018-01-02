@@ -1,21 +1,19 @@
-import iris.payloads as payloads
-import iris.request as request
-import iris.utils as utils
 from iris.base import Capability
 from pprint import pprint
+import iris.database as db
+import iris.request as request
+import iris.utils as utils
 
 class Device(Capability):
 	def __init__(self, iris):
 		Capability.__init__(self, iris)
 		self.classname = utils.classname(self)
 
-		def generate_method_fn(obj, method, enabled, required, oneof, valid):
-			if enabled == True:
-				fn_name = method
-				def fn(self, **kwargs):
-					pprint(fn_name)
-					request.device_method_request(client=self, namespace=self.namespace, method=method, required=required, oneof=oneof, valid=valid, **kwargs)
-				setattr(obj, fn_name, fn)
+		def generate_method_fn(obj, directory, namespace, method):
+			fn_name = method
+			def fn(self, **kwargs):
+				request.device_method_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
+			setattr(obj, fn_name, fn)
 
 		devices = {
 			"iris.device.Camera": { "namespace": "camera", "capabilities": ["dim", "indicator", "swit"] },
@@ -40,19 +38,17 @@ class Device(Capability):
 		common_capabilities = ["dev", "devadv", "devconn", "devpow"]
 		module_capabilities = devices[self.classname]["capabilities"]
 		capabilities = sorted(common_capabilities + module_capabilities)
-		readable = utils.fetch_readable_attributes(self.iris.capability_validator, capabilities)
-		writable = utils.fetch_writable_attributes(readable)
-		methods = utils.fetch_methods(self.iris.capability_validator, capabilities)
+		methods = db.fetch_methods("capability", capabilities)
 
-		if self.iris.capability_validator[namespace]["is_device"] == True:
-			for method_name, obj in methods.items():
-				generate_method_fn(self.__class__, method_name, obj["enabled"], obj["required"], obj["oneof"], obj["valid"])
+		for namespace_name, namespace_obj in methods.items():
+			for method_name in namespace_obj:
+				generate_method_fn(self.__class__, "capability", namespace_name, method_name)
 
 	def GetAttribute(self, **kwargs):
-		request.get_attributes(client=self, method="GetAttribute", **kwargs)
+		request.get_attributes(client=self, directory="capability", method="GetAttribute", **kwargs)
 
 	def SetAttribute(self, **kwargs):
-		request.set_attributes(client=self, method="SetAttribute", **kwargs)
+		request.set_attributes(client=self, directory="capability", method="SetAttribute", **kwargs)
 
 class Camera(Device):
 	def __init__(self, iris):

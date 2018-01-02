@@ -1,4 +1,4 @@
-from pprint import pprint
+from pprint import pprint, pformat
 import inspect
 import iris.database as db
 import iris.payloads as payloads
@@ -8,22 +8,13 @@ import os
 import sys
 
 def get_attributes(client=None, **kwargs):
-	kwargs.update({
-		"required": ["device"],
-		"oneof": [],
-		"valid": {
-			"params": {
-				"device": {"type": "string"}
-			}
-		}
-	})
-	content = utils.method_validator(client=client, **kwargs)
+	content = utils.attribute_validator(client=client, **kwargs)
 	if client.success:
 		payload = payloads.get_attributes(
 			destination=content["destination"],
 			namespace=content["namespace"]
 		)
-		send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
 		if client.success:
 			attribute = "{}:{}".format(content["namespace"], content["attribute"])
 			if attribute in client.response["payload"]["attributes"]:
@@ -47,26 +38,17 @@ def get_attributes(client=None, **kwargs):
 				)
 
 def set_attributes(client=None, **kwargs):
-	kwargs.update({
-		"required": ["device"],
-		"oneof": [],
-		"valid": {
-			"params": {
-				"device": {"type": "string"},
-				"value": {"type": "string"},
-			}
-		}
-	})
-	content = utils.method_validator(client=client, **kwargs)
+	content = utils.attribute_validator(client=client, **kwargs)
 	if client.success:
 		payload = payloads.set_attributes(
 			destination=content["destination"],
 			namespace=content["namespace"],
 			attribute=content["attribute"],
-			value=content["attributes"]["value"].upper(),
+			value=content["value"].upper(),
 		)
-		send(client=client, method=content["method"], payload=payload, debug=client.iris.debug)
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
 
+# Generic request for device methods
 def device_method_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
 	if client.success:
@@ -77,8 +59,10 @@ def device_method_request(client=None, **kwargs):
 		)
 		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, method=content["method"], payload=payload, debug=client.debug)
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
 
+
+# Requests for account, place, prodcat, rule, scene, schedule
 def account_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
 	if client.success:
@@ -89,8 +73,59 @@ def account_request(client=None, **kwargs):
 		)
 		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, method=content["method"], payload=payload, debug=client.debug)
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
 
+def place_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.method(
+			destination=client.iris.place_address,
+			method=content["method"],
+			namespace=content["namespace"]
+		)
+		cid = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
+
+def prodcat_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.method(
+			destination=client.iris.account_address,
+			method=content["method"],
+			namespace=content["namespace"]
+		)
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
+
+def rule_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.rule(
+			method=content["method"],
+			namespace=content["namespace"]
+		)
+		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
+
+def scene_request(client=None, **kwargs):
+	content = utils.method_validator(client=client, **kwargs)
+	if client.success:
+		payload = payloads.scene(
+			method=content["method"],
+			namespace=content["namespace"]
+		)
+		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
+		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
+		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
+
+
+# Hub requests
 def hub_request(client=None, **kwargs):
 	method = kwargs["method"]
 	namespace = kwargs["namespace"]
@@ -106,79 +141,33 @@ def hub_request(client=None, **kwargs):
 		cid = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, payload=payload, debug=client.debug)
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
 
-def place_request(client=None, **kwargs):
+# Service requests
+def service_request(client=None, **kwargs):
 	content = utils.method_validator(client=client, **kwargs)
 	if client.success:
-		payload = payloads.method(
-			destination=client.iris.place_address,
-			method=content["method"],
-			namespace=content["namespace"]
-		)
-		cid = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
-		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
-		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, method=content["method"], payload=payload, debug=client.debug)
-
-def prodcat_request(client=None, **kwargs):
-	content = utils.method_validator(client=client, **kwargs)
-	if client.success:
-		payload = payloads.method(
-			destination=client.iris.account_address,
+		payload = payloads.service(
+			destination="SERV:{}:".format(kwargs["namespace"]),
 			method=content["method"],
 			namespace=content["namespace"]
 		)
 		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
 		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, method=content["method"], payload=payload, debug=client.debug)
+		send(client=client, namespace=content["namespace"], method=content["method"], payload=payload, debug=client.debug)
 
-def rule_request(client=None, **kwargs):
-	content = utils.method_validator(client=client, **kwargs)
-	if client.success:
-		payload = payloads.rule(
-			method=content["method"],
-			namespace=content["namespace"]
-		)
-		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
-		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
-		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, method=content["method"], payload=payload, debug=client.debug)
-
-def scene_request(client=None, **kwargs):
-	content = utils.method_validator(client=client, **kwargs)
-	if client.success:
-		payload = payloads.scene(
-			method=content["method"],
-			namespace=content["namespace"]
-		)
-		payload["payload"]["attributes"]["placeId"] = client.iris.place_id
-		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
-		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, method=content["method"], payload=payload, debug=client.debug)
-
-
-def session_request(client=None, **kwargs):
-	content = utils.method_validator(client=client, **kwargs)
-	if client.success:
-		payload = payloads.session(
-			method=content["method"],
-			namespace=content["namespace"]
-		)
-		payload["headers"]["correlationId"] = db.find_correlation_id(namespace=content["namespace"], method=content["method"])
-		for k, v in content["attributes"].items(): payload["payload"]["attributes"][k] = v
-		send(client=client, method=content["method"], payload=payload, debug=client.debug)
-
-def send(client=None, method=None, payload=None, debug=False):
+# Generic send for all request methods and response validator
+def send(client=None, namespace=None, method=None, payload=None, debug=False):
+	client.logger.debug("Executing method: {0}".format(method))
+	client.logger.debug("Sending payload: {}".format(pformat(payload)))
 	payload = json.dumps(payload)
 	client.method_ready.clear()
-	client.logger.debug("Executing method: {0}".format(method))
-	client.logger.debug("Sending payload: {}".format(payload))
+
 	client.websocket.send_text(payload)
 	if client.method_ready.wait(5):
-		validate_response(client=client, response=client.iris.response)
+		validate_response(client=client, namespace=namespace, method=method, response=client.iris.response)
 
-def validate_response(client=None, response=None):
+def validate_response(client=None, namespace=None, method=None, response=None):
 	if "error" in response["type"].lower():
 		errors = []
 		if "payload" in response and "attributes" in response["payload"]:
@@ -193,7 +182,6 @@ def validate_response(client=None, response=None):
 		else:
 			message = "The method {} failed with an unknown error.".format(method)
 
-		utils.make_error(client=client, content_key="message", content=message)
-
+		utils.make_error(client=client, content_key="message", content=message, namespace=namespace, method=method)
 	else:
-		utils.make_success(client=client, content=response)
+		utils.make_success(client=client, content=response, namespace=namespace, method=method)
