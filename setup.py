@@ -34,7 +34,7 @@ setup(
 	install_requires = [
 		"requests",
 		"lomond",
-		"pyyaml"
+		"pyyaml",
 	],
 
 	# See https://pypi.python.org/pypi?%3Aaction=list_classifiers

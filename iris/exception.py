@@ -116,22 +116,18 @@ class WebSocketUpgradeRejected(Exception):
 		self.error = "I was able to connect to the websocket but upgrade failed with the following error: {}.".format(self.message)
 		return self.error
 
-class DeviceMapError(Exception):
-	def __init__(self, message=None):
+class PopulateDatabaseError(Exception):
+	def __init__(self, table=None, message=None):
+		self.table = table
 		self.message = message
 		return
 
 	def __str__(self):
-		self.error = "Failed to generate the required device map. The error is: {}.".format(self.message)
-		return self.error
+		error = ["Failed to populate the {} table.".format(self.table)]
+		if message:
+			error.append("The message is: {}".format(self.message))
 
-class PersonMapError(Exception):
-	def __init__(self, message=None):
-		self.message = message
-		return
-
-	def __str__(self):
-		self.error = "Failed to generate the required person map. The error is: {}.".format(self.message)
+		self.error = " ".join(error)
 		return self.error
 
 class NotAnIrisCoreObject(Exception):

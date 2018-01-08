@@ -13,7 +13,10 @@ import random
 import re
 import sys
 import time
+import uuid
 import yaml
+
+NEEDS_ADDRESS = ["device", "place", "person", "scene", "schedule", "rule"]
 
 # Set up the logger
 def configure_logger(loggerid=None, debug=False):
@@ -24,7 +27,8 @@ def configure_logger(loggerid=None, debug=False):
 
 		logger = logging.getLogger(loggerid)
 		handler = logging.StreamHandler()
-		formatter = logging.Formatter("%(levelname)s %(message)s")
+		#formatter = logging.Formatter("%(levelname)s %(message)s")
+		formatter = logging.Formatter("%(asctime)s.%(msecs)06d [%(levelname)s] %(message)s", "%s")
 		handler.setFormatter(formatter)
 		logger.addHandler(handler)
 		logger.setLevel(level)
@@ -118,6 +122,9 @@ def celsius_to_farenheit(temp):
 	return (((temp * 9) / 5) + 32)
 
 # Miscellaneous functions
+def now():
+	return time.time()
+
 def classname(c):
 	try:
 		module = c.__class__.__module__
@@ -126,6 +133,19 @@ def classname(c):
 	except:
 		print("need a 'not a class' exception")
 		sys.exit(1)
+
+def payload(namespace=None, method=None):
+	return {
+		"type": "{}:{}".format(namespace, method),
+		"headers": {
+			"correlationId": str(uuid.uuid4()),
+			"isRequest": True,
+		},
+		"payload": {
+			"attributes": {},
+			"messageType": "{}:{}".format(namespace, method),
+		}
+	}
 
 def generate_random(length=8):
 	return "".join(random.choice("0123456789abcdef") for x in range(length))
@@ -147,6 +167,8 @@ def make_response(client=None, success=None, content_key=None, content=None, nam
 			if isinstance(content, dict):
 				response = content
 				response["status"] = status
+			elif isinstance(content, list):
+				response = {"status": status, "message": content}
 			elif isinstance(content, str):
 				response = {"status": status, "message": content}
 		else:
@@ -170,20 +192,27 @@ def __too_many_optional_error(method, oneof):
 	return "the {0} method will accept only one of the following parameters: {1}".format(method, ", ".join(oneof))
 
 def method_validator(client=None, **kwargs):
+	# This is where it is tricky.
+	# You cannot pass invalid attributes in the attributes block of the payload
+	# but sometimes I need a device Id or person Id
+	# I need to make sure only valid attributes go in the attributes block
+
+	attribute = kwargs["attribute"] if "attribute" in kwargs else None
 	directory = kwargs["directory"] if "directory" in kwargs else None
 	method = kwargs["method"] if "method" in kwargs else None
 	namespace = kwargs["namespace"] if "namespace" in kwargs else None
-	attribute = kwargs["attribute"] if "attribute" in kwargs else None
+	errors = []
 
 	params = db.fetch_method_parameters(directory, namespace, method)
 
 	content = {
+		"addresses": {},
+		"attribute": attribute,
 		"attributes": {},
-		"destination": None,
 		"method": method,
 		"namespace": namespace,
-		"attribute": attribute,
 	}
+
 	if len(params.keys()) > 0:
 		valid = {"params": params}
 		required = [name for name, obj in valid["params"].items() if obj["required"] == 1]
@@ -191,9 +220,11 @@ def method_validator(client=None, **kwargs):
 			if obj["valid"] is not None:
 				valid[name] = re.split("\s*,\s*", obj["valid"])
 	else:
+		# do this better
+		client.success = True
 		return content
 
-	errors = []
+	
 	method = kwargs["method"] if "method" in kwargs else "unknown method"
 	type_map = {"boolean": bool, "enum": str, "int": int, "string": str, "uuid": str, "double": float}
 
@@ -205,6 +236,12 @@ def method_validator(client=None, **kwargs):
 		missing = list( set(required) - set(kwargs.keys()) )
 		if (len(missing) != 0):
 			errors.append(__missing_attributes_error(method, missing))
+
+		needs_address = {}
+		keys = list(set(required).intersection(NEEDS_ADDRESS))
+		for k in keys:
+			needs_address[k] = kwargs[k]
+			kwargs.pop(k)
 
 	for param, obj in valid["params"].items():
 		if param in kwargs and param in valid["params"]:
@@ -227,7 +264,7 @@ def method_validator(client=None, **kwargs):
 			else:
 				content["attributes"][param] = kwargs[param]
 
-	get_destination(content, errors)
+	get_addresses(content, needs_address, errors)
 
 	# For functions that require a personId in the attributes
 	if "personId" in content["attributes"]:
@@ -248,31 +285,14 @@ def method_validator(client=None, **kwargs):
 			else:
 				errors.append("The place with the name of {} was not found.".format(content["attributes"]["placeId"]))
 
-	# I'm not happy with this but for now it works.
-	# It is only used for set attribute functions.
-	if "settings" in kwargs:
-		settings = kwargs["settings"]
-		if "min" in settings and "max" in settings:
-			if int(content["attributes"]["value"]) < int(settings["min"]):
-				errors.append("The value \"{}\" specified for the \"{}\" attribute is lower than the minimum allowed value of {}.".format(content["attributes"]["value"], kwargs["attribute"], settings["min"]))
-			if int(content["attributes"]["value"]) > int(settings["max"]):
-				errors.append("The value \"{}\" specified for the \"{}\" attribute is higher than the maximum allowed value of {}.".format(content["attributes"]["value"], kwargs["attribute"], settings["max"]))
-
-		elif "valid" in settings:
-			lower = [e.lower() for e in settings["valid"]]
-			if not str(content["attributes"]["value"]).lower() in lower:
-				errors.append("\"{}\" is an invalid valid for the \"{}\" attribute. Valid values are: {}.".format(content["attributes"]["value"], kwargs["attribute"], ", ".join(settings["valid"])))
-			else:
-				content["value"] = block["value"]
-
-	if len(errors) > 0:
-		make_response(client=client, success=False, content="; ".join(errors))
-	else:
+	if len(errors) <= 0:
+		make_success(client=client, content=content)
 		return content
+	else:
+		make_error(client=client, content=errors)
 
 def attribute_validator(client=None, **kwargs):
 	attribute = kwargs["attribute"] if "attribute" in kwargs else None
-	device = kwargs["device"] if "device" in kwargs else None
 	directory = kwargs["directory"] if "directory" in kwargs else None
 	method = kwargs["method"] if "method" in kwargs else None
 	namespace = kwargs["namespace"] if "namespace" in kwargs else None
@@ -280,8 +300,8 @@ def attribute_validator(client=None, **kwargs):
 	errors = []
 
 	content = {
+		"addresses": {},
 		"attribute": attribute,
-		"destination": None,
 		"method": method,
 		"namespace": namespace,
 	}
@@ -293,6 +313,12 @@ def attribute_validator(client=None, **kwargs):
 		missing = list( set(required) - set(kwargs.keys()) )
 		if (len(missing) != 0):
 			errors.append(__missing_attributes_error(method, missing))
+
+		needs_address = {}
+		keys = list(set(required).intersection(NEEDS_ADDRESS))
+		for k in keys:
+			needs_address[k] = kwargs[k]
+			kwargs.pop(k)
 
 	for key, value in kwargs.items():
 		if (key in required) and (key != "value"):
@@ -313,68 +339,47 @@ def attribute_validator(client=None, **kwargs):
 					errors.append("\"{}\" is an invalid valid for the \"{}\" attribute. Valid values are: {}.".format(value, attribute, ", ".join(quoted)))
 
 			elif ("min" in attr) and ("max" in attr):
-				if (attr["min"] is not None) and (attr["max"] is not None):
-					if value < attr["min"]:
-						errors.append("The value \"{}\" specified for the \"{}\" attribute is lower than the minimum allowed value of {}.".format(value, attribute, attr["min"]))
-					if value > attr["max"]:
-						errors.append("The value \"{}\" specified for the \"{}\" attribute is higher than the maximum allowed value of {}.".format(value, attribute, attr["max"]))
+				floated = None
+				try:
+					floated = float(value)
+					if (attr["min"] is not None) and (attr["max"] is not None):
+						if float(value) < float(attr["min"]):
+							errors.append("The value \"{}\" specified for the \"{}\" attribute is lower than the minimum allowed value of {}.".format(value, attribute, attr["min"]))
+						if float(value) > float(attr["max"]):
+							errors.append("The value \"{}\" specified for the \"{}\" attribute is higher than the maximum allowed value of {}.".format(value, attribute, attr["max"]))
+				except ValueError:
+					errors.append("The attribute \"{}\" expects a number. You supplied \"{}\".".format(attribute, value))
 
-			content["value"] = value	
+			content["value"] = value
 
 	else:
 		errors.append("The attribute \"{}\" does not exist in the namespace \"{}\".".format(attribute, namespace))
 
-	get_destination(content, errors)
+	get_addresses(content, needs_address, errors)
 
-	if len(errors) > 0:
-		make_response(client=client, success=False, content="; ".join(errors))
-	else:
+	if len(errors) <= 0:
+		make_success(client=client, content=content)
 		return content
+	else:
+		make_error(client=client, content=errors)
 
-def get_destination(content, errors):
-	if "device" in content:
-		device_address = None
-		if is_uuid(content["device"]):
-			identifier_type = "uuid"
-			device_address = db.find_address(table="devices", id=content["device"])
-		else:
-			identifier_type = "name"
-			device_address = db.find_address(table="devices", name=content["device"])
+def get_addresses(content, needs_address, errors):
+	tables = {"devices": "device", "places": "place", "people": "person", "rules": "rule", "scenes": "scene"}
 
-		if device_address:
-			content["destination"] = device_address
-		else:
-			errors.append("The device with the {} of {} was not found.".format(identifier_type, content["device"]))
+	for table, key in tables.items():
+		if key in needs_address:
+			address = None
+			if is_uuid(needs_address[key]):
+				identifier_type = "UUID"
+				address = db.find_address(table=table, id=needs_address[key])
+			else:
+				identifier_type = "name"
+				address = db.find_address(table=table, name=needs_address[key])
+			if address:
+				content["addresses"][key] = address
+			else:
+				errors.append("The {} with the {} of {} was not found.".format(key, identifier_type, needs_address[key]))
 
-	if "person" in content:
-		person_address = None
-		if is_uuid(content["person"]):
-			identifier_type = "uuid"
-			person_address = db.find_address(table="people", id=content["person"])
-		else:
-			identifier_type = "name"
-			person_address = db.find_address(table="people", name=content["person"])
-
-		if person_address:
-			content["destination"] = person_address
-		else:
-			errors.append("The person with the {} of {} was not found.".format(identifier_type, content["person"]))
-
-	if "place" in content:
-		place_address = None
-		if is_uuid(content["place"]):
-			identifier_type = "uuid"
-			place_address = db.find_address(table="places", id=content["place"])
-		else:
-			identifier_type = "name"
-			place_address = db.find_address(table="places", name=content["place"])
-
-		if place_address:
-			content["destination"] = place_address
-		else:
-			errors.append("The place with the {} of {} was not found.".format(identifier_type, content["place"]))
-
-# Begin python-specific
 def __check_python_version(req_version):
 	cur_version = sys.version_info
 	if cur_version <= req_version:
@@ -383,7 +388,6 @@ def __check_python_version(req_version):
 
 def check_environment():
 	__check_python_version((3, 0))
-# End python-specific
 
 version = sys.version_info
 major = version[0]

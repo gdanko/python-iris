@@ -16,6 +16,17 @@ def prepare_database():
 		res = cursor.execute(create)
 		conn.commit()
 
+def populate_places(places):
+	for place in places:
+		insert = "INSERT OR REPLACE INTO places (id,name,address,account_id) VALUES (?,?,?,?)"
+		cursor.execute(insert, (
+			place["base:id"],
+			place["place:name"],
+			place["base:address"],
+			place["place:account"],
+		))
+		conn.commit()
+
 def populate_devices(devices):
 	for device in devices:
 		insert = "INSERT OR REPLACE INTO devices (id,name,address,vendor,model,type,protocol,account_id,place_id) VALUES (?,?,?,?,?,?,?,?,?)"
@@ -40,17 +51,6 @@ def populate_people(people):
 			person["base:id"],
 			name,
 			person["base:address"],
-		))
-		conn.commit()
-
-def populate_places(places):
-	for place in places:
-		insert = "INSERT OR REPLACE INTO places (id,name,address,account_id) VALUES (?,?,?,?)"
-		cursor.execute(insert, (
-			place["base:id"],
-			place["place:name"],
-			place["base:address"],
-			place["place:account"],
 		))
 		conn.commit()
 
@@ -154,7 +154,7 @@ def fetch_writable_attributes(directory, capabilities):
 
 def fetch_methods(directory, capabilities):
 	methods = {}
-	select = "SELECT * FROM methods WHERE  enabled=1".format(directory, quote_list(capabilities))
+	select = "SELECT * FROM methods WHERE directory='{}' AND namespace IN ({})".format(directory, quote_list(capabilities))
 	res = cursor.execute(select)
 	conn.commit()
 	for row in res:
@@ -179,6 +179,13 @@ def fetch_method_parameters(directory, namespace, method):
 
 def fetch_attribute(directory, namespace, attribute):
 	select = "SELECT * FROM attributes WHERE directory='{}' AND namespace='{}' AND name='{}'".format(directory, namespace, attribute)
+	cursor.execute(select)
+	result = cursor.fetchone()
+	return result if result else None
+
+# Fix this, it's ghetto
+def fetch_attribute2(namespace, attribute):
+	select = "SELECT * FROM attributes WHERE namespace='{}' AND name='{}'".format(namespace, attribute)
 	cursor.execute(select)
 	result = cursor.fetchone()
 	return result if result else None

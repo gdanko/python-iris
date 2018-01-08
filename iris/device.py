@@ -8,11 +8,16 @@ class Device(Capability):
 	def __init__(self, iris):
 		Capability.__init__(self, iris)
 		self.classname = utils.classname(self)
+		self.destination = {
+			"namespace": "DRIV",
+			"group": "dev",
+			"id": None,
+		}
 
 		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.device_method_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
+				request.device_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(obj, fn_name, fn)
 
 		devices = {

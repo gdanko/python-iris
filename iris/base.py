@@ -20,18 +20,16 @@ class Capability(object):
 			self.logger = self.iris.logger
 			self.debug = self.iris.debug
 			self.websocket = self.iris.websocket
-			self.method_ready = self.iris.method_ready
+			self.event_ready = self.iris.event_ready
 		else:
 			raise exception.NotAnIrisCoreObject(classname=self.classname, got=iris_type)
 
 class Account(Capability):
 	def __init__(self, init):
-		Capability.__init__(self, init)
 		self.namespace = "account"
+		Capability.__init__(self, init)
 
 		capabilities = [self.namespace]
-		readable = db.fetch_readable_attributes("capability", capabilities)
-		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
 		def generate_method_fn(obj, directory, namespace, method):
@@ -46,13 +44,12 @@ class Account(Capability):
 
 class Place(Capability):
 	def __init__(self, init):
-		Capability.__init__(self, init)
 		self.namespace = "place"
+		Capability.__init__(self, init)
 
 		capabilities = [self.namespace]
-		readable = db.fetch_readable_attributes("capability", capabilities)
-		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
+
 
 		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
@@ -66,12 +63,10 @@ class Place(Capability):
 
 class ProductCatalog(Capability):
 	def __init__(self, init):
-		Capability.__init__(self, init)
 		self.namespace = "prodcat"
+		Capability.__init__(self, init)
 
 		capabilities = [self.namespace]
-		readable = db.fetch_readable_attributes("capability", capabilities)
-		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
 		def generate_method_fn(obj, directory, namespace, method):
@@ -86,12 +81,10 @@ class ProductCatalog(Capability):
 
 class Rule(Capability):
 	def __init__(self, init):
-		Capability.__init__(self, init)
 		self.namespace = "rule"
+		Capability.__init__(self, init)
 
 		capabilities = [self.namespace]
-		readable = db.fetch_readable_attributes("capability", capabilities)
-		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
 		def generate_method_fn(obj, directory, namespace, method):
@@ -106,18 +99,16 @@ class Rule(Capability):
 
 class Scene(Capability):
 	def __init__(self, init):
-		Capability.__init__(self, init)
 		self.namespace = "scene"
+		Capability.__init__(self, init)
 
 		capabilities = [self.namespace]
-		readable = db.fetch_readable_attributes("capability", capabilities)
-		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
 		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.scene_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargss)
+				request.scene_request(client=self, namespace=self.namespace, directory=directory,method=method, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for namespace_name, namespace_obj in methods.items():
@@ -126,18 +117,16 @@ class Scene(Capability):
 
 class Schedule(Capability):
 	def __init__(self, init):
-		Capability.__init__(self, init)
 		self.namespace = "schedule"
+		Capability.__init__(self, init)
 
 		capabilities = [self.namespace]
-		readable = db.fetch_readable_attributes("capability", capabilities)
-		writable = db.fetch_writable_attributes("capability", capabilities)
 		methods = db.fetch_methods("capability", capabilities)
 
 		def generate_method_fn(obj, directory, namespace, method):
 			fn_name = method
 			def fn(self, **kwargs):
-				request.scene_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
+				request.schedule_request(client=self, directory=directory, namespace=namespace, method=method, **kwargs)
 			setattr(self.__class__, fn_name, fn)
 
 		for namespace_name, namespace_obj in methods.items():
